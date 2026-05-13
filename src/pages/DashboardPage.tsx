@@ -1,7 +1,23 @@
+import SectionCard from "../components/ui/SectionCard";
+import DashboardStats from "../features/dashboard/components/DashboardStats";
+import RecentActivity from "../features/dashboard/components/RecentActivity";
+import RecentDocuments from "../features/dashboard/components/RecentDocuments";
+
 function DashboardPage() {
   return (
-    <div className="p-8">
-      <h1 className="text-3x1 font-bold text-slate-900">Dashboard content</h1>
+    <div className="space-y-6">
+      <SectionCard>
+        <DashboardStats />
+      </SectionCard>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <SectionCard>
+          <RecentDocuments />
+        </SectionCard>
+        <SectionCard>
+          <RecentActivity />
+        </SectionCard>
+      </div>
     </div>
   );
 }
