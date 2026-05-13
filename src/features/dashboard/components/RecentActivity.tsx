@@ -1,23 +1,7 @@
 import DashboardListItem from "../../../components/dashboard/DashboardListItem";
-import { MoveRight, RefreshCcw, Upload, UserPlus } from "lucide-react";
-
-const RecentActivities = [
-  {
-    description: "max uploaded new version of Project Plan.pdf",
-    timestamp: "09.05.2026 14:32",
-    icon: Upload,
-  },
-  {
-    description: "anna was added to Project Plan.pdf",
-    timestamp: "09.05.2026 13:10",
-    icon: UserPlus,
-  },
-  {
-    description: "Ownership of Architecture.pdf transfered",
-    timestamp: "10.05.2026 13:10",
-    icon: RefreshCcw,
-  },
-];
+import { MoveRight } from "lucide-react";
+import { RecentActivities } from "../data/dashboardMock";
+import { getActivityIcon } from "../utils/activityIconMap";
 
 function RecentActivity() {
   return (
@@ -29,9 +13,9 @@ function RecentActivity() {
       <div className="space-y-1">
         {RecentActivities.map((activity) => (
           <DashboardListItem
-            key={activity.description}
-            title={activity.description}
-            icon={activity.icon}
+            key={activity.id}
+            title={activity.message}
+            icon={getActivityIcon(activity.type)}
             subtitle={activity.timestamp}
             iconBgClass="bg-blue-50"
             iconTextClass="text-blue-600"

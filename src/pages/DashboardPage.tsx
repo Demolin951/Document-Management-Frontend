@@ -6,9 +6,7 @@ import RecentDocuments from "../features/dashboard/components/RecentDocuments";
 function DashboardPage() {
   return (
     <div className="space-y-6">
-
-        <DashboardStats />
-
+      <DashboardStats />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <SectionCard>

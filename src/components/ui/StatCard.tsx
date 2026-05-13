@@ -7,7 +7,7 @@ type StatCardProps = {
 
 function StatCard({ title, value, subtitle, icon: Icon }: StatCardProps) {
   return (
-    <article className="rounded-2x1 boder border-slate-200 bg-white p-5 shadow-sm">
+    <article className="rounded-2x1 border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-medium text-slate-500">{title}</p>

@@ -1,24 +1,7 @@
 import { FileText, MoveRight } from "lucide-react";
 import DashboardListItem from "../../../components/dashboard/DashboardListItem";
 import VersionBadge from "../../../components/dashboard/VersionBadge";
-
-const recentDocuments = [
-  {
-    fileName: "Invoice_2026_Q1.pdf",
-    uploadDate: "2 hours ago",
-    version: "v3",
-  },
-  {
-    fileName: "Project_Requirements.pdf",
-    uploadDate: "Yesturday",
-    version: "v1",
-  },
-  {
-    fileName: "Contract_Update.pdf",
-    uploadDate: "3 days ago",
-    version: "v5",
-  },
-];
+import { recentDocument } from "../data/dashboardMock";
 
 function RecentDocuments() {
   return (
@@ -27,15 +10,15 @@ function RecentDocuments() {
         Recent Documents
       </h2>
       <div className="space-y-1">
-        {recentDocuments.map((document) => (
+        {recentDocument.map((document) => (
           <DashboardListItem
             key={document.fileName}
             icon={FileText}
             title={document.fileName}
-            subtitle={document.uploadDate}
+            subtitle={document.updatedAt}
             iconBgClass="bg-red-50"
             iconTextClass="text-red-600"
-            rightContent={<VersionBadge version={document.version} />}
+            rightContent={<VersionBadge version={`v${document.version}`} />}
           />
         ))}
       </div>

@@ -1,12 +1,12 @@
 import { NavLink } from "react-router";
 
-type SidebarNavItemProbs = {
+type SidebarNavItemProps = {
   label: string;
   icon: React.ElementType;
   path: string;
 };
 
-function SidebarNavItem({ label, icon: Icon, path }: SidebarNavItemProbs) {
+function SidebarNavItem({ label, icon: Icon, path }: SidebarNavItemProps) {
   return (
     <li>
       <NavLink
