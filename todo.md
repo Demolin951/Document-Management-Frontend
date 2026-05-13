@@ -87,14 +87,14 @@ Expected:
 
 ## 6. Recent Documents Section
 
-- [ ] Create SectionCard container
-- [ ] Add section title
-- [ ] Add document list item component
-- [ ] Add document icon
-- [ ] Add filename
-- [ ] Add upload date
-- [ ] Add version badge
-- [ ] Add "View all documents" link
+- [✅] Create SectionCard container
+- [✅] Add section title
+- [✅] Add document list item component
+- [✅] Add document icon
+- [✅] Add filename
+- [✅] Add upload date
+- [✅] Add version badge
+- [✅] Add "View all documents" link
 
 Expected:
 left dashboard content block
