@@ -23,7 +23,7 @@ function RecentDocuments() {
         ))}
       </div>
       <button className="mt-4 flex items-center gap-2 self-start text-sm font-semibold text-blue-600 hover:text-blue-700">
-        View all documetns
+        View all documents
         <MoveRight size={16} strokeWidth={2.5} className="mt-0.5" />
       </button>
     </div>

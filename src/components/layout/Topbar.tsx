@@ -6,7 +6,7 @@ function Topbar() {
     <header className="flex items-start justify-between">
       <div>
         <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
-        <p className="mt-1 text-sm text-slate-500">Welcome back, Name</p>
+        <p className="mt-1 text-sm font-semibold text-slate-600">Welcome back, Name!</p>
       </div>
 
       <div className="flex items-center gap-3">

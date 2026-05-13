@@ -13,7 +13,7 @@ function AppLayout({ children }: AppLayoutProps) {
       <main className="ml-64 min-h-screen px-6 py-6 lg:px-8 lg:py-8">
         <div className="w-full max-w-none">
           <Topbar />
-          <div>{children}</div>
+          <div className="mt-5">{children}</div>
         </div>
       </main>
     </div>

@@ -12,7 +12,7 @@ function Sidebar() {
             </div>
             <div>
               <h1 className="text-base font-semibold">DocManager</h1>
-              <p className="text-xs text-slate-400">Document System</p>
+              <p className="text-xs text-slate-400">Dmytro</p>
             </div>
           </div>
         </div>

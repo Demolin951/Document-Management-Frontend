@@ -1,26 +1,26 @@
 import{
-    FileText, Users, ShieldCheck, Activity,
+    FileText, Users, Upload, Activity,
 } from "lucide-react";
 import type { DashboardStat, RecentDocument, RecentActivity } from "../types/dashboardTypes";
 
 export const dashboardStats: DashboardStat[] = [
     {
         title: "Total Documents",
-        value: 128,
+        value: 24,
         subtitle: "+12 this month",
         icon: FileText,            
     },
         {
-        title: "Active Users",
-        value: 24,
+        title: "Total Users",
+        value: 12,
         subtitle: "+3 this week",
         icon: Users,            
     },
         {
-        title: "Access Roles",
-        value: 56,
-        subtitle: "8 owner roles",
-        icon: ShieldCheck,            
+        title: "Latests Uploads",
+        value: 8,
+        subtitle: "+2 this week",
+        icon: Upload,            
     },
         {
         title: "Audit Events",
@@ -40,7 +40,7 @@ export const recentDocument: RecentDocument[] = [
         {
         id: "doc-2",
         fileName: "Project_Requirements.pdf",
-        updatedAt: "Yesturday",
+        updatedAt: "Yesterday",
         version: 1,
     },
         {
