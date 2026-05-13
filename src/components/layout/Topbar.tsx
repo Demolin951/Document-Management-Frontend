@@ -1,14 +1,24 @@
+import { Bell } from "lucide-react";
 import Button from "../../features/dashboard/components/ui/Button";
 
 function Topbar() {
   return (
-    <header className="mb-8 flex items-center justify-between">
+    <header className="flex items-start justify-between">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
-        <p className="text-sm text-slate-500">Welcome back, Name</p>
+        <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
+        <p className="mt-1 text-sm text-slate-500">Welcome back, Name</p>
       </div>
 
-      <Button> +Upload Document</Button>
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+        >
+          <Bell size={18} strokeWidth={3}/>
+        </button>
+
+        <Button> +Upload Document</Button>
+      </div>
     </header>
   );
 }
