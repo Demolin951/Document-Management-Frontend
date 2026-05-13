@@ -1,5 +1,6 @@
-import DocumentListItem from "./DocumentListItem";
-import { MoveRight } from "lucide-react";
+import { FileText, MoveRight } from "lucide-react";
+import DashboardListItem from "../../../components/dashboard/DashboardListItem";
+import VersionBadge from "../../../components/dashboard/VersionBadge";
 
 const recentDocuments = [
   {
@@ -27,11 +28,14 @@ function RecentDocuments() {
       </h2>
       <div className="space-y-1">
         {recentDocuments.map((document) => (
-          <DocumentListItem
+          <DashboardListItem
             key={document.fileName}
-            fileName={document.fileName}
-            uploadDate={document.uploadDate}
-            version={document.version}
+            icon={FileText}
+            title={document.fileName}
+            subtitle={document.uploadDate}
+            iconBgClass="bg-red-50"
+            iconTextClass="text-red-600"
+            rightContent={<VersionBadge version={document.version} />}
           />
         ))}
       </div>
