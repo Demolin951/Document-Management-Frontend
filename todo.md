@@ -15,17 +15,23 @@ Sidebar | Main Content
 
 ## 2. Sidebar
 
-- [ ] Add application logo / title
-- [ ] Add navigation menu items
-  - [ ] Dashboard
-  - [ ] Documents
-  - [ ] Shared with me
-  - [ ] All Versions
-  - [ ] Users
-  - [ ] Audit Log
-  - [ ] Settings
-- [ ] Add active menu state
-- [ ] Add bottom user profile section
+- [✅] Add application logo / title
+- [✅] Add navigation menu items
+  - [✅] Dashboard
+  - [✅] Documents
+  - [✅] Shared with me
+  - [✅] All Versions
+  - [✅] Users
+  - [✅] Audit Log
+  - [✅] Settings
+- [✅] Add active menu state
+- [✅] Add bottom user profile section
+
+- [✅] replace hardcoded items with config
+- [ ] add routing support
+
+- [ ] add icons
+- [ ] proper active styling
 
 Expected:
 matches dashboard design left navigation

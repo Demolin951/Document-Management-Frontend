@@ -1,7 +1,10 @@
+import SidebarNavItem from "../ui/SidebarNavItem";
+import sidebarItems from "./sidebarConfig";
+
 function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 h-screen w-64 bg-slate-950 text-white">
-      <div className="flext h-full flex-col">
+      <div className="flex h-screen flex-col">
         <div className="border-b border-white/10 p-6">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600">
@@ -10,6 +13,30 @@ function Sidebar() {
             <div>
               <h1 className="text-base font-semibold">DocManager</h1>
               <p className="text-xs text-slate-400">Document System</p>
+            </div>
+          </div>
+        </div>
+        <nav className="px-4 py-6">
+          <ul className="space-y-1">
+            {sidebarItems.map((item) => (
+              <SidebarNavItem
+                key={item.label}
+                label={item.label}
+                icon={item.icon}
+                isActive={item.isActive}
+              />
+            ))}
+          </ul>
+        </nav>
+        <div className="flex-1"></div>
+        <div className="border-t border-white/10 p-4">
+          <div className="flex items-center gap-3 rounded-lg px-3 py-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-700 text-sm font-semibold">
+              M
+            </div>
+            <div>
+              <p className="text-sm font-medium text-white">Name</p>
+              <p className="text-xs text-slate-400">Owner</p>
             </div>
           </div>
         </div>
