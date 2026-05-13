@@ -23,7 +23,7 @@ function Sidebar() {
                 key={item.label}
                 label={item.label}
                 icon={item.icon}
-                isActive={item.isActive}
+                path={item.path}
               />
             ))}
           </ul>

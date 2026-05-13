@@ -27,11 +27,12 @@ Sidebar | Main Content
 - [✅] Add active menu state
 - [✅] Add bottom user profile section
 
-- [✅] replace hardcoded items with config
-- [ ] add routing support
+## 2.1 Sidebar update
 
-- [ ] add icons
-- [ ] proper active styling
+- [✅] replace hardcoded items with config
+- [✅] add routing support
+- [✅] add icons
+- [✅] proper active styling
 
 Expected:
 matches dashboard design left navigation
@@ -40,10 +41,10 @@ matches dashboard design left navigation
 
 ## 3. Topbar
 
-- [ ] Add dashboard title
-- [ ] Add welcome message
+- [✅] Add dashboard title
+- [✅] Add welcome message
 - [ ] Add notification icon placeholder
-- [ ] Add upload document button
+- [✅] Add upload document button
 
 Expected:
 top horizontal navigation
