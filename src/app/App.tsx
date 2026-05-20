@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import AppLayout from "../layouts/AppLayout";
 import DashboardPage from "../pages/DashboardPage";
+import DocumentsPage from "../pages/DocumentPage";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/documents" element={<DocumentsPage />} />
         </Routes>
       </AppLayout>
     </BrowserRouter>
