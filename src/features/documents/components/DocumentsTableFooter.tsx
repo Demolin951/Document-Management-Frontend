@@ -1,32 +1,38 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-function DocumentsTableFooter() {
+type DocumentsTableFooterProps = {
+  totalCount: number;
+};
+
+function DocumentsTableFooter({ totalCount }: DocumentsTableFooterProps) {
+  const firstVisibleDocumentNumber = totalCount === 0 ? 0 : 1;
+
   return (
     <div className="flex items-center justify-between">
       <p className="text-sm font-medium text-slate-500">
-        Showing 0 to 0 of 0 documents
+        Showing {firstVisibleDocumentNumber} to {totalCount} of {totalCount}{" "}
+        documents
       </p>
+
       <div className="flex items-center gap-2">
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-400"
+          disabled
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-300"
         >
-          <ChevronLeft size={17} strokeWidth={2.5} />
+          <ChevronLeft size={16} />
         </button>
+
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white shadow-sm"
+          disabled
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-300"
         >
-          1
-        </button>
-        <button
-          type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-400"
-        >
-          <ChevronRight size={17} strokeWidth={2.5} />
+          <ChevronRight size={16} />
         </button>
       </div>
     </div>
   );
 }
+
 export default DocumentsTableFooter;

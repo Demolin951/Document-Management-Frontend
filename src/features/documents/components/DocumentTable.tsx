@@ -1,10 +1,52 @@
 import { FileText } from "lucide-react";
+
 import DataTable from "../../../components/ui/DataTable";
-import DocumentsTableFooter from "./DocumentsTableFooter";
-import { documentTableColumns } from "../../config/documentTableColumns";
 import EmptyDataTableState from "../../../components/ui/EmptyDataTableState";
 
-function DocumentsTable() {
+import { documentTableColumns } from "../../config/documentTableColumns";
+import { useDocuments } from "../hooks/useDocuments";
+
+import DocumentTableRow from "./DocumentTableRow";
+import DocumentsTableFooter from "./DocumentsTableFooter";
+
+type DocumentsTableProps = {
+  username: string | undefined;
+};
+
+function DocumentsTable({ username }: DocumentsTableProps) {
+  const { documents, isLoadingDocuments, documentsErrorMessage } =
+    useDocuments(username);
+
+  if (!username) {
+    return (
+      <EmptyDataTableState
+        icon={FileText}
+        title="No user selected"
+        description="Select a user in the sidebar to load documents."
+      />
+    );
+  }
+
+  if (isLoadingDocuments) {
+    return (
+      <div className="rounded-2xl border border-slate-200 bg-white px-6 py-10 text-center shadow-sm">
+        <p className="text-sm font-semibold text-slate-500">
+          Loading documents...
+        </p>
+      </div>
+    );
+  }
+
+  if (documentsErrorMessage) {
+    return (
+      <div className="rounded-2xl border border-red-100 bg-red-50 px-6 py-10 text-center shadow-sm">
+        <p className="text-sm font-semibold text-red-700">
+          {documentsErrorMessage}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <DataTable
       columns={documentTableColumns}
@@ -12,11 +54,15 @@ function DocumentsTable() {
         <EmptyDataTableState
           icon={FileText}
           title="No documents yet"
-          description="Documents will be displayed here after they are loaded from the API."
+          description="This user does not have access to any documents yet."
         />
       }
-      footer={<DocumentsTableFooter />}
-    />
+      footer={<DocumentsTableFooter totalCount={documents.length} />}
+    >
+      {documents.map((document) => (
+        <DocumentTableRow key={document.id} document={document} />
+      ))}
+    </DataTable>
   );
 }
 

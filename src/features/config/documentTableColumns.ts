@@ -18,7 +18,7 @@ export const documentTableColumns: DataTableColumn[] = [
     },
     {
         key: "createdAt",
-        label: "CreatedAt",
+        label: "Created At",
         width: "1.3fr",
     },
     {
