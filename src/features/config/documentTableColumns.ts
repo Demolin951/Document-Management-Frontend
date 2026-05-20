@@ -12,8 +12,8 @@ export const documentTableColumns: DataTableColumn[] = [
         width: "1fr",
     },
     {
-        key: "latestVersion",
-        label: "LatestVersion",
+        key: "role",
+        label: "Your Role",
         width: "1fr",
     },
     {
