@@ -1,3 +1,0 @@
-Legenda:
-✅ - Fertig
-🔄 - Im Prozess
