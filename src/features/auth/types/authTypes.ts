@@ -1,7 +1,7 @@
 export type DocumentRole = "Owner" | "Editor" | "Viewer";
 
 export type AppUser = {
-    id: string;
+    id: number;
     name: string;
 };
 
