@@ -48,7 +48,7 @@ const sidebarItems: SidebarItem[] = [
     {
         label: "Settings",
         icon: Settings,
-        path: "settings"
+        path: "/settings"
     }
 ]
 
