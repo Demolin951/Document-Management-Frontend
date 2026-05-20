@@ -1,11 +1,19 @@
 import Sidebar from "../components/layout/Sidebar";
 import Topbar from "../components/layout/Topbar";
+import { useEffect } from "react";
+import { useAuthStore } from "../features/auth/store/useAuthStore";
 
 type AppLayoutProps = {
   children: React.ReactNode;
 };
 
 function AppLayout({ children }: AppLayoutProps) {
+  const loadUsers = useAuthStore((state) => state.loadUsers);
+
+  useEffect(() => {
+    loadUsers();
+  }, [loadUsers]);
+
   return (
     <div className="min-h-screen bg-slate-100">
       <Sidebar />
