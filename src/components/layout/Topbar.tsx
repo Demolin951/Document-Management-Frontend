@@ -1,14 +1,22 @@
 import { Bell } from "lucide-react";
-import Button from "../ui/Button";
+import { useLocation } from "react-router";
+
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
+import Button from "../ui/Button";
+
+import { getTopbarTitle } from "./utils/getTopbarTitle";
 
 function Topbar() {
   const selectedUser = useAuthStore((state) => state.selectedUser);
+  const location = useLocation();
+
+  const topbarTitle = getTopbarTitle(location.pathname);
 
   return (
     <header className="flex items-start justify-between">
       <div>
-        <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-slate-900">{topbarTitle}</h1>
+
         <p className="mt-1 text-sm font-semibold text-slate-600">
           Welcome back, {selectedUser?.name ?? "No user"}!
         </p>
