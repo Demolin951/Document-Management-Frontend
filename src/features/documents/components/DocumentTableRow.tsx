@@ -2,7 +2,7 @@ import { FileText } from "lucide-react";
 
 import DataTableRow from "../../../components/ui/DataTableRow";
 import { documentRoleConfig } from "../config/documentRoleConfig";
-import { documentTableColumns } from "../../config/documentTableColumns";
+import { documentTableColumns } from "../config/documentTableColumns";
 import type { DocumentListItem } from "../types/documentTypes";
 import { getAvailableDocumentActions } from "../utils/documentPermissions";
 import { formatDateTime } from "../utils/formatDateTime";

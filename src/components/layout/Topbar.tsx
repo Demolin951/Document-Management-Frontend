@@ -1,5 +1,5 @@
 import { Bell } from "lucide-react";
-import Button from "../../features/dashboard/components/ui/Button";
+import Button from "../ui/Button";
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
 
 function Topbar() {
@@ -22,7 +22,7 @@ function Topbar() {
           <Bell size={18} strokeWidth={3} />
         </button>
 
-        <Button> +Upload Document</Button>
+        <Button>+ Upload Document</Button>
       </div>
     </header>
   );

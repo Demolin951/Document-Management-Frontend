@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import AppLayout from "../layouts/AppLayout";
 import DashboardPage from "../pages/DashboardPage";
-import DocumentsPage from "../pages/DocumentPage";
+import DocumentsPage from "../pages/DocumentsPage";
 
 function App() {
   return (

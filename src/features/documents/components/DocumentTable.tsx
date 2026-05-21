@@ -3,7 +3,7 @@ import { FileText } from "lucide-react";
 import DataTable from "../../../components/ui/DataTable";
 import EmptyDataTableState from "../../../components/ui/EmptyDataTableState";
 
-import { documentTableColumns } from "../../config/documentTableColumns";
+import { documentTableColumns } from "../config/documentTableColumns";
 import { useDocuments } from "../hooks/useDocuments";
 
 import DocumentTableRow from "./DocumentTableRow";
@@ -13,7 +13,7 @@ type DocumentsTableProps = {
   username: string | undefined;
 };
 
-function DocumentsTable({ username }: DocumentsTableProps) {
+function DocumentTable({ username }: DocumentsTableProps) {
   const { documents, isLoadingDocuments, documentsErrorMessage } =
     useDocuments(username);
 
@@ -66,4 +66,4 @@ function DocumentsTable({ username }: DocumentsTableProps) {
   );
 }
 
-export default DocumentsTable;
+export default DocumentTable;
