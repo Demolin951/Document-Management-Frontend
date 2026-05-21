@@ -1,4 +1,4 @@
-import type { DashboardListItemProps } from "./types/dashboardListItemTypes";
+import type { DashboardListItemProps } from "../types/dashboardListItemTypes";
 
 function DashboardListItem({
   icon: Icon,

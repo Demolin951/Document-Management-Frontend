@@ -1,4 +1,4 @@
-import DashboardListItem from "../../../components/dashboard/DashboardListItem";
+import DashboardListItem from "./DashboardListItem";
 import { MoveRight } from "lucide-react";
 import { RecentActivities } from "../data/dashboardMock";
 import { getActivityIcon } from "../utils/activityIconMap";

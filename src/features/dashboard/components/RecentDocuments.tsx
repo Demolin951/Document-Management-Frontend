@@ -1,6 +1,6 @@
 import { FileText, MoveRight } from "lucide-react";
-import DashboardListItem from "../../../components/dashboard/DashboardListItem";
-import VersionBadge from "../../../components/dashboard/VersionBadge";
+import DashboardListItem from "./DashboardListItem";
+import VersionBadge from "../../../components/ui/VersionBadge";
 import { recentDocument } from "../data/dashboardMock";
 
 function RecentDocuments() {
