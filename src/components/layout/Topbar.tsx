@@ -3,8 +3,8 @@ import { Bell } from "lucide-react";
 import { useLocation } from "react-router";
 
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
+import UploadDocumentModal from "../../features/documents/components/UploadDocumentModal";
 import Button from "../ui/Button";
-import Modal from "../ui/Modal";
 
 import { getTopbarTitle } from "./utils/getTopbarTitle";
 
@@ -47,23 +47,11 @@ function Topbar() {
         </div>
       </header>
 
-      <Modal
+      <UploadDocumentModal
         isOpen={isUploadModalOpen}
-        title="Upload Document"
+        selectedUsername={selectedUser?.name}
         onClose={closeUploadModal}
-      >
-        <div className="rounded-2xl border border-dashed border-slate-300 px-6 py-12 text-center">
-          <p className="text-sm font-semibold text-slate-600">
-            Upload document modal skeleton
-          </p>
-
-          <p className="mt-2 text-sm text-slate-500">Drag & drop UI</p>
-
-          <div className="mt-6">
-            <Button onClick={closeUploadModal}>Cancel</Button>
-          </div>
-        </div>
-      </Modal>
+      />
     </>
   );
 }
