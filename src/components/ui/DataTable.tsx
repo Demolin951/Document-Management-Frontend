@@ -1,18 +1,5 @@
-import { Children, type ReactNode } from "react";
-
-export type DataTableColumn = {
-  key: string;
-  label: string;
-  width?: string;
-  className?: string;
-};
-
-type DataTableProps = {
-  columns: DataTableColumn[];
-  children?: ReactNode;
-  footer?: ReactNode;
-  emptyState?: ReactNode;
-};
+import { Children } from "react";
+import type { DataTableProps } from "./types/dataTableTypes";
 
 function DataTable({ columns, children, emptyState, footer }: DataTableProps) {
   const hasRows = Children.count(children) > 0;

@@ -1,6 +1,4 @@
-type VersionBadgeProps = {
-  version: string;
-};
+import type { VersionBadgeProps } from "./types/versionBadgeTypes";
 
 function VersionBadge({ version }: VersionBadgeProps) {
   return (

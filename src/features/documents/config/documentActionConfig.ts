@@ -1,18 +1,5 @@
-import { Download, Eye, FileUp, Users, type LucideIcon } from "lucide-react";
-import type { DocumentRole } from "../types/documentTypes";
- 
-export type DocumentActionKey =
-  | "view"
-  | "download"
-  | "createNewVersion"
-  | "manageAccess";
- 
-export type DocumentActionConfig = {
-  key: DocumentActionKey;
-  title: string;
-  icon: LucideIcon;
-  allowedRoles: DocumentRole[];
-};
+import { Download, Eye, FileUp, Users } from "lucide-react";
+import type { DocumentActionConfig } from "../types/documentActionTypes";
  
 export const documentActionConfig: DocumentActionConfig[] = [
   {
@@ -28,7 +15,7 @@ export const documentActionConfig: DocumentActionConfig[] = [
     allowedRoles: ["Owner", "Editor", "Viewer"],
   },
   {
-    key: "createNewVersion",
+    key: "uploadNewVersion",
     title: "Upload new version",
     icon: FileUp,
     allowedRoles: ["Owner", "Editor"],

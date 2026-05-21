@@ -1,14 +1,4 @@
-import type { LucideIcon } from "lucide-react";
-import type { ReactNode } from "react";
-
-type DashboardListItemProps = {
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
-  iconBgClass: string;
-  iconTextClass: string;
-  rightContent?: ReactNode;
-};
+import type { DashboardListItemProps } from "./types/dashboardListItemTypes";
 
 function DashboardListItem({
   icon: Icon,

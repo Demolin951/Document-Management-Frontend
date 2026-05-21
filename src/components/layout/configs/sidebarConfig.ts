@@ -8,11 +8,7 @@ import{
     Settings,
 } from "lucide-react";
 
-type SidebarItem = {
-    label:string;
-    icon: React.ElementType;
-    path: string;
-};
+import type { SidebarItem } from "../types/sidebarTypes";
 
 const sidebarItems: SidebarItem[] = [
     {

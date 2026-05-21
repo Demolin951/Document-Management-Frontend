@@ -1,5 +1,5 @@
 import SidebarNavItem from "../ui/SidebarNavItem";
-import sidebarItems from "./sidebarConfig";
+import sidebarItems from "./configs/sidebarConfig";
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
 
 function Sidebar() {

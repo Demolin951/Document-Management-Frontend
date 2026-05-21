@@ -1,16 +1,6 @@
 import {create} from "zustand";
 import { getUsers } from "../api/userApi";
-import type { AppUser } from "../types/authTypes";
-
-type AuthState = {
-    users: AppUser[];
-    selectedUser: AppUser | null;
-    isLoadingUsers: boolean;
-    errorMessage: string | null;
-
-    loadUsers: () => Promise<void>;
-    selectUser: (userId: number) => void;
-};
+import type { AuthState } from "../types/authStoreTypes";
 
 export const useAuthStore = create<AuthState>((set, get) => ({
     users: [],

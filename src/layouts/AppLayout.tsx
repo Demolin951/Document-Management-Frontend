@@ -2,10 +2,7 @@ import Sidebar from "../components/layout/Sidebar";
 import Topbar from "../components/layout/Topbar";
 import { useEffect } from "react";
 import { useAuthStore } from "../features/auth/store/useAuthStore";
-
-type AppLayoutProps = {
-  children: React.ReactNode;
-};
+import type { AppLayoutProps } from "./types/appLayoutTypes";
 
 function AppLayout({ children }: AppLayoutProps) {
   const loadUsers = useAuthStore((state) => state.loadUsers);

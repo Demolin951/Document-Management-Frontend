@@ -1,16 +1,11 @@
-import type { DocumentActionKey } from "./documentActionTypes";
 import type { DocumentListItem } from "./documentTypes";
 
-export type DocumentTableProps = {
+export type DocumentsTableProps = {
   username: string | undefined;
 };
 
 export type DocumentTableRowProps = {
   document: DocumentListItem;
-  onDocumentAction: (
-    actionKey: DocumentActionKey,
-    document: DocumentListItem
-  ) => void;
 };
 
 export type DocumentsTableFooterProps = {

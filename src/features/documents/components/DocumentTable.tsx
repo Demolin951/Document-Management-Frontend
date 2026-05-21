@@ -5,13 +5,10 @@ import EmptyDataTableState from "../../../components/ui/EmptyDataTableState";
 
 import { documentTableColumns } from "../config/documentTableColumns";
 import { useDocuments } from "../hooks/useDocuments";
+import type { DocumentsTableProps } from "../types/documentTableTypes";
 
 import DocumentTableRow from "./DocumentTableRow";
 import DocumentsTableFooter from "./DocumentsTableFooter";
-
-type DocumentsTableProps = {
-  username: string | undefined;
-};
 
 function DocumentTable({ username }: DocumentsTableProps) {
   const { documents, isLoadingDocuments, documentsErrorMessage } =

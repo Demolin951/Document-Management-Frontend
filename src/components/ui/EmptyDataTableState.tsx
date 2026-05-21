@@ -1,10 +1,4 @@
-import type { LucideIcon } from "lucide-react";
-
-type EmptyDataTableStateProps = {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-};
+import type { EmptyDataTableStateProps } from "./types/emptyDataTableStateTypes";
 
 function EmptyDataTableState({
   icon: Icon,
@@ -12,7 +6,7 @@ function EmptyDataTableState({
   description,
 }: EmptyDataTableStateProps) {
   return (
-    <div className="flex min-h[420px] flex-col items-center justify-center px-6 py-20 text-center">
+    <div className="flex min-h-105 flex-col items-center justify-center px-6 py-20 text-center">
       <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-red-600">
         <Icon size={28} strokeWidth={2.4} />
       </div>

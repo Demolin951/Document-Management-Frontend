@@ -1,9 +1,4 @@
-type StatCardProps = {
-  title: string;
-  value: number;
-  subtitle: string;
-  icon: React.ElementType;
-};
+import type { StatCardProps } from "./types/statCardTypes";
 
 function StatCard({ title, value, subtitle, icon: Icon }: StatCardProps) {
   return (

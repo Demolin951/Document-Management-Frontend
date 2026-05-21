@@ -1,10 +1,4 @@
-import type { ReactNode } from "react";
-import type { DataTableColumn } from "./DataTable";
-
-type DataTableRowProps = {
-  columns: DataTableColumn[];
-  children: ReactNode;
-};
+import type { DataTableRowProps } from "./types/dataTableTypes";
 
 function DataTableRow({ columns, children }: DataTableRowProps) {
   const gridTemplateColumns = columns

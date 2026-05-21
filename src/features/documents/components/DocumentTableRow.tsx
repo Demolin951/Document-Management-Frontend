@@ -3,13 +3,9 @@ import { FileText } from "lucide-react";
 import DataTableRow from "../../../components/ui/DataTableRow";
 import { documentRoleConfig } from "../config/documentRoleConfig";
 import { documentTableColumns } from "../config/documentTableColumns";
-import type { DocumentListItem } from "../types/documentTypes";
+import type { DocumentTableRowProps } from "../types/documentTableTypes";
 import { getAvailableDocumentActions } from "../utils/documentPermissions";
 import { formatDateTime } from "../utils/formatDateTime";
-
-type DocumentTableRowProps = {
-  document: DocumentListItem;
-};
 
 function DocumentTableRow({ document }: DocumentTableRowProps) {
   const roleConfig = documentRoleConfig[document.role];

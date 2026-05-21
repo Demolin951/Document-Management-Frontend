@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
  
 import { getDocumentsByUsername } from "../api/documentsApi";
 import type { DocumentListItem } from "../types/documentTypes";
- 
-type UseDocumentsResult = {
-  documents: DocumentListItem[];
-  isLoadingDocuments: boolean;
-  documentsErrorMessage: string | null;
-};
+import type { UseDocumentsResult } from "../types/useDocumentsTypes";
  
 export function useDocuments(username: string | undefined): UseDocumentsResult {
   const [documents, setDocuments] = useState<DocumentListItem[]>([]);

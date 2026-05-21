@@ -1,9 +1,5 @@
 import type { DocumentRole, } from "../types/documentTypes";
-
-type DocumentRoleConfig = {
-    label: string;
-    badgeClassName: string;
-};
+import type { DocumentRoleConfig } from "../types/documentRoleTypes";
 
 export const documentRoleConfig: Record<DocumentRole, DocumentRoleConfig> = {
     Owner: {
