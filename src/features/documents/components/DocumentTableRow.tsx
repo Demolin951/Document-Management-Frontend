@@ -24,7 +24,7 @@ function DocumentTableRow({
 
         <span
           title={document.fileName}
-          className="max-w-60 truncate font-semibold text-slate-900"
+          className="max-w-105 truncate font-semibold text-slate-900"
         >
           {document.fileName}
         </span>

@@ -6,25 +6,21 @@ import EmptyDataTableState from "../../../components/ui/EmptyDataTableState";
 import { documentTableColumns } from "../config/documentTableColumns";
 import { useDocumentActions } from "../hooks/useDocumentActions";
 import { useDocuments } from "../hooks/useDocuments";
-import { useDocumentRefreshStore } from "../store/useDocumentRefreshStore";
-import type { DocumentTableProps } from "../types/documentTableTypes";
+import type { DocumentsTableProps } from "../types/documentTableTypes";
 
 import DocumentTableRow from "./DocumentTableRow";
 import DocumentsTableFooter from "./DocumentsTableFooter";
+import ManageDocumentAccessModal from "./ManageDocumentAccessModal";
 
-function DocumentTable({ username }: DocumentTableProps) {
-  const documentsRefreshVersion = useDocumentRefreshStore(
-    (state) => state.documentsRefreshVersion,
-  );
-
-  const { documents, isLoadingDocuments, documentsErrorMessage } = useDocuments(
-    username,
-    documentsRefreshVersion,
-  );
+function DocumentTable({ username }: DocumentsTableProps) {
+  const { documents, isLoadingDocuments, documentsErrorMessage } =
+    useDocuments(username);
 
   const {
     documentActionErrorMessage,
     isDocumentActionLoading,
+    selectedDocumentForAccess,
+    closeManageAccessModal,
     handleDocumentAction,
   } = useDocumentActions(username);
 
@@ -59,34 +55,43 @@ function DocumentTable({ username }: DocumentTableProps) {
   }
 
   return (
-    <div className="space-y-4">
-      {documentActionErrorMessage && (
-        <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
-          {documentActionErrorMessage}
-        </div>
-      )}
+    <>
+      <div className="space-y-4">
+        {documentActionErrorMessage && (
+          <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+            {documentActionErrorMessage}
+          </div>
+        )}
 
-      <DataTable
-        columns={documentTableColumns}
-        emptyState={
-          <EmptyDataTableState
-            icon={FileText}
-            title="No documents yet"
-            description="This user does not have access to any documents yet."
-          />
-        }
-        footer={<DocumentsTableFooter totalCount={documents.length} />}
-      >
-        {documents.map((document) => (
-          <DocumentTableRow
-            key={document.id}
-            document={document}
-            onDocumentAction={handleDocumentAction}
-            isDocumentActionLoading={isDocumentActionLoading}
-          />
-        ))}
-      </DataTable>
-    </div>
+        <DataTable
+          columns={documentTableColumns}
+          emptyState={
+            <EmptyDataTableState
+              icon={FileText}
+              title="No documents yet"
+              description="This user does not have access to any documents yet."
+            />
+          }
+          footer={<DocumentsTableFooter totalCount={documents.length} />}
+        >
+          {documents.map((document) => (
+            <DocumentTableRow
+              key={document.id}
+              document={document}
+              onDocumentAction={handleDocumentAction}
+              isDocumentActionLoading={isDocumentActionLoading}
+            />
+          ))}
+        </DataTable>
+      </div>
+
+      <ManageDocumentAccessModal
+        isOpen={Boolean(selectedDocumentForAccess)}
+        document={selectedDocumentForAccess}
+        ownerUsername={username}
+        onClose={closeManageAccessModal}
+      />
+    </>
   );
 }
 

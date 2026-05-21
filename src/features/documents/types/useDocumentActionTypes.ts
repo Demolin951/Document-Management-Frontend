@@ -4,6 +4,8 @@ import type { DocumentListItem } from "./documentTypes";
 export type UseDocumentActionsResult = {
   documentActionErrorMessage: string | null;
   isDocumentActionLoading: boolean;
+  selectedDocumentForAccess: DocumentListItem | null;
+  closeManageAccessModal: () => void;
   handleDocumentAction: (
     actionKey: DocumentActionKey,
     document: DocumentListItem

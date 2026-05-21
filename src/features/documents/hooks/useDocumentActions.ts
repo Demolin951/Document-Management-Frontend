@@ -15,6 +15,13 @@ export function useDocumentActions(
  
   const [isDocumentActionLoading, setIsDocumentActionLoading] = useState(false);
  
+  const [selectedDocumentForAccess, setSelectedDocumentForAccess] =
+    useState<DocumentListItem | null>(null);
+ 
+  function closeManageAccessModal() {
+    setSelectedDocumentForAccess(null);
+  }
+ 
   async function handleDownloadDocument(document: DocumentListItem) {
     if (!username) {
       setDocumentActionErrorMessage("Please select a user before downloading.");
@@ -31,6 +38,12 @@ export function useDocumentActions(
     document: DocumentListItem
   ) {
     setDocumentActionErrorMessage(null);
+ 
+    if (actionKey === "manageAccess") {
+      setSelectedDocumentForAccess(document);
+      return;
+    }
+ 
     setIsDocumentActionLoading(true);
  
     try {
@@ -50,6 +63,8 @@ export function useDocumentActions(
   return {
     documentActionErrorMessage,
     isDocumentActionLoading,
+    selectedDocumentForAccess,
+    closeManageAccessModal,
     handleDocumentAction,
   };
 }

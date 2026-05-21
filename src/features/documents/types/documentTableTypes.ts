@@ -1,7 +1,7 @@
 import type { DocumentActionKey } from "./documentActionTypes";
 import type { DocumentListItem } from "./documentTypes";
  
-export type DocumentTableProps = {
+export type DocumentsTableProps = {
   username: string | undefined;
 };
  
