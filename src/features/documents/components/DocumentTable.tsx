@@ -4,14 +4,15 @@ import DataTable from "../../../components/ui/DataTable";
 import EmptyDataTableState from "../../../components/ui/EmptyDataTableState";
 
 import { documentTableColumns } from "../config/documentTableColumns";
+import { useDocumentActions } from "../hooks/useDocumentActions";
 import { useDocuments } from "../hooks/useDocuments";
 import { useDocumentRefreshStore } from "../store/useDocumentRefreshStore";
-import type { DocumentsTableProps } from "../types/documentTableTypes";
+import type { DocumentTableProps } from "../types/documentTableTypes";
 
 import DocumentTableRow from "./DocumentTableRow";
 import DocumentsTableFooter from "./DocumentsTableFooter";
 
-function DocumentTable({ username }: DocumentsTableProps) {
+function DocumentTable({ username }: DocumentTableProps) {
   const documentsRefreshVersion = useDocumentRefreshStore(
     (state) => state.documentsRefreshVersion,
   );
@@ -20,6 +21,12 @@ function DocumentTable({ username }: DocumentsTableProps) {
     username,
     documentsRefreshVersion,
   );
+
+  const {
+    documentActionErrorMessage,
+    isDocumentActionLoading,
+    handleDocumentAction,
+  } = useDocumentActions(username);
 
   if (!username) {
     return (
@@ -52,21 +59,34 @@ function DocumentTable({ username }: DocumentsTableProps) {
   }
 
   return (
-    <DataTable
-      columns={documentTableColumns}
-      emptyState={
-        <EmptyDataTableState
-          icon={FileText}
-          title="No documents yet"
-          description="This user does not have access to any documents yet."
-        />
-      }
-      footer={<DocumentsTableFooter totalCount={documents.length} />}
-    >
-      {documents.map((document) => (
-        <DocumentTableRow key={document.id} document={document} />
-      ))}
-    </DataTable>
+    <div className="space-y-4">
+      {documentActionErrorMessage && (
+        <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+          {documentActionErrorMessage}
+        </div>
+      )}
+
+      <DataTable
+        columns={documentTableColumns}
+        emptyState={
+          <EmptyDataTableState
+            icon={FileText}
+            title="No documents yet"
+            description="This user does not have access to any documents yet."
+          />
+        }
+        footer={<DocumentsTableFooter totalCount={documents.length} />}
+      >
+        {documents.map((document) => (
+          <DocumentTableRow
+            key={document.id}
+            document={document}
+            onDocumentAction={handleDocumentAction}
+            isDocumentActionLoading={isDocumentActionLoading}
+          />
+        ))}
+      </DataTable>
+    </div>
   );
 }
 

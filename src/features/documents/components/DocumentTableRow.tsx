@@ -7,20 +7,24 @@ import type { DocumentTableRowProps } from "../types/documentTableTypes";
 import { getAvailableDocumentActions } from "../utils/documentPermissions";
 import { formatDateTime } from "../utils/formatDateTime";
 
-function DocumentTableRow({ document }: DocumentTableRowProps) {
+function DocumentTableRow({
+  document,
+  onDocumentAction,
+  isDocumentActionLoading,
+}: DocumentTableRowProps) {
   const roleConfig = documentRoleConfig[document.role];
   const availableActions = getAvailableDocumentActions(document.role);
 
   return (
     <DataTableRow columns={documentTableColumns}>
-      <div className="flex min-w-0 items-center gap-3 pr-4">
-        <div className="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-red-50 text-red-600">
+      <div className="flex items-center gap-3">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-600">
           <FileText size={18} strokeWidth={2.5} />
         </div>
 
         <span
           title={document.fileName}
-          className="block max-w-60 truncate font-semibold text-slate-900"
+          className="max-w-60 truncate font-semibold text-slate-900"
         >
           {document.fileName}
         </span>
@@ -49,7 +53,9 @@ function DocumentTableRow({ document }: DocumentTableRowProps) {
               key={action.key}
               type="button"
               title={action.title}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-slate-700"
+              disabled={isDocumentActionLoading}
+              onClick={() => onDocumentAction(action.key, document)}
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <Icon size={16} strokeWidth={2.4} />
             </button>
