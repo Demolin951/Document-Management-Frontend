@@ -5,14 +5,21 @@ import EmptyDataTableState from "../../../components/ui/EmptyDataTableState";
 
 import { documentTableColumns } from "../config/documentTableColumns";
 import { useDocuments } from "../hooks/useDocuments";
+import { useDocumentRefreshStore } from "../store/useDocumentRefreshStore";
 import type { DocumentsTableProps } from "../types/documentTableTypes";
 
 import DocumentTableRow from "./DocumentTableRow";
 import DocumentsTableFooter from "./DocumentsTableFooter";
 
 function DocumentTable({ username }: DocumentsTableProps) {
-  const { documents, isLoadingDocuments, documentsErrorMessage } =
-    useDocuments(username);
+  const documentsRefreshVersion = useDocumentRefreshStore(
+    (state) => state.documentsRefreshVersion,
+  );
+
+  const { documents, isLoadingDocuments, documentsErrorMessage } = useDocuments(
+    username,
+    documentsRefreshVersion,
+  );
 
   if (!username) {
     return (

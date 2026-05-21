@@ -4,7 +4,10 @@ import { getDocumentsByUsername } from "../api/documentsApi";
 import type { DocumentListItem } from "../types/documentTypes";
 import type { UseDocumentsResult } from "../types/useDocumentsTypes";
  
-export function useDocuments(username: string | undefined): UseDocumentsResult {
+export function useDocuments(
+  username: string | undefined,
+  refreshVersion = 0
+): UseDocumentsResult {
   const [documents, setDocuments] = useState<DocumentListItem[]>([]);
   const [isLoadingDocuments, setIsLoadingDocuments] = useState(false);
   const [documentsErrorMessage, setDocumentsErrorMessage] = useState<
@@ -49,7 +52,7 @@ export function useDocuments(username: string | undefined): UseDocumentsResult {
     return () => {
       isCurrentRequest = false;
     };
-  }, [username]);
+  }, [username, refreshVersion]);
  
   if (!username) {
     return {

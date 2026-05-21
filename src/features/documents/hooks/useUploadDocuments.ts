@@ -2,10 +2,15 @@ import { useState } from "react";
  
 import { uploadDocument } from "../api/documentUploadApi";
 import { documentUploadConfig } from "../config/documentUploadConfig";
+import { useDocumentRefreshStore } from "../store/useDocumentRefreshStore";
 import type { UseUploadDocumentResult } from "../types/documentUploadTypes";
 import { validateUploadFile } from "../utils/documentUploadUtils";
  
 export function useUploadDocument(): UseUploadDocumentResult {
+  const requestDocumentsRefresh = useDocumentRefreshStore(
+    (state) => state.requestDocumentsRefresh
+  );
+ 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadErrorMessage, setUploadErrorMessage] = useState<string | null>(
     null
@@ -57,7 +62,9 @@ export function useUploadDocument(): UseUploadDocumentResult {
         username,
       });
  
+      requestDocumentsRefresh();
       clearUploadState();
+ 
       return true;
     } catch {
       setUploadErrorMessage(documentUploadConfig.uploadFailedMessage);
