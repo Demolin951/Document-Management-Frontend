@@ -19,6 +19,7 @@ export function useDocuments(
       return;
     }
  
+    const currentUsername = username;
     let isCurrentRequest = true;
  
     async function loadDocuments() {
@@ -26,7 +27,7 @@ export function useDocuments(
       setDocumentsErrorMessage(null);
  
       try {
-        const loadedDocuments = await getDocumentsByUsername(username);
+        const loadedDocuments = await getDocumentsByUsername(currentUsername);
  
         if (!isCurrentRequest) {
           return;
