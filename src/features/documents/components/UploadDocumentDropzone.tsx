@@ -94,7 +94,7 @@ function UploadDocumentDropzone({
       </button>
 
       {selectedFile && (
-        <p className="mt-5 truncate text-sm font-semibold text-slate-600">
+        <p className="mx-auto mt-5 max-w-md truncate text-sm font-semibold text-slate-600">
           {documentUploadConfig.selectedFileLabel}:{" "}
           <span title={selectedFile.name} className="text-slate-900">
             {selectedFile.name}

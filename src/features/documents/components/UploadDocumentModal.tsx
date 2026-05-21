@@ -1,23 +1,19 @@
-import { useState } from "react";
-
 import Button from "../../../components/ui/Button";
 import Modal from "../../../components/ui/Modal";
 
 import { documentUploadConfig } from "../config/documentUploadConfig";
+import { useUploadDocument } from "../hooks/useUploadDocuments";
 import type { UploadDocumentModalProps } from "../types/documentUploadTypes";
 
 import UploadDocumentDropzone from "./UploadDocumentDropzone";
 
 function UploadDocumentModal({ isOpen, onClose }: UploadDocumentModalProps) {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const { selectedFile, uploadErrorMessage, selectFile, clearUploadState } =
+    useUploadDocument();
 
   function handleClose() {
-    setSelectedFile(null);
+    clearUploadState();
     onClose();
-  }
-
-  function handleFileSelect(file: File) {
-    setSelectedFile(file);
   }
 
   return (
@@ -27,9 +23,15 @@ function UploadDocumentModal({ isOpen, onClose }: UploadDocumentModalProps) {
       onClose={handleClose}
     >
       <div className="space-y-5">
+        {uploadErrorMessage && (
+          <div className="max-w-60 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+            {uploadErrorMessage}
+          </div>
+        )}
+
         <UploadDocumentDropzone
           selectedFile={selectedFile}
-          onFileSelect={handleFileSelect}
+          onFileSelect={selectFile}
         />
 
         <div className="flex items-center justify-end gap-3 border-t border-slate-200 pt-5">
