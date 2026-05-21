@@ -7,14 +7,34 @@ import type { UploadDocumentModalProps } from "../types/documentUploadTypes";
 
 import UploadDocumentDropzone from "./UploadDocumentDropzone";
 
-function UploadDocumentModal({ isOpen, onClose }: UploadDocumentModalProps) {
-  const { selectedFile, uploadErrorMessage, selectFile, clearUploadState } =
-    useUploadDocument();
+function UploadDocumentModal({
+  isOpen,
+  selectedUsername,
+  onClose,
+}: UploadDocumentModalProps) {
+  const {
+    selectedFile,
+    uploadErrorMessage,
+    isUploading,
+    selectFile,
+    clearUploadState,
+    uploadSelectedDocument,
+  } = useUploadDocument();
 
   function handleClose() {
     clearUploadState();
     onClose();
   }
+
+  async function handleUploadClick() {
+    const wasUploaded = await uploadSelectedDocument(selectedUsername);
+
+    if (wasUploaded) {
+      onClose();
+    }
+  }
+
+  const isUploadDisabled = !selectedFile || !selectedUsername || isUploading;
 
   return (
     <Modal
@@ -38,12 +58,15 @@ function UploadDocumentModal({ isOpen, onClose }: UploadDocumentModalProps) {
           <button
             type="button"
             onClick={handleClose}
-            className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
+            disabled={isUploading}
+            className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-60"
           >
             Cancel
           </button>
 
-          <Button disabled={!selectedFile}>Upload</Button>
+          <Button disabled={isUploadDisabled} onClick={handleUploadClick}>
+            {isUploading ? "Uploading..." : "Upload"}
+          </Button>
         </div>
       </div>
     </Modal>

@@ -27,6 +27,9 @@ export type DocumentUploadConfig = {
   noUserSelectedText: string;
   invalidFileTypeMessage: string;
   invalidFileSizeMessage: string;
+  noFileSelectedMessage: string;
+  noUserSelectedMessage: string;
+  uploadFailedMessage: string;
 };
  
 export type UploadDocumentValidationResult = {
@@ -34,10 +37,17 @@ export type UploadDocumentValidationResult = {
   errorMessage: string | null;
 };
  
+export type UploadDocumentPayload = {
+  file: File;
+  username: string;
+};
+ 
 export type UseUploadDocumentResult = {
   selectedFile: File | null;
   uploadErrorMessage: string | null;
+  isUploading: boolean;
   selectFile: (file: File) => void;
   clearSelectedFile: () => void;
   clearUploadState: () => void;
+  uploadSelectedDocument: (username: string | undefined) => Promise<boolean>;
 };

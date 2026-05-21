@@ -11,4 +11,7 @@ export const documentUploadConfig: DocumentUploadConfig = {
   noUserSelectedText: "No user selected",
   invalidFileTypeMessage: "Only PDF files are allowed.",
   invalidFileSizeMessage: "The selected file is too large.",
+  noFileSelectedMessage: "Please select a PDF file before uploading.",
+  noUserSelectedMessage: "Please select a user before uploading a document.",
+  uploadFailedMessage: "Document could not be uploaded.",
 };
