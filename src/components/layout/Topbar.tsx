@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { Bell } from "lucide-react";
 import { useLocation } from "react-router";
 
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
 import UploadDocumentModal from "../../features/documents/components/UploadDocumentModal";
+import { useDocumentsFeature } from "../../features/documents/hooks/useDocumentsFeature";
 import Button from "../ui/Button";
 
 import { getTopbarTitle } from "./utils/getTopbarTitle";
@@ -12,17 +12,18 @@ function Topbar() {
   const selectedUser = useAuthStore((state) => state.selectedUser);
   const location = useLocation();
 
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const {
+    isUploadModalOpen,
+    openUploadModal,
+    closeUploadModal,
+    selectedFile,
+    selectFile,
+    submitUpload,
+    isUploading,
+    featureError,
+  } = useDocumentsFeature(selectedUser?.name);
 
   const topbarTitle = getTopbarTitle(location.pathname);
-
-  function openUploadModal() {
-    setIsUploadModalOpen(true);
-  }
-
-  function closeUploadModal() {
-    setIsUploadModalOpen(false);
-  }
 
   return (
     <>
@@ -49,7 +50,13 @@ function Topbar() {
 
       <UploadDocumentModal
         isOpen={isUploadModalOpen}
-        selectedUsername={selectedUser?.name}
+        selectedFile={selectedFile}
+        uploadErrorMessage={featureError}
+        isUploading={isUploading}
+        onFileSelect={selectFile}
+        onSubmit={() => {
+          void submitUpload();
+        }}
         onClose={closeUploadModal}
       />
     </>

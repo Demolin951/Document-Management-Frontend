@@ -1,30 +1,36 @@
-import type { ChangeEvent, FormEvent } from "react";
- 
+import type { FormEvent } from "react";
+
 import type { DocumentListItem, DocumentRole } from "./documentTypes";
- 
+
 export type AddDocumentAccessRole = Exclude<DocumentRole, "Owner">;
- 
+
 export type DocumentAccessApiRole = 1 | 2;
- 
+
 export type AddDocumentAccessPayload = {
   documentId: number;
   ownerUsername: string;
   targetUserName: string;
   role: AddDocumentAccessRole;
 };
- 
+
 export type ManageDocumentAccessModalProps = {
   isOpen: boolean;
   document: DocumentListItem | null;
-  ownerUsername: string | undefined;
+  targetUserName: string;
+  selectedRole: AddDocumentAccessRole;
+  isAddingAccess: boolean;
+  addAccessErrorMessage: string | null;
+  onTargetUserNameChange: (value: string) => void;
+  onRoleChange: (role: AddDocumentAccessRole) => void;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   onClose: () => void;
 };
- 
+
 export type DocumentAccessRoleOption = {
   value: AddDocumentAccessRole;
   label: string;
 };
- 
+
 export type DocumentAccessConfig = {
   modalTitle: string;
   targetUsernameLabel: string;
@@ -38,7 +44,7 @@ export type DocumentAccessConfig = {
   targetUsernameRequiredMessage: string;
   addAccessFailedMessage: string;
 };
- 
+
 export type UseAddDocumentAccessResult = {
   targetUserName: string;
   selectedRole: AddDocumentAccessRole;
@@ -49,13 +55,6 @@ export type UseAddDocumentAccessResult = {
   resetAddAccessState: () => void;
   submitAddAccess: (
     document: DocumentListItem | null,
-    ownerUsername: string | undefined
+    ownerUsername: string | undefined,
   ) => Promise<boolean>;
 };
- 
-export type AddDocumentAccessFormSubmitEvent = FormEvent<HTMLFormElement>;
- 
-export type AddDocumentAccessInputChangeEvent = ChangeEvent<HTMLInputElement>;
- 
-export type AddDocumentAccessRoleChangeEvent =
-  ChangeEvent<HTMLSelectElement>;

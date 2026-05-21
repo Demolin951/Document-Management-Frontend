@@ -2,45 +2,26 @@ import Button from "../../../components/ui/Button";
 import Modal from "../../../components/ui/Modal";
 
 import { documentUploadConfig } from "../config/documentUploadConfig";
-import { useUploadDocument } from "../hooks/useUploadDocuments";
 import type { UploadDocumentModalProps } from "../types/documentUploadTypes";
 
 import UploadDocumentDropzone from "./UploadDocumentDropzone";
 
 function UploadDocumentModal({
   isOpen,
-  selectedUsername,
+  selectedFile,
+  uploadErrorMessage,
+  isUploading,
+  onFileSelect,
+  onSubmit,
   onClose,
 }: UploadDocumentModalProps) {
-  const {
-    selectedFile,
-    uploadErrorMessage,
-    isUploading,
-    selectFile,
-    clearUploadState,
-    uploadSelectedDocument,
-  } = useUploadDocument();
-
-  function handleClose() {
-    clearUploadState();
-    onClose();
-  }
-
-  async function handleUploadClick() {
-    const wasUploaded = await uploadSelectedDocument(selectedUsername);
-
-    if (wasUploaded) {
-      onClose();
-    }
-  }
-
-  const isUploadDisabled = !selectedFile || !selectedUsername || isUploading;
+  const isUploadDisabled = !selectedFile || isUploading;
 
   return (
     <Modal
       isOpen={isOpen}
       title={documentUploadConfig.modalTitle}
-      onClose={handleClose}
+      onClose={onClose}
     >
       <div className="space-y-5">
         {uploadErrorMessage && (
@@ -51,20 +32,20 @@ function UploadDocumentModal({
 
         <UploadDocumentDropzone
           selectedFile={selectedFile}
-          onFileSelect={selectFile}
+          onFileSelect={onFileSelect}
         />
 
         <div className="flex items-center justify-end gap-3 border-t border-slate-200 pt-5">
           <button
             type="button"
-            onClick={handleClose}
+            onClick={onClose}
             disabled={isUploading}
             className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-60"
           >
             Cancel
           </button>
 
-          <Button disabled={isUploadDisabled} onClick={handleUploadClick}>
+          <Button disabled={isUploadDisabled} onClick={onSubmit}>
             {isUploading ? "Uploading..." : "Upload"}
           </Button>
         </div>

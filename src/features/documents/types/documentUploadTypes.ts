@@ -1,21 +1,25 @@
 import type { ChangeEvent, DragEvent } from "react";
- 
+
 export type UploadDocumentModalProps = {
   isOpen: boolean;
-  selectedUsername: string | undefined;
+  selectedFile: File | null;
+  uploadErrorMessage: string | null;
+  isUploading: boolean;
+  onFileSelect: (file: File) => void;
+  onSubmit: () => void;
   onClose: () => void;
 };
- 
+
 export type UploadDocumentDropzoneProps = {
   selectedFile: File | null;
   onFileSelect: (file: File) => void;
 };
- 
+
 export type UploadDocumentDropzoneInputChangeEvent =
   ChangeEvent<HTMLInputElement>;
- 
+
 export type UploadDocumentDropzoneDragEvent = DragEvent<HTMLDivElement>;
- 
+
 export type DocumentUploadConfig = {
   acceptedFileTypes: string;
   maxFileSizeInMb: number;
@@ -31,17 +35,17 @@ export type DocumentUploadConfig = {
   noUserSelectedMessage: string;
   uploadFailedMessage: string;
 };
- 
+
 export type UploadDocumentValidationResult = {
   isValid: boolean;
   errorMessage: string | null;
 };
- 
+
 export type UploadDocumentPayload = {
   file: File;
   username: string;
 };
- 
+
 export type UseUploadDocumentResult = {
   selectedFile: File | null;
   uploadErrorMessage: string | null;
