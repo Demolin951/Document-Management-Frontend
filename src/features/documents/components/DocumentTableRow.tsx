@@ -13,12 +13,15 @@ function DocumentTableRow({ document }: DocumentTableRowProps) {
 
   return (
     <DataTableRow columns={documentTableColumns}>
-      <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-600">
+      <div className="flex min-w-0 items-center gap-3 pr-4">
+        <div className="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-red-50 text-red-600">
           <FileText size={18} strokeWidth={2.5} />
         </div>
 
-        <span className="font-semibold text-slate-900">
+        <span
+          title={document.fileName}
+          className="block max-w-60 truncate font-semibold text-slate-900"
+        >
           {document.fileName}
         </span>
       </div>
