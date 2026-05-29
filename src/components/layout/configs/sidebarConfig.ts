@@ -22,6 +22,7 @@ const sidebarItems: SidebarItem[] = [
     label: "Users",
     icon: Users,
     path: "/users",
+    adminOnly: true,
   },
 ];
  

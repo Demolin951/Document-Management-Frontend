@@ -4,4 +4,5 @@ export type SidebarItem = {
     label: string;
     icon: LucideIcon;
     path: string;
+    adminOnly?: boolean;
 }

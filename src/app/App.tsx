@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import UsersPage from "../pages/UserPage";
+import UsersPage from "../pages/UsersPage";
 import AppLayout from "../layouts/AppLayout";
 import DashboardPage from "../pages/DashboardPage";
 import DocumentsPage from "../pages/DocumentsPage";
