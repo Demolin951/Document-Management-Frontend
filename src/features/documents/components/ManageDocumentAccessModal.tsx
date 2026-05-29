@@ -25,6 +25,7 @@ function ManageDocumentAccessModal({
   document,
   ownerUsername,
   onClose,
+  onAccessChanged,
 }: ManageDocumentAccessModalProps) {
   const {
     targetUserName,
@@ -94,7 +95,23 @@ function ManageDocumentAccessModal({
 
     if (wasAccessAdded) {
       await reloadAccessUsers();
+      await notifyAccessChanged();
     }
+  }
+
+  async function handleAccessRoleChange(
+    accessUser: Parameters<typeof changeAccessRole>[0],
+    newRole: Parameters<typeof changeAccessRole>[1],
+  ) {
+    await changeAccessRole(accessUser, newRole);
+    await notifyAccessChanged();
+  }
+
+  async function handleRemoveAccess(
+    accessUser: Parameters<typeof removeAccess>[0],
+  ) {
+    await removeAccess(accessUser);
+    await notifyAccessChanged();
   }
 
   function handleNewOwnerUsernameChange(
@@ -103,11 +120,16 @@ function ManageDocumentAccessModal({
     setNewOwnerUsername(event.target.value);
   }
 
+  async function notifyAccessChanged() {
+    await onAccessChanged?.();
+  }
+
   async function handleTransferOwnership() {
     const wasOwnershipTransferred = await transferOwnership(newOwnerUsername);
 
     if (wasOwnershipTransferred) {
       resetTransferOwnershipState();
+      await notifyAccessChanged();
 
       window.alert(
         "Ownership was transferred successfully. The current user is no longer the owner of this document.",
@@ -162,8 +184,8 @@ function ManageDocumentAccessModal({
           accessUsers={accessUsers}
           isLoadingAccess={isLoadingAccess}
           isActionLoading={isAccessActionLoading}
-          onRoleChange={changeAccessRole}
-          onRemoveAccess={removeAccess}
+          onRoleChange={handleAccessRoleChange}
+          onRemoveAccess={handleRemoveAccess}
         />
       </div>
     </Modal>

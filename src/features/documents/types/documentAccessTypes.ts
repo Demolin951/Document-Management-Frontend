@@ -29,6 +29,7 @@ export type ManageDocumentAccessModalProps = {
   document: DocumentListItem | null;
   ownerUsername: string | undefined;
   onClose: () => void;
+  onAccessChanged?: () => Promise<void> | void;
 };
  
 export type DocumentAccessRoleOption = {

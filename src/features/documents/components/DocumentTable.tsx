@@ -13,8 +13,12 @@ import DocumentsTableFooter from "./DocumentsTableFooter";
 import ManageDocumentAccessModal from "./ManageDocumentAccessModal";
 
 function DocumentTable({ username }: DocumentsTableProps) {
-  const { documents, isLoadingDocuments, documentsErrorMessage } =
-    useDocuments(username);
+  const {
+    documents,
+    isLoadingDocuments,
+    documentsErrorMessage,
+    reloadDocuments,
+  } = useDocuments(username);
 
   const {
     documentActionErrorMessage,
@@ -90,6 +94,7 @@ function DocumentTable({ username }: DocumentsTableProps) {
         document={selectedDocumentForAccess}
         ownerUsername={username}
         onClose={closeManageAccessModal}
+        onAccessChanged={reloadDocuments}
       />
     </>
   );
