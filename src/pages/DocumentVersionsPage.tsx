@@ -3,7 +3,7 @@ import { useAuthStore } from "../features/auth/store/useAuthStore";
 import { useDocuments } from "../features/documents/hooks/useDocuments";
 import AvailableDocumentsVersionTable from "../features/versions/components/AvailableDocumentsVersionTable";
 import VersionHistoryModal from "../features/versions/components/VersionHistoryModal";
-import { useMockDocumentVersions } from "../features/versions/hooks/useMockDocumentVersions";
+import { useDocumentVersions } from "../features/versions/hooks/useDocumentVersions";
 
 function DocumentVersionsPage() {
   const selectedUser = useAuthStore((state) => state.selectedUser);
@@ -15,11 +15,13 @@ function DocumentVersionsPage() {
   const {
     selectedDocumentForVersions,
     selectedDocumentVersions,
+    isLoadingVersions,
+    versionsErrorMessage,
     openVersionHistory,
     closeVersionHistory,
     downloadLatestVersion,
     downloadVersion,
-  } = useMockDocumentVersions();
+  } = useDocumentVersions(selectedUser?.name);
 
   if (!selectedUser) {
     return (
@@ -71,6 +73,8 @@ function DocumentVersionsPage() {
         isOpen={Boolean(selectedDocumentForVersions)}
         document={selectedDocumentForVersions}
         versions={selectedDocumentVersions}
+        isLoadingVersions={isLoadingVersions}
+        versionsErrorMessage={versionsErrorMessage}
         onClose={closeVersionHistory}
         onDownloadVersion={downloadVersion}
       />
