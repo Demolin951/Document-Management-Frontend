@@ -59,10 +59,22 @@ function getFileNameFromContentDisposition(
   if (!contentDisposition) {
     return null;
   }
-
-  const fileNameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
-
-  return fileNameMatch?.[1] ?? null;
+ 
+  const utf8FileNameMatch = contentDisposition.match(
+    /filename\*=UTF-8''([^;]+)/i,
+  );
+ 
+  if (utf8FileNameMatch?.[1]) {
+    return decodeURIComponent(utf8FileNameMatch[1].replaceAll('"', ""));
+  }
+ 
+  const fileNameMatch = contentDisposition.match(/filename="?([^";]+)"?/i);
+ 
+  if (fileNameMatch?.[1]) {
+    return fileNameMatch[1].trim();
+  }
+ 
+  return null;
 }
 
 async function downloadBlobAsFile(response: Response, fallbackFileName: string) {
