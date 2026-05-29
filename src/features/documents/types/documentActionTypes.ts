@@ -5,8 +5,9 @@ export type DocumentActionKey =
   | "view"
   | "download"
   | "uploadNewVersion"
-  | "manageAccess";
-  
+  | "manageAccess"
+  | "deleteDocument";
+
 export type DocumentActionConfig = {
   key: DocumentActionKey;
   title: string;
