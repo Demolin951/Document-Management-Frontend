@@ -72,5 +72,5 @@ export const changeAccessConfig = {
   loadingText: "Loading access list...",
   emptyText: "No users found.",
   ownerInfoText:
-    "The owner has full control over this document, including changing permissions and transferring ownership. Ownership can only be transferred to another user.",
+    "The ownership can only be transfered to user that already has access",
 };

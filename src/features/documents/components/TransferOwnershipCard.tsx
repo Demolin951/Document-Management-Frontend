@@ -1,4 +1,4 @@
-import { ShieldCheck } from "lucide-react";
+import { ArrowRightLeft } from "lucide-react";
 
 import Button from "../../../components/ui/Button";
 import { transferOwnershipConfig } from "../config/documentAccessConfig";
@@ -22,7 +22,7 @@ function TransferOwnershipCard({
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-5 flex items-center gap-3">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-50 text-blue-600">
-          <ShieldCheck size={18} strokeWidth={2.5} />
+          <ArrowRightLeft size={18} strokeWidth={2.5} />
         </div>
 
         <h3 className="text-base font-bold text-slate-900">
