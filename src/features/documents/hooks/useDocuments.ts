@@ -1,16 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
- 
+
 import { getDocumentsByUsername } from "../api/documentsApi";
+import { useDocumentRefreshStore } from "../store/useDocumentRefreshStore";
 import type { DocumentListItem } from "../types/documentTypes";
 import type { UseDocumentsResult } from "../types/useDocumentsTypes";
- 
+
 export function useDocuments(username: string | undefined): UseDocumentsResult {
+  const documentsRefreshVersion = useDocumentRefreshStore(
+    (state) => state.documentsRefreshVersion,
+  );
+
   const [documents, setDocuments] = useState<DocumentListItem[]>([]);
   const [isLoadingDocuments, setIsLoadingDocuments] = useState(false);
   const [documentsErrorMessage, setDocumentsErrorMessage] = useState<
     string | null
->(null);
- 
+  >(null);
+
   const reloadDocuments = useCallback(async () => {
     if (!username) {
       setDocuments([]);
@@ -18,13 +23,13 @@ export function useDocuments(username: string | undefined): UseDocumentsResult {
       setIsLoadingDocuments(false);
       return;
     }
- 
+
     setIsLoadingDocuments(true);
     setDocumentsErrorMessage(null);
- 
+
     try {
       const loadedDocuments = await getDocumentsByUsername(username);
- 
+
       setDocuments(loadedDocuments);
     } catch {
       setDocuments([]);
@@ -33,17 +38,17 @@ export function useDocuments(username: string | undefined): UseDocumentsResult {
       setIsLoadingDocuments(false);
     }
   }, [username]);
- 
+
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
       void reloadDocuments();
     }, 0);
- 
+
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [reloadDocuments]);
- 
+  }, [reloadDocuments, documentsRefreshVersion]);
+
   return {
     documents,
     isLoadingDocuments,

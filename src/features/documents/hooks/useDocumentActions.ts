@@ -23,12 +23,19 @@ export function useDocumentActions(
     setSelectedDocumentForVersionUpload,
   ] = useState<DocumentListItem | null>(null);
 
+  const [selectedDocumentForDelete, setSelectedDocumentForDelete] =
+    useState<DocumentListItem | null>(null);
+
   function closeManageAccessModal() {
     setSelectedDocumentForAccess(null);
   }
 
   function closeUploadVersionModal() {
     setSelectedDocumentForVersionUpload(null);
+  }
+
+  function closeDeleteDocumentModal() {
+    setSelectedDocumentForDelete(null);
   }
 
   async function handleDownloadDocument(document: DocumentListItem) {
@@ -58,6 +65,11 @@ export function useDocumentActions(
       return;
     }
 
+    if (actionKey === "deleteDocument") {
+      setSelectedDocumentForDelete(document);
+      return;
+    }
+
     setIsDocumentActionLoading(true);
 
     try {
@@ -83,6 +95,9 @@ export function useDocumentActions(
 
     selectedDocumentForVersionUpload,
     closeUploadVersionModal,
+
+    selectedDocumentForDelete,
+    closeDeleteDocumentModal,
 
     handleDocumentAction,
   };

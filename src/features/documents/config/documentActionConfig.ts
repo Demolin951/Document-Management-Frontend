@@ -1,6 +1,6 @@
-import { Download, Eye, FileUp, Users } from "lucide-react";
+import { Download, Eye, FileUp, Trash2, Users } from "lucide-react";
 import type { DocumentActionConfig } from "../types/documentActionTypes";
- 
+
 export const documentActionConfig: DocumentActionConfig[] = [
   {
     key: "view",
@@ -24,6 +24,12 @@ export const documentActionConfig: DocumentActionConfig[] = [
     key: "manageAccess",
     title: "Manage access",
     icon: Users,
+    allowedRoles: ["Owner"],
+  },
+  {
+    key: "deleteDocument",
+    title: "Delete document",
+    icon: Trash2,
     allowedRoles: ["Owner"],
   },
 ];
