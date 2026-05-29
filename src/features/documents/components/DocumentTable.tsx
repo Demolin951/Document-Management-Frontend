@@ -8,6 +8,7 @@ import { useDocumentActions } from "../hooks/useDocumentActions";
 import { useDocuments } from "../hooks/useDocuments";
 import type { DocumentsTableProps } from "../types/documentTableTypes";
 
+import DeleteDocumentConfirmModal from "./DeleteDocumentConfirmModal";
 import DocumentTableRow from "./DocumentTableRow";
 import DocumentsTableFooter from "./DocumentsTableFooter";
 import ManageDocumentAccessModal from "./ManageDocumentAccessModal";
@@ -28,6 +29,8 @@ function DocumentTable({ username }: DocumentsTableProps) {
     closeManageAccessModal,
     selectedDocumentForVersionUpload,
     closeUploadVersionModal,
+    selectedDocumentForDelete,
+    closeDeleteDocumentModal,
     handleDocumentAction,
   } = useDocumentActions(username);
 
@@ -106,6 +109,14 @@ function DocumentTable({ username }: DocumentsTableProps) {
         selectedUsername={username}
         onClose={closeUploadVersionModal}
         onVersionUploaded={reloadDocuments}
+      />
+
+      <DeleteDocumentConfirmModal
+        isOpen={Boolean(selectedDocumentForDelete)}
+        document={selectedDocumentForDelete}
+        username={username}
+        onClose={closeDeleteDocumentModal}
+        onDocumentDeleted={reloadDocuments}
       />
     </>
   );
