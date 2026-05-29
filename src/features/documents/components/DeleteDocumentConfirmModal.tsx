@@ -45,7 +45,8 @@ function DeleteDocumentConfirmModal({
     try {
       await deleteDocument(document.id, username);
       await onDocumentDeleted?.();
-      handleClose();
+      setDeleteErrorMessage(null);
+      onClose();
     } catch {
       setDeleteErrorMessage("Document could not be deleted.");
     } finally {
