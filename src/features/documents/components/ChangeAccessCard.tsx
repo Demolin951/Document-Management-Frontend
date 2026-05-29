@@ -7,6 +7,8 @@ import AccessUserRow from "./AccessUserRow";
 
 function ChangeAccessCard({
   accessUsers,
+  isLoadingAccess,
+  isActionLoading,
   onRoleChange,
   onRemoveAccess,
 }: ChangeAccessCardProps) {
@@ -30,14 +32,25 @@ function ChangeAccessCard({
           <div className="text-right">{changeAccessConfig.actionsColumn}</div>
         </div>
 
-        {accessUsers.map((accessUser) => (
-          <AccessUserRow
-            key={accessUser.id}
-            accessUser={accessUser}
-            onRoleChange={onRoleChange}
-            onRemoveAccess={onRemoveAccess}
-          />
-        ))}
+        {isLoadingAccess ? (
+          <div className="border-t border-slate-200 px-4 py-6 text-center text-sm font-semibold text-slate-500">
+            {changeAccessConfig.loadingText}
+          </div>
+        ) : accessUsers.length === 0 ? (
+          <div className="border-t border-slate-200 px-4 py-6 text-center text-sm font-semibold text-slate-500">
+            {changeAccessConfig.emptyText}
+          </div>
+        ) : (
+          accessUsers.map((accessUser) => (
+            <AccessUserRow
+              key={accessUser.id}
+              accessUser={accessUser}
+              isActionLoading={isActionLoading}
+              onRoleChange={onRoleChange}
+              onRemoveAccess={onRemoveAccess}
+            />
+          ))
+        )}
       </div>
 
       <div className="mt-4 flex gap-3 rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm font-medium text-blue-800">

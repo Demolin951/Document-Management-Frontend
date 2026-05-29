@@ -4,13 +4,24 @@ import type { DocumentListItem, DocumentRole } from "./documentTypes";
  
 export type AddDocumentAccessRole = Exclude<DocumentRole, "Owner">;
  
-export type DocumentAccessApiRole = 1 | 2;
+export type DocumentAccessApiRole = 0 | 1 | 2;
  
 export type AddDocumentAccessPayload = {
   documentId: number;
   ownerUsername: string;
   targetUserName: string;
   role: AddDocumentAccessRole;
+};
+ 
+export type DocumentAccessApiResponse = {
+  documentId?: number;
+  DocumentId?: number;
+  userId?: number;
+  UserId?: number;
+  userName?: string;
+  UserName?: string;
+  role?: DocumentAccessApiRole | DocumentRole;
+  Role?: DocumentAccessApiRole | DocumentRole;
 };
  
 export type ManageDocumentAccessModalProps = {
@@ -37,6 +48,10 @@ export type DocumentAccessConfig = {
   noOwnerSelectedMessage: string;
   targetUsernameRequiredMessage: string;
   addAccessFailedMessage: string;
+  loadAccessFailedMessage: string;
+  changeAccessRoleFailedMessage: string;
+  removeAccessFailedMessage: string;
+  transferOwnershipFailedMessage: string;
 };
  
 export type AccessUser = {
@@ -65,16 +80,20 @@ export type UseTransferOwnershipFormResult = {
   isTransferOwnershipDisabled: boolean;
   setNewOwnerUsername: (newOwnerUsername: string) => void;
   resetTransferOwnershipState: () => void;
-  submitTransferOwnership: (document: DocumentListItem | null) => void;
 };
  
-export type UseDocumentAccessPreviewResult = {
+export type UseDocumentAccessManagementResult = {
   accessUsers: AccessUser[];
-  handleAccessRoleChange: (
+  isLoadingAccess: boolean;
+  isAccessActionLoading: boolean;
+  accessManagementErrorMessage: string | null;
+  reloadAccessUsers: () => Promise<void>;
+  changeAccessRole: (
     accessUser: AccessUser,
     newRole: AddDocumentAccessRole,
-  ) => void;
-  handleRemoveAccess: (accessUser: AccessUser) => void;
+  ) => Promise<void>;
+  removeAccess: (accessUser: AccessUser) => Promise<void>;
+  transferOwnership: (newOwnerUsername: string) => Promise<boolean>;
 };
  
 export type AddUserAccessCardProps = {
@@ -88,14 +107,18 @@ export type AddUserAccessCardProps = {
 };
  
 export type TransferOwnershipCardProps = {
+  accessUsers: AccessUser[];
   newOwnerUsername: string;
   isTransferOwnershipDisabled: boolean;
+  isActionLoading: boolean;
   onNewOwnerUsernameChange: TransferOwnershipInputChangeHandler;
   onTransferOwnership: () => void;
 };
  
 export type ChangeAccessCardProps = {
   accessUsers: AccessUser[];
+  isLoadingAccess: boolean;
+  isActionLoading: boolean;
   onRoleChange: (
     accessUser: AccessUser,
     newRole: AddDocumentAccessRole,
@@ -105,6 +128,7 @@ export type ChangeAccessCardProps = {
  
 export type AccessUserRowProps = {
   accessUser: AccessUser;
+  isActionLoading: boolean;
   onRoleChange: (
     accessUser: AccessUser,
     newRole: AddDocumentAccessRole,
@@ -118,8 +142,7 @@ export type AddDocumentAccessInputChangeEvent = ChangeEvent<HTMLInputElement>;
  
 export type AddDocumentAccessRoleChangeEvent = ChangeEvent<HTMLSelectElement>;
  
-export type TransferOwnershipInputChangeEvent =
-  ChangeEvent<HTMLInputElement>;
+export type TransferOwnershipInputChangeEvent = ChangeEvent<HTMLSelectElement>;
  
 export type AddDocumentAccessFormSubmitHandler = (
   event: AddDocumentAccessFormSubmitEvent,

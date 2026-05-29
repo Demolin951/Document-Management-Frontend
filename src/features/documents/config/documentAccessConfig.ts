@@ -1,10 +1,10 @@
 import type {
-  AccessUser,
   AddDocumentAccessRole,
   DocumentAccessApiRole,
   DocumentAccessConfig,
   DocumentAccessRoleOption,
 } from "../types/documentAccessTypes";
+import type { DocumentRole } from "../types/documentTypes";
  
 export const documentAccessRoleOptions: DocumentAccessRoleOption[] = [
   {
@@ -25,6 +25,15 @@ export const documentAccessApiRoleByRole: Record<
   Viewer: 2,
 };
  
+export const documentAccessRoleByApiRole: Record<
+  DocumentAccessApiRole,
+  DocumentRole
+> = {
+  0: "Owner",
+  1: "Editor",
+  2: "Viewer",
+};
+ 
 export const documentAccessConfig: DocumentAccessConfig = {
   modalTitle: "Change Permissions",
   targetUsernameLabel: "Username",
@@ -37,6 +46,10 @@ export const documentAccessConfig: DocumentAccessConfig = {
   noOwnerSelectedMessage: "Please select the owner user before adding access.",
   targetUsernameRequiredMessage: "Please enter a username.",
   addAccessFailedMessage: "Access could not be added.",
+  loadAccessFailedMessage: "Access list could not be loaded.",
+  changeAccessRoleFailedMessage: "Access role could not be changed.",
+  removeAccessFailedMessage: "Access could not be removed.",
+  transferOwnershipFailedMessage: "Ownership could not be transferred.",
 };
  
 export const documentAccessModalPanelClassName = "w-[92vw] max-w-5xl";
@@ -56,27 +69,8 @@ export const changeAccessConfig = {
   actionsColumn: "Actions",
   lockedText: "Locked",
   removeButtonText: "Remove",
+  loadingText: "Loading access list...",
+  emptyText: "No users found.",
   ownerInfoText:
     "The owner has full control over this document, including changing permissions and transferring ownership. Ownership can only be transferred to another user.",
 };
- 
-export const documentAccessMockSharedUsers: AccessUser[] = [
-  {
-    id: 2,
-    name: "Anna Schmidt",
-    username: "anna.schmidt",
-    role: "Viewer",
-  },
-  {
-    id: 3,
-    name: "Max Weber",
-    username: "max.weber",
-    role: "Editor",
-  },
-  {
-    id: 4,
-    name: "Lisa Müller",
-    username: "lisa.mueller",
-    role: "Viewer",
-  },
-];

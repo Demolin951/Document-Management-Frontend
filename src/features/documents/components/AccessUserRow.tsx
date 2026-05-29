@@ -11,6 +11,7 @@ import type {
 
 function AccessUserRow({
   accessUser,
+  isActionLoading,
   onRoleChange,
   onRemoveAccess,
 }: AccessUserRowProps) {
@@ -37,14 +38,15 @@ function AccessUserRow({
           <span className="font-semibold text-slate-700">Owner</span>
         ) : (
           <select
-            defaultValue={accessUser.role}
+            value={accessUser.role}
+            disabled={isActionLoading}
             onChange={(event) =>
               onRoleChange(
                 accessUser,
                 event.target.value as AddDocumentAccessRole,
               )
             }
-            className="w-32 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-100"
+            className="w-32 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-50"
           >
             {documentAccessRoleOptions.map((roleOption) => (
               <option key={roleOption.value} value={roleOption.value}>
@@ -64,8 +66,9 @@ function AccessUserRow({
         ) : (
           <button
             type="button"
+            disabled={isActionLoading}
             onClick={() => onRemoveAccess(accessUser)}
-            className="rounded-lg border border-red-200 bg-white px-3 py-2 text-sm font-bold text-red-600 transition hover:bg-red-50"
+            className="rounded-lg border border-red-200 bg-white px-3 py-2 text-sm font-bold text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {changeAccessConfig.removeButtonText}
           </button>

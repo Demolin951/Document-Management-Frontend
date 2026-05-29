@@ -5,7 +5,7 @@ import {
   documentAccessModalPanelClassName,
 } from "../config/documentAccessConfig";
 import { useAddDocumentAccess } from "../hooks/useAddDocumentAccess";
-import { useDocumentAccessPreview } from "../hooks/useDocumentAccessPreview";
+import { useDocumentAccessManagement } from "../hooks/useDocumentAccessManagement";
 import { useTransferOwnershipForm } from "../hooks/useTransferOwnershipForm";
 import type {
   AddDocumentAccessFormSubmitEvent,
@@ -42,18 +42,32 @@ function ManageDocumentAccessModal({
     isTransferOwnershipDisabled,
     setNewOwnerUsername,
     resetTransferOwnershipState,
-    submitTransferOwnership,
   } = useTransferOwnershipForm();
 
-  const { accessUsers, handleAccessRoleChange, handleRemoveAccess } =
-    useDocumentAccessPreview(document, ownerUsername);
+  const {
+    accessUsers,
+    isLoadingAccess,
+    isAccessActionLoading,
+    accessManagementErrorMessage,
+    reloadAccessUsers,
+    changeAccessRole,
+    removeAccess,
+    transferOwnership,
+  } = useDocumentAccessManagement(document, ownerUsername, isOpen);
 
   const modalTitle = document
     ? `${documentAccessConfig.modalTitle}: ${document.fileName}`
     : documentAccessConfig.modalTitle;
 
   const isAddAccessDisabled =
-    isAddingAccess || !targetUserName.trim() || !document || !ownerUsername;
+    isAddingAccess ||
+    isAccessActionLoading ||
+    !targetUserName.trim() ||
+    !document ||
+    !ownerUsername;
+
+  const isTransferDisabled =
+    isAccessActionLoading || isTransferOwnershipDisabled;
 
   function handleClose() {
     resetAddAccessState();
@@ -76,7 +90,11 @@ function ManageDocumentAccessModal({
   ) {
     event.preventDefault();
 
-    await submitAddAccess(document, ownerUsername);
+    const wasAccessAdded = await submitAddAccess(document, ownerUsername);
+
+    if (wasAccessAdded) {
+      await reloadAccessUsers();
+    }
   }
 
   function handleNewOwnerUsernameChange(
@@ -85,8 +103,18 @@ function ManageDocumentAccessModal({
     setNewOwnerUsername(event.target.value);
   }
 
-  function handleTransferOwnership() {
-    submitTransferOwnership(document);
+  async function handleTransferOwnership() {
+    const wasOwnershipTransferred = await transferOwnership(newOwnerUsername);
+
+    if (wasOwnershipTransferred) {
+      resetTransferOwnershipState();
+
+      window.alert(
+        "Ownership was transferred successfully. The current user is no longer the owner of this document.",
+      );
+
+      handleClose();
+    }
   }
 
   return (
@@ -103,6 +131,12 @@ function ManageDocumentAccessModal({
           </div>
         )}
 
+        {accessManagementErrorMessage && (
+          <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+            {accessManagementErrorMessage}
+          </div>
+        )}
+
         <div className="grid gap-5 lg:grid-cols-2">
           <AddUserAccessCard
             targetUserName={targetUserName}
@@ -115,8 +149,10 @@ function ManageDocumentAccessModal({
           />
 
           <TransferOwnershipCard
+            accessUsers={accessUsers}
             newOwnerUsername={newOwnerUsername}
-            isTransferOwnershipDisabled={isTransferOwnershipDisabled}
+            isTransferOwnershipDisabled={isTransferDisabled}
+            isActionLoading={isAccessActionLoading}
             onNewOwnerUsernameChange={handleNewOwnerUsernameChange}
             onTransferOwnership={handleTransferOwnership}
           />
@@ -124,8 +160,10 @@ function ManageDocumentAccessModal({
 
         <ChangeAccessCard
           accessUsers={accessUsers}
-          onRoleChange={handleAccessRoleChange}
-          onRemoveAccess={handleRemoveAccess}
+          isLoadingAccess={isLoadingAccess}
+          isActionLoading={isAccessActionLoading}
+          onRoleChange={changeAccessRole}
+          onRemoveAccess={removeAccess}
         />
       </div>
     </Modal>

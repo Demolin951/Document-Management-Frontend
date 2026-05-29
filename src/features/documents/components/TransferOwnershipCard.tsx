@@ -5,11 +5,19 @@ import { transferOwnershipConfig } from "../config/documentAccessConfig";
 import type { TransferOwnershipCardProps } from "../types/documentAccessTypes";
 
 function TransferOwnershipCard({
+  accessUsers,
   newOwnerUsername,
   isTransferOwnershipDisabled,
+  isActionLoading,
   onNewOwnerUsernameChange,
   onTransferOwnership,
 }: TransferOwnershipCardProps) {
+  const transferCandidates = accessUsers.filter(
+    (accessUser) => accessUser.role !== "Owner",
+  );
+
+  const hasTransferCandidates = transferCandidates.length > 0;
+
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-5 flex items-center gap-3">
@@ -28,19 +36,28 @@ function TransferOwnershipCard({
             {transferOwnershipConfig.newOwnerLabel}
           </label>
 
-          <input
-            type="text"
+          <select
             value={newOwnerUsername}
             onChange={onNewOwnerUsernameChange}
-            placeholder={transferOwnershipConfig.newOwnerPlaceholder}
-            className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100"
-          />
+            disabled={isActionLoading || !hasTransferCandidates}
+            className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+          >
+            <option value="">
+              {hasTransferCandidates ? "Select user" : "No users available"}
+            </option>
+
+            {transferCandidates.map((accessUser) => (
+              <option key={accessUser.id} value={accessUser.username}>
+                {accessUser.username} ({accessUser.role})
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="flex justify-end pt-14">
           <Button
             type="button"
-            disabled={isTransferOwnershipDisabled}
+            disabled={isTransferOwnershipDisabled || isActionLoading}
             onClick={onTransferOwnership}
           >
             {transferOwnershipConfig.transferButtonText}
