@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
-
+ 
 export type ModalProps = {
-    isOpen:boolean;
-    title: string;
-    children: ReactNode;
-    onClose: () => void;
+  isOpen: boolean;
+  title: string;
+  children: ReactNode;
+  onClose: () => void;
+  panelClassName?: string;
 };

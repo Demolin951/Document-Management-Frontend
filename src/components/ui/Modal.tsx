@@ -2,10 +2,18 @@ import { X } from "lucide-react";
 
 import type { ModalProps } from "./types/modalTypes";
 
-function Modal({ isOpen, title, children, onClose }: ModalProps) {
+function Modal({
+  isOpen,
+  title,
+  children,
+  onClose,
+  panelClassName,
+}: ModalProps) {
   if (!isOpen) {
     return null;
   }
+
+  const defaultPanelClassName = "w-[92vw] max-w-3xl lg:w-[50vw]";
 
   return (
     <div
@@ -16,7 +24,9 @@ function Modal({ isOpen, title, children, onClose }: ModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
-        className="w-[92vw] max-w-3xl rounded-2xl bg-white shadow-2xl lg:w-[50vw]"
+        className={`${
+          panelClassName ?? defaultPanelClassName
+        } rounded-2xl bg-white shadow-2xl`}
         onMouseDown={(event) => event.stopPropagation()}
       >
         <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
