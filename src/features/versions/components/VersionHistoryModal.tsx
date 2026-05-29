@@ -12,6 +12,8 @@ function VersionHistoryModal({
   isOpen,
   document,
   versions,
+  isLoadingVersions,
+  versionsErrorMessage,
   onClose,
   onDownloadVersion,
 }: VersionHistoryModalProps) {
@@ -26,24 +28,40 @@ function VersionHistoryModal({
       onClose={onClose}
       panelClassName="w-[92vw] max-w-4xl"
     >
-      <DataTable
-        columns={versionHistoryTableColumns}
-        emptyState={
-          <EmptyDataTableState
-            icon={FileText}
-            title="No versions found"
-            description="This document does not have any versions yet."
-          />
-        }
-      >
-        {versions.map((version) => (
-          <VersionHistoryRow
-            key={version.id}
-            version={version}
-            onDownloadVersion={onDownloadVersion}
-          />
-        ))}
-      </DataTable>
+      <div className="space-y-4">
+        {versionsErrorMessage && (
+          <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+            {versionsErrorMessage}
+          </div>
+        )}
+
+        {isLoadingVersions ? (
+          <div className="rounded-2xl border border-slate-200 bg-white px-6 py-10 text-center shadow-sm">
+            <p className="text-sm font-semibold text-slate-500">
+              Loading versions...
+            </p>
+          </div>
+        ) : (
+          <DataTable
+            columns={versionHistoryTableColumns}
+            emptyState={
+              <EmptyDataTableState
+                icon={FileText}
+                title="No versions found"
+                description="This document does not have any versions yet."
+              />
+            }
+          >
+            {versions.map((version) => (
+              <VersionHistoryRow
+                key={version.id}
+                version={version}
+                onDownloadVersion={onDownloadVersion}
+              />
+            ))}
+          </DataTable>
+        )}
+      </div>
     </Modal>
   );
 }
