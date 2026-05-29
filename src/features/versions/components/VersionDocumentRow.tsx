@@ -9,6 +9,9 @@ function VersionDocumentRow({
   onDownloadLatest,
   onOpenVersionHistory,
 }: VersionDocumentRowProps) {
+  const canViewVersionHistory =
+    document.role === "Owner" || document.role === "Editor";
+
   return (
     <DataTableRow columns={availableDocumentsVersionTableColumns}>
       <div className="flex items-center gap-3">
@@ -34,14 +37,16 @@ function VersionDocumentRow({
           <Download size={16} strokeWidth={2.4} />
         </button>
 
-        <button
-          type="button"
-          title="Show versions"
-          onClick={() => onOpenVersionHistory(document)}
-          className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-slate-700"
-        >
-          <Layers size={16} strokeWidth={2.4} />
-        </button>
+        {canViewVersionHistory && (
+          <button
+            type="button"
+            title="Show versions"
+            onClick={() => onOpenVersionHistory(document)}
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-slate-700"
+          >
+            <Layers size={16} strokeWidth={2.4} />
+          </button>
+        )}
       </div>
     </DataTableRow>
   );

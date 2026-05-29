@@ -11,6 +11,7 @@ import type { DocumentsTableProps } from "../types/documentTableTypes";
 import DocumentTableRow from "./DocumentTableRow";
 import DocumentsTableFooter from "./DocumentsTableFooter";
 import ManageDocumentAccessModal from "./ManageDocumentAccessModal";
+import UploadDocumentVersionModal from "./UploadDocumentVersionModal";
 
 function DocumentTable({ username }: DocumentsTableProps) {
   const {
@@ -25,6 +26,8 @@ function DocumentTable({ username }: DocumentsTableProps) {
     isDocumentActionLoading,
     selectedDocumentForAccess,
     closeManageAccessModal,
+    selectedDocumentForVersionUpload,
+    closeUploadVersionModal,
     handleDocumentAction,
   } = useDocumentActions(username);
 
@@ -95,6 +98,14 @@ function DocumentTable({ username }: DocumentsTableProps) {
         ownerUsername={username}
         onClose={closeManageAccessModal}
         onAccessChanged={reloadDocuments}
+      />
+
+      <UploadDocumentVersionModal
+        isOpen={Boolean(selectedDocumentForVersionUpload)}
+        document={selectedDocumentForVersionUpload}
+        selectedUsername={username}
+        onClose={closeUploadVersionModal}
+        onVersionUploaded={reloadDocuments}
       />
     </>
   );
