@@ -11,6 +11,9 @@ export type UseDocumentActionsResult = {
   selectedDocumentForVersionUpload: DocumentListItem | null;
   closeUploadVersionModal: () => void;
 
+  selectedDocumentForDelete: DocumentListItem | null;
+  closeDeleteDocumentModal: () => void;
+
   handleDocumentAction: (
     actionKey: DocumentActionKey,
     document: DocumentListItem,
