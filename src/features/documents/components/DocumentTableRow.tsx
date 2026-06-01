@@ -17,8 +17,8 @@ function DocumentTableRow({
 
   return (
     <DataTableRow columns={documentTableColumns}>
-      <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-600">
+      <div className="flex max-w-60 items-center gap-3">
+        <div className="flex shrink-0 h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-600">
           <FileText size={18} strokeWidth={2.5} />
         </div>
 
