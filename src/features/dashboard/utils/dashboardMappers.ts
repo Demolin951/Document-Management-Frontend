@@ -1,4 +1,4 @@
-import { FileText, Share2, Upload, Users } from "lucide-react";
+import { FileText, Share2, Spline, Users } from "lucide-react";
 
 import type { DashboardStat } from "../types/dashboardTypes";
 import type { DocumentListItem } from "../../documents/types/documentTypes";
@@ -29,13 +29,13 @@ export function buildDashboardStats(
       title: "Shared With Me",
       value: sharedWithMeCount,
       subtitle: "",
-      icon: Share2,
+      icon: Spline,
     },
     {
       title: "Shared To Others",
       value: sharedToOthersCount,
       subtitle: "",
-      icon: Upload,
+      icon: Share2,
     },
   ];
 }
