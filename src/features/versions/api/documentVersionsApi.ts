@@ -1,19 +1,10 @@
+import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
+import { downloadResponseAsFile } from "../../../shared/utils/fileDownloadUtils";
+
 import type {
   DocumentVersionApiResponse,
   DocumentVersionListItem,
 } from "../types/documentVersionTypes";
-
-function getVersionApiErrorMessage(
-  response: Response,
-  fallbackMessage: string,
-): Promise<string> {
-  return response
-    .json()
-    .then((body: { title?: string; detail?: string }) => {
-      return body.detail ?? body.title ?? fallbackMessage;
-    })
-    .catch(() => fallbackMessage);
-}
 
 function normalizeDocumentVersion(
   response: DocumentVersionApiResponse,
@@ -53,49 +44,6 @@ function normalizeDocumentVersion(
   };
 }
 
-function getFileNameFromContentDisposition(
-  contentDisposition: string | null,
-): string | null {
-  if (!contentDisposition) {
-    return null;
-  }
- 
-  const utf8FileNameMatch = contentDisposition.match(
-    /filename\*=UTF-8''([^;]+)/i,
-  );
- 
-  if (utf8FileNameMatch?.[1]) {
-    return decodeURIComponent(utf8FileNameMatch[1].replaceAll('"', ""));
-  }
- 
-  const fileNameMatch = contentDisposition.match(/filename="?([^";]+)"?/i);
- 
-  if (fileNameMatch?.[1]) {
-    return fileNameMatch[1].trim();
-  }
- 
-  return null;
-}
-
-async function downloadBlobAsFile(response: Response, fallbackFileName: string) {
-  const blob = await response.blob();
-  const fileName =
-    getFileNameFromContentDisposition(
-      response.headers.get("content-disposition"),
-    ) ?? fallbackFileName;
-
-  const url = window.URL.createObjectURL(blob);
-  const anchorElement = document.createElement("a");
-
-  anchorElement.href = url;
-  anchorElement.download = fileName;
-  document.body.appendChild(anchorElement);
-  anchorElement.click();
-  anchorElement.remove();
-
-  window.URL.revokeObjectURL(url);
-}
-
 export async function getDocumentVersions(
   documentId: number,
   username: string,
@@ -109,7 +57,7 @@ export async function getDocumentVersions(
   );
 
   if (!response.ok) {
-    const errorMessage = await getVersionApiErrorMessage(
+    const errorMessage = await getApiErrorMessage(
       response,
       "Versions could not be loaded.",
     );
@@ -136,7 +84,7 @@ export async function downloadLatestDocumentVersion(
   );
 
   if (!response.ok) {
-    const errorMessage = await getVersionApiErrorMessage(
+    const errorMessage = await getApiErrorMessage(
       response,
       "Latest version could not be downloaded.",
     );
@@ -144,7 +92,7 @@ export async function downloadLatestDocumentVersion(
     throw new Error(errorMessage);
   }
 
-  await downloadBlobAsFile(response, fallbackFileName);
+  await downloadResponseAsFile(response, fallbackFileName);
 }
 
 export async function downloadDocumentVersion(
@@ -162,7 +110,7 @@ export async function downloadDocumentVersion(
   );
 
   if (!response.ok) {
-    const errorMessage = await getVersionApiErrorMessage(
+    const errorMessage = await getApiErrorMessage(
       response,
       "Version could not be downloaded.",
     );
@@ -170,5 +118,5 @@ export async function downloadDocumentVersion(
     throw new Error(errorMessage);
   }
 
-  await downloadBlobAsFile(response, fallbackFileName);
+  await downloadResponseAsFile(response, fallbackFileName);
 }
