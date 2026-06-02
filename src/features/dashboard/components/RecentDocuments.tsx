@@ -1,4 +1,5 @@
-import { FileText } from "lucide-react";
+import { FileText, MoveRight } from "lucide-react";
+import { Link } from "react-router";
 
 import VersionBadge from "../../../components/ui/VersionBadge";
 import type { DocumentListItem } from "../../documents/types/documentTypes";
@@ -10,13 +11,15 @@ export type RecentDocumentsProps = {
 };
 
 function RecentDocuments({ documents }: RecentDocumentsProps) {
+  const hasRecentDocuments = documents.length > 0;
+
   return (
     <div className="flex h-full flex-col">
       <h2 className="mb-4 text-base font-semibold text-slate-900">
         Recent Documents
       </h2>
 
-      {documents.length === 0 ? (
+      {!hasRecentDocuments ? (
         <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-8 text-center">
           <p className="text-sm font-semibold text-slate-500">
             No recent documents found.
@@ -36,6 +39,16 @@ function RecentDocuments({ documents }: RecentDocumentsProps) {
             />
           ))}
         </div>
+      )}
+
+      {hasRecentDocuments && (
+        <Link
+          to="/documents"
+          className="mt-auto flex items-center gap-2 self-start text-sm font-semibold text-blue-600 hover:text-blue-700"
+        >
+          View all documents
+          <MoveRight size={16} strokeWidth={2.5} className="mt-0.5" />
+        </Link>
       )}
     </div>
   );

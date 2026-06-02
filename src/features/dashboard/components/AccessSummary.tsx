@@ -1,4 +1,5 @@
-import { Edit3, Eye, Crown } from "lucide-react";
+import { Edit3, Eye, Crown, MoveRight } from "lucide-react";
+import { Link } from "react-router";
 
 import type { DocumentListItem } from "../../documents/types/documentTypes";
 import { getRoleCount } from "../utils/dashboardMappers";
@@ -8,6 +9,8 @@ export type AccessSummaryProps = {
 };
 
 function AccessSummary({ documents }: AccessSummaryProps) {
+  const hasAccessSummary = documents.length > 0;
+
   const roleSummaryItems = [
     {
       label: "Owner",
@@ -74,6 +77,16 @@ function AccessSummary({ documents }: AccessSummaryProps) {
           );
         })}
       </div>
+
+      {hasAccessSummary && (
+        <Link
+          to="/documents"
+          className="mt-4 flex items-center gap-2 self-start text-sm font-semibold text-blue-600 hover:text-blue-700"
+        >
+          View all documents
+          <MoveRight size={16} strokeWidth={2.5} className="mt-0.5" />
+        </Link>
+      )}
     </div>
   );
 }
