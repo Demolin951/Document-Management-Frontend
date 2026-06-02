@@ -2,10 +2,10 @@ import { FileText } from "lucide-react";
 
 import DataTable from "../../../components/ui/DataTable";
 import EmptyDataTableState from "../../../components/ui/EmptyDataTableState";
+import { useDocuments } from "../../../shared/hooks/useDocuments";
 
 import { documentTableColumns } from "../config/documentTableColumns";
 import { useDocumentActions } from "../hooks/useDocumentActions";
-import { useDocuments } from "../hooks/useDocuments";
 import type { DocumentsTableProps } from "../types/documentTableTypes";
 
 import DeleteDocumentConfirmModal from "./DeleteDocumentConfirmModal";
