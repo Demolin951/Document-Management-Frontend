@@ -57,14 +57,14 @@ export function useDocumentAccessManagement(
   }, [document, ownerUsername, isOpen]);
  
   useEffect(() => {
-  const timeoutId = window.setTimeout(() => {
-    void loadAccessUsers();
-  }, 0);
+    const timeoutId = window.setTimeout(() => {
+      void loadAccessUsers();
+    }, 0);
  
-  return () => {
-    window.clearTimeout(timeoutId);
-  };
-}, [loadAccessUsers]);
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [loadAccessUsers]);
  
   async function changeAccessRole(
     accessUser: AccessUser,
@@ -95,17 +95,9 @@ export function useDocumentAccessManagement(
     }
   }
  
-  async function removeAccess(accessUser: AccessUser) {
+  async function removeAccess(accessUser: AccessUser): Promise<boolean> {
     if (!document || !ownerUsername) {
-      return;
-    }
- 
-    const shouldRemoveAccess = window.confirm(
-      `Remove access for ${accessUser.name}?`,
-    );
- 
-    if (!shouldRemoveAccess) {
-      return;
+      return false;
     }
  
     setIsAccessActionLoading(true);
@@ -115,57 +107,61 @@ export function useDocumentAccessManagement(
       await removeDocumentAccess(document.id, ownerUsername, accessUser.username);
  
       await loadAccessUsers();
+
+      return true;
     } catch {
       setAccessManagementErrorMessage(
         documentAccessConfig.removeAccessFailedMessage,
       );
+
+      return false;
     } finally {
       setIsAccessActionLoading(false);
     }
   }
  
   async function transferOwnership(
-  newOwnerUsername: string,
-): Promise<boolean> {
-  if (!document || !ownerUsername) {
-    return false;
-  }
+    newOwnerUsername: string,
+  ): Promise<boolean> {
+    if (!document || !ownerUsername) {
+      return false;
+    }
  
-  const trimmedNewOwnerUsername = newOwnerUsername.trim();
+    const trimmedNewOwnerUsername = newOwnerUsername.trim();
  
-  if (!trimmedNewOwnerUsername) {
-    return false;
-  }
+    if (!trimmedNewOwnerUsername) {
+      return false;
+    }
  
-  const shouldTransferOwnership = window.confirm(
-    `Transfer ownership of ${document.fileName} to ${trimmedNewOwnerUsername}?`,
-  );
- 
-  if (!shouldTransferOwnership) {
-    return false;
-  }
- 
-  setIsAccessActionLoading(true);
-  setAccessManagementErrorMessage(null);
- 
-  try {
-    await transferDocumentOwnership(
-      document.id,
-      ownerUsername,
-      trimmedNewOwnerUsername,
+    const shouldTransferOwnership = window.confirm(
+      `Transfer ownership of ${document.fileName} to ${trimmedNewOwnerUsername}?`,
     );
  
-    return true;
-  } catch {
-    setAccessManagementErrorMessage(
-      documentAccessConfig.transferOwnershipFailedMessage,
-    );
+    if (!shouldTransferOwnership) {
+      return false;
+    }
  
-    return false;
-  } finally {
-    setIsAccessActionLoading(false);
+    setIsAccessActionLoading(true);
+    setAccessManagementErrorMessage(null);
+ 
+    try {
+      await transferDocumentOwnership(
+        document.id,
+        ownerUsername,
+        trimmedNewOwnerUsername,
+      );
+ 
+      return true;
+    } catch {
+      setAccessManagementErrorMessage(
+        documentAccessConfig.transferOwnershipFailedMessage,
+      );
+ 
+      return false;
+    } finally {
+      setIsAccessActionLoading(false);
+    }
   }
-}
  
   return {
     accessUsers,
