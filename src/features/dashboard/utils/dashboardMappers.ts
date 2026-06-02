@@ -1,4 +1,4 @@
-import { FileText, Share2, ShieldCheck, Users } from "lucide-react";
+import { FileText, Share2, Crown, Users } from "lucide-react";
 
 import type { DashboardStat } from "../types/dashboardTypes";
 import type { DocumentListItem } from "../../documents/types/documentTypes";
@@ -19,25 +19,25 @@ export function buildDashboardStats(
     {
       title: "Available Documents",
       value: documents.length,
-      subtitle: "Documents available to selected user",
+      subtitle: "",
       icon: FileText,
     },
     {
       title: "Total Users",
       value: usersCount,
-      subtitle: "Application users",
+      subtitle: "",
       icon: Users,
     },
     {
       title: "Owned Documents",
       value: ownedDocumentsCount,
-      subtitle: "Documents owned by selected user",
-      icon: ShieldCheck,
+      subtitle: "",
+      icon: Crown,
     },
     {
       title: "Shared Documents",
       value: sharedDocumentsCount,
-      subtitle: "Editor and viewer access",
+      subtitle: "",
       icon: Share2,
     },
   ];

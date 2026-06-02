@@ -1,4 +1,4 @@
-import { Edit3, Eye, ShieldCheck } from "lucide-react";
+import { Edit3, Eye, Crown } from "lucide-react";
 
 import type { DocumentListItem } from "../../documents/types/documentTypes";
 import { getRoleCount } from "../utils/dashboardMappers";
@@ -12,7 +12,7 @@ function AccessSummary({ documents }: AccessSummaryProps) {
     {
       label: "Owner",
       value: getRoleCount(documents, "Owner"),
-      icon: ShieldCheck,
+      icon: Crown,
       iconBgClass: "bg-blue-50",
       iconTextClass: "text-blue-600",
       subtitle: "Owned documents",
