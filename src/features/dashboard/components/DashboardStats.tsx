@@ -1,10 +1,14 @@
 import StatCard from "../../../components/ui/StatCard";
-import { dashboardStats } from "../data/dashboardMock";
+import type { DashboardStat } from "../types/dashboardTypes";
 
-function DashboardStats() {
+export type DashboardStatsProps = {
+  stats: DashboardStat[];
+};
+
+function DashboardStats({ stats }: DashboardStatsProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {dashboardStats.map((stat) => (
+      {stats.map((stat) => (
         <StatCard
           key={stat.title}
           title={stat.title}
