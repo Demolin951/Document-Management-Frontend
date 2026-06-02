@@ -9,6 +9,8 @@ export type AccessSummaryProps = {
 };
 
 function AccessSummary({ documents }: AccessSummaryProps) {
+  const hasAccessSummary = documents.length > 0;
+
   const roleSummaryItems = [
     {
       label: "Owner",
@@ -76,13 +78,15 @@ function AccessSummary({ documents }: AccessSummaryProps) {
         })}
       </div>
 
-      <Link
-        to="/documents"
-        className="mt-4 flex items-center gap-2 self-start text-sm font-semibold text-blue-600 hover:text-blue-700"
-      >
-        View all documents
-        <MoveRight size={16} strokeWidth={2.5} className="mt-0.5" />
-      </Link>
+      {hasAccessSummary && (
+        <Link
+          to="/documents"
+          className="mt-4 flex items-center gap-2 self-start text-sm font-semibold text-blue-600 hover:text-blue-700"
+        >
+          View all documents
+          <MoveRight size={16} strokeWidth={2.5} className="mt-0.5" />
+        </Link>
+      )}
     </div>
   );
 }
