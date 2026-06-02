@@ -1,5 +1,5 @@
 import SectionCard from "../components/ui/SectionCard";
-import { useAuthStore } from "../features/auth/store/useAuthStore";
+import { useAuthStore } from "../app/store/useAuthStore";
 import AccessSummary from "../features/dashboard/components/AccessSummary";
 import DashboardStats from "../features/dashboard/components/DashboardStats";
 import RecentDocuments from "../features/dashboard/components/RecentDocuments";

@@ -2,8 +2,8 @@ import { FileText, MoveRight } from "lucide-react";
 import { Link } from "react-router";
 
 import VersionBadge from "../../../components/ui/VersionBadge";
-import type { DocumentListItem } from "../../documents/types/documentTypes";
-import { formatDateTime } from "../../documents/utils/formatDateTime";
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
+import { formatDateTime } from "../../../shared/utils/formatDateTime";
 import DashboardListItem from "./DashboardListItem";
 
 export type RecentDocumentsProps = {

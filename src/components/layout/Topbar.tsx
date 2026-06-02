@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Bell } from "lucide-react";
 import { useLocation } from "react-router";
 
-import { useAuthStore } from "../../features/auth/store/useAuthStore";
+import { useAuthStore } from "../../app/store/useAuthStore";
 import UploadDocumentModal from "../../features/documents/components/UploadDocumentModal";
 import Button from "../ui/Button";
 

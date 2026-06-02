@@ -1,6 +1,6 @@
 import SectionCard from "../components/ui/SectionCard";
-import { useAuthStore } from "../features/auth/store/useAuthStore";
-import { useDocuments } from "../features/documents/hooks/useDocuments";
+import { useAuthStore } from "../app/store/useAuthStore";
+import { useDocuments } from "../shared/hooks/useDocuments";
 import AvailableDocumentsVersionTable from "../features/versions/components/AvailableDocumentsVersionTable";
 import VersionHistoryModal from "../features/versions/components/VersionHistoryModal";
 import { useDocumentVersions } from "../features/versions/hooks/useDocumentVersions";

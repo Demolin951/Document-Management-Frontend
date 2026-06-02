@@ -1,6 +1,6 @@
 import SidebarNavItem from "../ui/SidebarNavItem";
 import sidebarItems from "./configs/sidebarConfig";
-import { useAuthStore } from "../../features/auth/store/useAuthStore";
+import { useAuthStore } from "../../app/store/useAuthStore";
 
 function Sidebar() {
   const users = useAuthStore((state) => state.users);

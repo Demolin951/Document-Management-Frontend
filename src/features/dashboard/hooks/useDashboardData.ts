@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
+import { getDocumentsByUsername } from "../../../shared/api/documentsApi";
+import { getUsers } from "../../../shared/api/usersApi";
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
+import { getReadableErrorMessage } from "../../../shared/utils/errorUtils";
 import { getDocumentAccessList } from "../../documents/api/documentAccessApi";
-import { getDocumentsByUsername } from "../../documents/api/documentsApi";
-import type { DocumentListItem } from "../../documents/types/documentTypes";
-import { getManagedUsers } from "../../users/api/usersManagementApi";
 
 export type UseDashboardDataResult = {
   documents: DocumentListItem[];
@@ -12,14 +13,6 @@ export type UseDashboardDataResult = {
   isLoadingDashboard: boolean;
   dashboardErrorMessage: string | null;
 };
-
-function getReadableErrorMessage(error: unknown, fallbackMessage: string) {
-  if (error instanceof Error && error.message) {
-    return error.message;
-  }
-
-  return fallbackMessage;
-}
 
 async function getSharedToOthersCount(
   documents: DocumentListItem[],
@@ -76,7 +69,7 @@ export function useDashboardData(
       try {
         const [loadedDocuments, loadedUsers] = await Promise.all([
           getDocumentsByUsername(username),
-          getManagedUsers(),
+          getUsers(),
         ]);
 
         const loadedSharedToOthersCount = await getSharedToOthersCount(

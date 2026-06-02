@@ -1,7 +1,7 @@
 import Sidebar from "../components/layout/Sidebar";
 import Topbar from "../components/layout/Topbar";
 import { useEffect } from "react";
-import { useAuthStore } from "../features/auth/store/useAuthStore";
+import { useAuthStore } from "../app/store/useAuthStore";
 import type { AppLayoutProps } from "./types/appLayoutTypes";
 
 function AppLayout({ children }: AppLayoutProps) {

@@ -1,27 +1,6 @@
-import type { AppUser } from "../../auth/types/authTypes";
+import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
+import type { AppUser } from "../../../shared/types/userTypes";
 import type { CreateUserRequest } from "../types/userManagementTypes";
-
-async function getUserManagementErrorMessage(
-  response: Response,
-  fallbackMessage: string,
-): Promise<string> {
-  return response
-    .json()
-    .then((body: { title?: string; detail?: string }) => {
-      return body.detail ?? body.title ?? fallbackMessage;
-    })
-    .catch(() => fallbackMessage);
-}
-
-export async function getManagedUsers(): Promise<AppUser[]> {
-  const response = await fetch("/api/User");
-
-  if (!response.ok) {
-    throw new Error("Users could not be loaded.");
-  }
-
-  return response.json();
-}
 
 export async function createManagedUser(
   username: string,
@@ -44,7 +23,7 @@ export async function createManagedUser(
   });
 
   if (!response.ok) {
-    const errorMessage = await getUserManagementErrorMessage(
+    const errorMessage = await getApiErrorMessage(
       response,
       "User could not be created.",
     );
@@ -71,7 +50,7 @@ export async function deleteManagedUser(
   );
 
   if (!response.ok) {
-    const errorMessage = await getUserManagementErrorMessage(
+    const errorMessage = await getApiErrorMessage(
       response,
       "User could not be deleted.",
     );

@@ -1,4 +1,4 @@
-import type { AppUser } from "../../auth/types/authTypes";
+import type { AppUser } from "../../../shared/types/userTypes";
 
 export type ManagedUser = AppUser;
 

@@ -1,23 +1,16 @@
 import { useEffect, useState } from "react";
 
-import { useAuthStore } from "../../auth/store/useAuthStore";
+import { useAuthStore } from "../../../app/store/useAuthStore";
+import { getReadableErrorMessage } from "../../../shared/utils/errorUtils";
 import {
   createManagedUser,
   deleteManagedUser,
-  getManagedUsers,
 } from "../api/usersManagementApi";
+import { getUsers } from "../../../shared/api/usersApi";
 import type {
   ManagedUser,
   UseUsersManagementResult,
 } from "../types/userManagementTypes";
-
-function getReadableErrorMessage(error: unknown, fallbackMessage: string) {
-  if (error instanceof Error && error.message) {
-    return error.message;
-  }
-
-  return fallbackMessage;
-}
 
 export function useUsersManagement(
   currentUsername: string | undefined,
@@ -49,7 +42,7 @@ export function useUsersManagement(
     setUsersErrorMessage(null);
 
     try {
-      const loadedUsers = await getManagedUsers();
+      const loadedUsers = await getUsers();
 
       setUsers(loadedUsers);
     } catch (error) {

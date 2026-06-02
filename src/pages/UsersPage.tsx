@@ -1,5 +1,5 @@
 import SectionCard from "../components/ui/SectionCard";
-import { useAuthStore } from "../features/auth/store/useAuthStore";
+import { useAuthStore } from "../app/store/useAuthStore";
 import AddUserModal from "../features/users/components/AddUserModal";
 import DeleteUserConfirmModal from "../features/users/components/DeleteUserConfirmModal";
 import UsersTable from "../features/users/components/UsersTable";

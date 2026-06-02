@@ -1,6 +1,6 @@
 import SectionCard from "../components/ui/SectionCard";
 import DocumentsTable from "../features/documents/components/DocumentTable";
-import { useAuthStore } from "../features/auth/store/useAuthStore";
+import { useAuthStore } from "../app/store/useAuthStore";
  
 function DocumentsPage() {
   const selectedUser = useAuthStore((state) => state.selectedUser);
