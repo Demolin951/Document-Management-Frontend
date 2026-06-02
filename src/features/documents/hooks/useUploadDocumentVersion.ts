@@ -1,8 +1,9 @@
 import { useState } from "react";
 
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
+
 import { uploadDocumentVersion } from "../api/documentVersionUploadApi";
 import { documentUploadConfig } from "../config/documentUploadConfig";
-import type { DocumentListItem } from "../types/documentTypes";
 import { validateUploadFile } from "../utils/documentUploadUtils";
 
 type UseUploadDocumentVersionResult = {

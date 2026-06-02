@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import type { DocumentRole } from "./documentTypes";
+import type { DocumentRole } from "../../../shared/types/documentTypes";
 
 export type DocumentActionKey =
   | "view"

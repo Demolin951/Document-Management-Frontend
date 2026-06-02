@@ -1,5 +1,5 @@
 import type { DocumentActionKey } from "./documentActionTypes";
-import type { DocumentListItem } from "./documentTypes";
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
 
 export type UseDocumentActionsResult = {
   documentActionErrorMessage: string | null;

@@ -1,4 +1,4 @@
-import type { DocumentListItem } from "../../documents/types/documentTypes";
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
 
 export type DocumentVersionListItem = {
   id: number;
