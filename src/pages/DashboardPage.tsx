@@ -15,6 +15,7 @@ function DashboardPage() {
   const {
     documents,
     usersCount,
+    sharedToOthersCount,
     isLoadingDashboard,
     dashboardErrorMessage,
   } = useDashboardData(selectedUser?.name);
@@ -53,7 +54,11 @@ function DashboardPage() {
     );
   }
 
-  const stats = buildDashboardStats(documents, usersCount);
+  const stats = buildDashboardStats(
+    documents,
+    usersCount,
+    sharedToOthersCount,
+  );
   const recentDocuments = getRecentDocuments(documents);
 
   return (
