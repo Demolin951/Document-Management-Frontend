@@ -1,9 +1,10 @@
 import { Download } from "lucide-react";
 
 import DataTableRow from "../../../components/ui/DataTableRow";
+import { formatDateTime } from "../../../shared/utils/formatDateTime";
+
 import { versionHistoryTableColumns } from "../config/documentVersionsConfig";
 import type { VersionHistoryRowProps } from "../types/documentVersionTypes";
-import { formatDateTime } from "../../documents/utils/formatDateTime";
 
 function VersionHistoryRow({
   version,
