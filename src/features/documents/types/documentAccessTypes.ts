@@ -93,7 +93,7 @@ export type UseDocumentAccessManagementResult = {
     accessUser: AccessUser,
     newRole: AddDocumentAccessRole,
   ) => Promise<void>;
-  removeAccess: (accessUser: AccessUser) => Promise<void>;
+  removeAccess: (accessUser: AccessUser) => Promise<boolean>;
   transferOwnership: (newOwnerUsername: string) => Promise<boolean>;
 };
  
@@ -135,6 +135,14 @@ export type AccessUserRowProps = {
     newRole: AddDocumentAccessRole,
   ) => void;
   onRemoveAccess: (accessUser: AccessUser) => void;
+};
+
+export type RemoveAccessConfirmModalProps = {
+  isOpen: boolean;
+  accessUser: AccessUser | null;
+  isRemovingAccess: boolean;
+  onClose: () => void;
+  onConfirmRemoveAccess: () => Promise<void>;
 };
  
 export type AddDocumentAccessFormSubmitEvent = FormEvent<HTMLFormElement>;
