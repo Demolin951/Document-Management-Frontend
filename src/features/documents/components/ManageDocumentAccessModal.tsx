@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Modal from "../../../components/ui/Modal";
 
 import {
@@ -8,6 +10,7 @@ import { useAddDocumentAccess } from "../hooks/useAddDocumentAccess";
 import { useDocumentAccessManagement } from "../hooks/useDocumentAccessManagement";
 import { useTransferOwnershipForm } from "../hooks/useTransferOwnershipForm";
 import type {
+  AccessUser,
   AddDocumentAccessFormSubmitEvent,
   AddDocumentAccessInputChangeEvent,
   AddDocumentAccessRole,
@@ -18,6 +21,7 @@ import type {
 
 import AddUserAccessCard from "./AddUserAccessCard";
 import ChangeAccessCard from "./ChangeAccessCard";
+import RemoveAccessConfirmModal from "./RemoveAccessConfirmModal";
 import TransferOwnershipCard from "./TransferOwnershipCard";
 
 function ManageDocumentAccessModal({
@@ -27,6 +31,9 @@ function ManageDocumentAccessModal({
   onClose,
   onAccessChanged,
 }: ManageDocumentAccessModalProps) {
+  const [accessUserForRemove, setAccessUserForRemove] =
+    useState<AccessUser | null>(null);
+
   const {
     targetUserName,
     selectedRole,
@@ -73,6 +80,7 @@ function ManageDocumentAccessModal({
   function handleClose() {
     resetAddAccessState();
     resetTransferOwnershipState();
+    setAccessUserForRemove(null);
     onClose();
   }
 
@@ -107,11 +115,29 @@ function ManageDocumentAccessModal({
     await notifyAccessChanged();
   }
 
-  async function handleRemoveAccess(
-    accessUser: Parameters<typeof removeAccess>[0],
-  ) {
-    await removeAccess(accessUser);
-    await notifyAccessChanged();
+  function handleRemoveAccess(accessUser: AccessUser) {
+    setAccessUserForRemove(accessUser);
+  }
+
+  function closeRemoveAccessConfirmModal() {
+    if (isAccessActionLoading) {
+      return;
+    }
+
+    setAccessUserForRemove(null);
+  }
+
+  async function confirmRemoveAccess() {
+    if (!accessUserForRemove) {
+      return;
+    }
+
+    const wasAccessRemoved = await removeAccess(accessUserForRemove);
+
+    if (wasAccessRemoved) {
+      setAccessUserForRemove(null);
+      await notifyAccessChanged();
+    }
   }
 
   function handleNewOwnerUsernameChange(
@@ -140,55 +166,65 @@ function ManageDocumentAccessModal({
   }
 
   return (
-    <Modal
-      isOpen={isOpen}
-      title={modalTitle}
-      onClose={handleClose}
-      panelClassName={documentAccessModalPanelClassName}
-    >
-      <div className="space-y-5">
-        {addAccessErrorMessage && (
-          <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
-            {addAccessErrorMessage}
+    <>
+      <Modal
+        isOpen={isOpen}
+        title={modalTitle}
+        onClose={handleClose}
+        panelClassName={documentAccessModalPanelClassName}
+      >
+        <div className="space-y-5">
+          {addAccessErrorMessage && (
+            <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+              {addAccessErrorMessage}
+            </div>
+          )}
+
+          {accessManagementErrorMessage && (
+            <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+              {accessManagementErrorMessage}
+            </div>
+          )}
+
+          <div className="grid gap-5 lg:grid-cols-2">
+            <AddUserAccessCard
+              targetUserName={targetUserName}
+              selectedRole={selectedRole}
+              isAddingAccess={isAddingAccess}
+              isAddAccessDisabled={isAddAccessDisabled}
+              onSubmit={handleAddAccessSubmit}
+              onTargetUsernameChange={handleTargetUsernameChange}
+              onRoleChange={handleRoleChange}
+            />
+
+            <TransferOwnershipCard
+              accessUsers={accessUsers}
+              newOwnerUsername={newOwnerUsername}
+              isTransferOwnershipDisabled={isTransferDisabled}
+              isActionLoading={isAccessActionLoading}
+              onNewOwnerUsernameChange={handleNewOwnerUsernameChange}
+              onTransferOwnership={handleTransferOwnership}
+            />
           </div>
-        )}
 
-        {accessManagementErrorMessage && (
-          <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
-            {accessManagementErrorMessage}
-          </div>
-        )}
-
-        <div className="grid gap-5 lg:grid-cols-2">
-          <AddUserAccessCard
-            targetUserName={targetUserName}
-            selectedRole={selectedRole}
-            isAddingAccess={isAddingAccess}
-            isAddAccessDisabled={isAddAccessDisabled}
-            onSubmit={handleAddAccessSubmit}
-            onTargetUsernameChange={handleTargetUsernameChange}
-            onRoleChange={handleRoleChange}
-          />
-
-          <TransferOwnershipCard
+          <ChangeAccessCard
             accessUsers={accessUsers}
-            newOwnerUsername={newOwnerUsername}
-            isTransferOwnershipDisabled={isTransferDisabled}
+            isLoadingAccess={isLoadingAccess}
             isActionLoading={isAccessActionLoading}
-            onNewOwnerUsernameChange={handleNewOwnerUsernameChange}
-            onTransferOwnership={handleTransferOwnership}
+            onRoleChange={handleAccessRoleChange}
+            onRemoveAccess={handleRemoveAccess}
           />
         </div>
+      </Modal>
 
-        <ChangeAccessCard
-          accessUsers={accessUsers}
-          isLoadingAccess={isLoadingAccess}
-          isActionLoading={isAccessActionLoading}
-          onRoleChange={handleAccessRoleChange}
-          onRemoveAccess={handleRemoveAccess}
-        />
-      </div>
-    </Modal>
+      <RemoveAccessConfirmModal
+        isOpen={Boolean(accessUserForRemove)}
+        accessUser={accessUserForRemove}
+        isRemovingAccess={isAccessActionLoading}
+        onClose={closeRemoveAccessConfirmModal}
+        onConfirmRemoveAccess={confirmRemoveAccess}
+      />
+    </>
   );
 }
 
