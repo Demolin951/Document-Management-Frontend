@@ -28,7 +28,7 @@ function Sidebar() {
               {userInitial}
             </div>
             <div>
-              <h1 className="text-base font-semibold">DocManager</h1>
+              <h1 className="text-base font-semibold">Document Manager</h1>
               <p className="text-xs text-slate-400">{selectedUser?.name}</p>
             </div>
           </div>
