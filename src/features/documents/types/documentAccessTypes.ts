@@ -1,18 +1,18 @@
 import type { ChangeEvent, FormEvent } from "react";
- 
+  
 import type { DocumentListItem, DocumentRole } from "./documentTypes";
- 
+  
 export type AddDocumentAccessRole = Exclude<DocumentRole, "Owner">;
- 
+  
 export type DocumentAccessApiRole = 0 | 1 | 2;
- 
+  
 export type AddDocumentAccessPayload = {
   documentId: number;
   ownerUsername: string;
   targetUserName: string;
   role: AddDocumentAccessRole;
 };
- 
+  
 export type DocumentAccessApiResponse = {
   documentId?: number;
   DocumentId?: number;
@@ -23,7 +23,7 @@ export type DocumentAccessApiResponse = {
   role?: DocumentAccessApiRole | DocumentRole;
   Role?: DocumentAccessApiRole | DocumentRole;
 };
- 
+  
 export type ManageDocumentAccessModalProps = {
   isOpen: boolean;
   document: DocumentListItem | null;
@@ -31,12 +31,12 @@ export type ManageDocumentAccessModalProps = {
   onClose: () => void;
   onAccessChanged?: () => Promise<void> | void;
 };
- 
+  
 export type DocumentAccessRoleOption = {
   value: AddDocumentAccessRole;
   label: string;
 };
- 
+  
 export type DocumentAccessConfig = {
   modalTitle: string;
   targetUsernameLabel: string;
@@ -54,14 +54,14 @@ export type DocumentAccessConfig = {
   removeAccessFailedMessage: string;
   transferOwnershipFailedMessage: string;
 };
- 
+  
 export type AccessUser = {
   id: number;
   name: string;
   username: string;
   role: DocumentRole;
 };
- 
+  
 export type UseAddDocumentAccessResult = {
   targetUserName: string;
   selectedRole: AddDocumentAccessRole;
@@ -75,14 +75,14 @@ export type UseAddDocumentAccessResult = {
     ownerUsername: string | undefined,
   ) => Promise<boolean>;
 };
- 
+  
 export type UseTransferOwnershipFormResult = {
   newOwnerUsername: string;
   isTransferOwnershipDisabled: boolean;
   setNewOwnerUsername: (newOwnerUsername: string) => void;
   resetTransferOwnershipState: () => void;
 };
- 
+  
 export type UseDocumentAccessManagementResult = {
   accessUsers: AccessUser[];
   isLoadingAccess: boolean;
@@ -96,7 +96,7 @@ export type UseDocumentAccessManagementResult = {
   removeAccess: (accessUser: AccessUser) => Promise<boolean>;
   transferOwnership: (newOwnerUsername: string) => Promise<boolean>;
 };
- 
+  
 export type AddUserAccessCardProps = {
   targetUserName: string;
   selectedRole: AddDocumentAccessRole;
@@ -106,7 +106,7 @@ export type AddUserAccessCardProps = {
   onTargetUsernameChange: AddDocumentAccessInputChangeHandler;
   onRoleChange: AddDocumentAccessRoleChangeHandler;
 };
- 
+  
 export type TransferOwnershipCardProps = {
   accessUsers: AccessUser[];
   newOwnerUsername: string;
@@ -115,7 +115,22 @@ export type TransferOwnershipCardProps = {
   onNewOwnerUsernameChange: TransferOwnershipInputChangeHandler;
   onTransferOwnership: () => void;
 };
- 
+
+export type TransferOwnershipConfirmModalProps = {
+  isOpen: boolean;
+  document: DocumentListItem | null;
+  newOwnerUsername: string;
+  isTransferringOwnership: boolean;
+  onClose: () => void;
+  onConfirmTransferOwnership: () => Promise<void>;
+};
+
+export type TransferOwnershipSuccessModalProps = {
+  isOpen: boolean;
+  message: string | null;
+  onClose: () => void;
+};
+  
 export type ChangeAccessCardProps = {
   accessUsers: AccessUser[];
   isLoadingAccess: boolean;
@@ -126,7 +141,7 @@ export type ChangeAccessCardProps = {
   ) => void;
   onRemoveAccess: (accessUser: AccessUser) => void;
 };
- 
+  
 export type AccessUserRowProps = {
   accessUser: AccessUser;
   isActionLoading: boolean;
@@ -144,27 +159,27 @@ export type RemoveAccessConfirmModalProps = {
   onClose: () => void;
   onConfirmRemoveAccess: () => Promise<void>;
 };
- 
+  
 export type AddDocumentAccessFormSubmitEvent = FormEvent<HTMLFormElement>;
- 
+  
 export type AddDocumentAccessInputChangeEvent = ChangeEvent<HTMLInputElement>;
- 
+  
 export type AddDocumentAccessRoleChangeEvent = ChangeEvent<HTMLSelectElement>;
- 
+  
 export type TransferOwnershipInputChangeEvent = ChangeEvent<HTMLSelectElement>;
- 
+  
 export type AddDocumentAccessFormSubmitHandler = (
   event: AddDocumentAccessFormSubmitEvent,
 ) => void;
- 
+  
 export type AddDocumentAccessInputChangeHandler = (
   event: AddDocumentAccessInputChangeEvent,
 ) => void;
- 
+  
 export type AddDocumentAccessRoleChangeHandler = (
   event: AddDocumentAccessRoleChangeEvent,
 ) => void;
- 
+  
 export type TransferOwnershipInputChangeHandler = (
   event: TransferOwnershipInputChangeEvent,
 ) => void;

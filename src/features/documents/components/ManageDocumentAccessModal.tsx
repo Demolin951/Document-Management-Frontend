@@ -23,6 +23,8 @@ import AddUserAccessCard from "./AddUserAccessCard";
 import ChangeAccessCard from "./ChangeAccessCard";
 import RemoveAccessConfirmModal from "./RemoveAccessConfirmModal";
 import TransferOwnershipCard from "./TransferOwnershipCard";
+import TransferOwnershipConfirmModal from "./TransferOwnershipConfirmModal";
+import TransferOwnershipSuccessModal from "./TransferOwnershipSuccessModal";
 
 function ManageDocumentAccessModal({
   isOpen,
@@ -33,6 +35,10 @@ function ManageDocumentAccessModal({
 }: ManageDocumentAccessModalProps) {
   const [accessUserForRemove, setAccessUserForRemove] =
     useState<AccessUser | null>(null);
+  const [isTransferOwnershipConfirmOpen, setIsTransferOwnershipConfirmOpen] =
+    useState(false);
+  const [transferOwnershipSuccessMessage, setTransferOwnershipSuccessMessage] =
+    useState<string | null>(null);
 
   const {
     targetUserName,
@@ -81,6 +87,7 @@ function ManageDocumentAccessModal({
     resetAddAccessState();
     resetTransferOwnershipState();
     setAccessUserForRemove(null);
+    setIsTransferOwnershipConfirmOpen(false);
     onClose();
   }
 
@@ -150,18 +157,40 @@ function ManageDocumentAccessModal({
     await onAccessChanged?.();
   }
 
-  async function handleTransferOwnership() {
-    const wasOwnershipTransferred = await transferOwnership(newOwnerUsername);
+  function handleTransferOwnership() {
+    if (!newOwnerUsername.trim()) {
+      return;
+    }
+
+    setIsTransferOwnershipConfirmOpen(true);
+  }
+
+  function closeTransferOwnershipConfirmModal() {
+    if (isAccessActionLoading) {
+      return;
+    }
+
+    setIsTransferOwnershipConfirmOpen(false);
+  }
+
+  async function confirmTransferOwnership() {
+    const trimmedNewOwnerUsername = newOwnerUsername.trim();
+
+    const wasOwnershipTransferred = await transferOwnership(
+      trimmedNewOwnerUsername,
+    );
 
     if (wasOwnershipTransferred) {
+      setIsTransferOwnershipConfirmOpen(false);
       resetTransferOwnershipState();
+
       await notifyAccessChanged();
 
-      window.alert(
-        "Ownership was transferred successfully. The current user is no longer the owner of this document.",
-      );
-
       handleClose();
+
+      setTransferOwnershipSuccessMessage(
+        `Ownership was transferred successfully to ${trimmedNewOwnerUsername}. The current user is no longer the owner of this document.`,
+      );
     }
   }
 
@@ -223,6 +252,21 @@ function ManageDocumentAccessModal({
         isRemovingAccess={isAccessActionLoading}
         onClose={closeRemoveAccessConfirmModal}
         onConfirmRemoveAccess={confirmRemoveAccess}
+      />
+
+      <TransferOwnershipConfirmModal
+        isOpen={isTransferOwnershipConfirmOpen}
+        document={document}
+        newOwnerUsername={newOwnerUsername}
+        isTransferringOwnership={isAccessActionLoading}
+        onClose={closeTransferOwnershipConfirmModal}
+        onConfirmTransferOwnership={confirmTransferOwnership}
+      />
+
+      <TransferOwnershipSuccessModal
+        isOpen={Boolean(transferOwnershipSuccessMessage)}
+        message={transferOwnershipSuccessMessage}
+        onClose={() => setTransferOwnershipSuccessMessage(null)}
       />
     </>
   );

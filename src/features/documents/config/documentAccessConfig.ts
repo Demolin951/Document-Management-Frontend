@@ -5,7 +5,7 @@ import type {
   DocumentAccessRoleOption,
 } from "../types/documentAccessTypes";
 import type { DocumentRole } from "../types/documentTypes";
- 
+  
 export const documentAccessRoleOptions: DocumentAccessRoleOption[] = [
   {
     value: "Viewer",
@@ -16,7 +16,7 @@ export const documentAccessRoleOptions: DocumentAccessRoleOption[] = [
     label: "Editor",
   },
 ];
- 
+  
 export const documentAccessApiRoleByRole: Record<
   AddDocumentAccessRole,
   DocumentAccessApiRole
@@ -24,7 +24,7 @@ export const documentAccessApiRoleByRole: Record<
   Editor: 1,
   Viewer: 2,
 };
- 
+  
 export const documentAccessRoleByApiRole: Record<
   DocumentAccessApiRole,
   DocumentRole
@@ -33,7 +33,7 @@ export const documentAccessRoleByApiRole: Record<
   1: "Editor",
   2: "Viewer",
 };
- 
+  
 export const documentAccessConfig: DocumentAccessConfig = {
   modalTitle: "Change Permissions",
   targetUsernameLabel: "Username",
@@ -51,16 +51,16 @@ export const documentAccessConfig: DocumentAccessConfig = {
   removeAccessFailedMessage: "Access could not be removed.",
   transferOwnershipFailedMessage: "Ownership could not be transferred.",
 };
- 
+  
 export const documentAccessModalPanelClassName = "w-[92vw] max-w-5xl";
- 
+  
 export const transferOwnershipConfig = {
   title: "Transfer Ownership",
   newOwnerLabel: "New owner",
   newOwnerPlaceholder: "Enter username",
   transferButtonText: "Transfer ownership",
 };
- 
+  
 export const changeAccessConfig = {
   title: "Change Access",
   userColumn: "User",
@@ -73,4 +73,18 @@ export const changeAccessConfig = {
   emptyText: "No users found.",
   ownerInfoText:
     "The ownership can only be transfered to user that already has access",
+};
+
+export const transferOwnershipConfirmConfig = {
+  title: "Transfer ownership",
+  questionText: "Are you sure you want to transfer ownership of this document?",
+  warningText: "The current owner will lose ownership and become an editor.",
+  cancelButtonText: "Cancel",
+  confirmButtonText: "Transfer ownership",
+  transferringButtonText: "Transferring...",
+};
+
+export const transferOwnershipSuccessConfig = {
+  title: "Ownership transferred",
+  closeButtonText: "OK",
 };
