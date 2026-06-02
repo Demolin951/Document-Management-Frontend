@@ -1,4 +1,4 @@
-import { FileText, Share2, UserCheck, Users } from "lucide-react";
+import { FileText, Share2, Upload, Users } from "lucide-react";
 
 import type { DashboardStat } from "../types/dashboardTypes";
 import type { DocumentListItem } from "../../documents/types/documentTypes";
@@ -6,14 +6,11 @@ import type { DocumentListItem } from "../../documents/types/documentTypes";
 export function buildDashboardStats(
   documents: DocumentListItem[],
   usersCount: number,
+  sharedToOthersCount: number,
 ): DashboardStat[] {
-  const sharedWithMeDocuments = documents.filter(
+  const sharedWithMeCount = documents.filter(
     (document) => document.role !== "Owner",
-  );
-
-  const otherOwnersCount = new Set(
-    sharedWithMeDocuments.map((document) => document.owner),
-  ).size;
+  ).length;
 
   return [
     {
@@ -30,15 +27,15 @@ export function buildDashboardStats(
     },
     {
       title: "Shared With Me",
-      value: sharedWithMeDocuments.length,
+      value: sharedWithMeCount,
       subtitle: "",
       icon: Share2,
     },
     {
-      title: "Other Owners",
-      value: otherOwnersCount,
+      title: "Shared To Others",
+      value: sharedToOthersCount,
       subtitle: "",
-      icon: UserCheck,
+      icon: Upload,
     },
   ];
 }
