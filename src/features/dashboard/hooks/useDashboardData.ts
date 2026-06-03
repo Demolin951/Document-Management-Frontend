@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
+import { getDocumentAccessList } from "../../../shared/api/documentAccessApi";
 import { getDocumentsByUsername } from "../../../shared/api/documentsApi";
 import { getUsers } from "../../../shared/api/usersApi";
 import type { DocumentListItem } from "../../../shared/types/documentTypes";
 import { getReadableErrorMessage } from "../../../shared/utils/errorUtils";
-import { getDocumentAccessList } from "../../documents/api/documentAccessApi";
 
 export type UseDashboardDataResult = {
   documents: DocumentListItem[];
