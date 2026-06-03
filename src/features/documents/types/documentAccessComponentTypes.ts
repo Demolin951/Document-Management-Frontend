@@ -1,6 +1,7 @@
+import type { AccessUser } from "../../../shared/types/documentAccessTypes";
 import type { DocumentListItem } from "../../../shared/types/documentTypes";
 
-import type { AccessUser, AddDocumentAccessRole } from "./documentAccessApiTypes";
+import type { AddDocumentAccessRole } from "./documentAccessTypes";
 import type {
   AddDocumentAccessFormSubmitHandler,
   AddDocumentAccessInputChangeHandler,
