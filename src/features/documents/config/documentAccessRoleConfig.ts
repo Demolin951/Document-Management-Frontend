@@ -1,9 +1,8 @@
-import type { DocumentRole } from "../../../shared/types/documentTypes";
+import type { DocumentAccessApiRole } from "../../../shared/types/documentAccessTypes";
 import type {
   AddDocumentAccessRole,
-  DocumentAccessApiRole,
   DocumentAccessRoleOption,
-} from "../types/documentAccessApiTypes";
+} from "../types/documentAccessTypes";
 
 export const documentAccessRoleOptions: DocumentAccessRoleOption[] = [
   {
@@ -22,13 +21,4 @@ export const documentAccessApiRoleByRole: Record<
 > = {
   Editor: 1,
   Viewer: 2,
-};
-
-export const documentAccessRoleByApiRole: Record<
-  DocumentAccessApiRole,
-  DocumentRole
-> = {
-  0: "Owner",
-  1: "Editor",
-  2: "Viewer",
 };
