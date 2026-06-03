@@ -1,11 +1,11 @@
-import { AUTH_STORAGE_KEYS } from "../../../app/config/authStorageConfig";
+import { SELECTED_USER_STORAGE_KEYS } from "../../../app/config/selectedUserStorageConfig";
  
 export function saveSelectedUserId(userId: number) {
-  localStorage.setItem(AUTH_STORAGE_KEYS.selectedUserId, String(userId));
+  localStorage.setItem(SELECTED_USER_STORAGE_KEYS.selectedUserId, String(userId));
 }
  
 export function getSavedSelectedUserId(): number | null {
-  const savedUserId = localStorage.getItem(AUTH_STORAGE_KEYS.selectedUserId);
+  const savedUserId = localStorage.getItem(SELECTED_USER_STORAGE_KEYS.selectedUserId);
  
   if (!savedUserId) {
     return null;
@@ -21,5 +21,5 @@ export function getSavedSelectedUserId(): number | null {
 }
  
 export function clearSavedSelectedUserId() {
-  localStorage.removeItem(AUTH_STORAGE_KEYS.selectedUserId);
+  localStorage.removeItem(SELECTED_USER_STORAGE_KEYS.selectedUserId);
 }

@@ -1,8 +1,8 @@
 import { create } from "zustand";
  
 import { getUsers } from "../api/userApi";
-import type { AuthState } from "../../../app/types/authStoreTypes";
-import { clearSavedSelectedUserId, getSavedSelectedUserId, saveSelectedUserId } from "../../../app/utils/authStorageUtils";
+import type { AuthState } from "../types/authStoreTypes";
+import { clearSavedSelectedUserId, getSavedSelectedUserId, saveSelectedUserId } from "../utils/authStorageUtils";
 
 export const useAuthStore = create<AuthState>((set, get) => ({
   users: [],

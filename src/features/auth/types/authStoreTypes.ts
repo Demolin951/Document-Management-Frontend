@@ -1,4 +1,4 @@
-import type { AppUser } from "./authTypes";
+import type { AppUser } from "../../../shared/types/userTypes";
 
 export type AuthState = {
     users: AppUser[];
