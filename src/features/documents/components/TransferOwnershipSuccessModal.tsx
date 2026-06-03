@@ -1,7 +1,7 @@
 import Button from "../../../components/ui/Button";
 import Modal from "../../../components/ui/Modal";
-import { transferOwnershipSuccessConfig } from "../config/documentAccessConfig";
-import type { TransferOwnershipSuccessModalProps } from "../types/documentAccessTypes";
+import { transferOwnershipSuccessConfig } from "../config/transferOwnershipConfig";
+import type { TransferOwnershipSuccessModalProps } from "../types/documentAccessComponentTypes";
 
 function TransferOwnershipSuccessModal({
   isOpen,

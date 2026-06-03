@@ -1,11 +1,9 @@
 import { Lock } from "lucide-react";
 
-import {
-  changeAccessConfig,
-  documentAccessRoleOptions,
-} from "../config/documentAccessConfig";
+import { changeAccessConfig } from "../config/changeAccessConfig";
+import { documentAccessRoleOptions } from "../config/documentAccessRoleConfig";
 import type { AddDocumentAccessRole } from "../types/documentAccessApiTypes";
-import type { AccessUserRowProps} from "../types/documentAccessComponentTypes";
+import type { AccessUserRowProps } from "../types/documentAccessComponentTypes";
 
 function AccessUserRow({
   accessUser,

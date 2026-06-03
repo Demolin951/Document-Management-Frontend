@@ -1,6 +1,6 @@
 import { Info, Users } from "lucide-react";
 
-import { changeAccessConfig } from "../config/documentAccessConfig";
+import { changeAccessConfig } from "../config/changeAccessConfig";
 import type { ChangeAccessCardProps } from "../types/documentAccessComponentTypes";
 
 import AccessUserRow from "./AccessUserRow";

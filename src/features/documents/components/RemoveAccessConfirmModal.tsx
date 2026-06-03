@@ -1,6 +1,6 @@
 import Button from "../../../components/ui/Button";
 import Modal from "../../../components/ui/Modal";
-import type { RemoveAccessConfirmModalProps } from "../types/documentAccessTypes";
+import type { RemoveAccessConfirmModalProps } from "../types/documentAccessComponentTypes";
 
 function RemoveAccessConfirmModal({
   isOpen,

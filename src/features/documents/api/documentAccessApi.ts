@@ -4,7 +4,7 @@ import type { DocumentRole } from "../../../shared/types/documentTypes";
 import {
   documentAccessApiRoleByRole,
   documentAccessRoleByApiRole,
-} from "../config/documentAccessConfig";
+} from "../config/documentAccessRoleConfig";
 import type {
   AccessUser,
   AddDocumentAccessPayload,

@@ -1,7 +1,7 @@
 import Button from "../../../components/ui/Button";
 import Modal from "../../../components/ui/Modal";
-import { transferOwnershipConfirmConfig } from "../config/documentAccessConfig";
-import type { TransferOwnershipConfirmModalProps } from "../types/documentAccessTypes";
+import { transferOwnershipConfirmConfig } from "../config/transferOwnershipConfig";
+import type { TransferOwnershipConfirmModalProps } from "../types/documentAccessComponentTypes";
 
 function TransferOwnershipConfirmModal({
   isOpen,
@@ -27,8 +27,7 @@ function TransferOwnershipConfirmModal({
             </p>
 
             <p className="text-sm font-semibold text-slate-700">
-              New owner:{" "}
-              <span className="text-slate-900">{newOwnerUsername}</span>
+              New owner: <span className="text-slate-900">{newOwnerUsername}</span>
             </p>
           </div>
 

@@ -3,7 +3,7 @@ import Modal from "../../../components/ui/Modal";
 import {
   documentAccessConfig,
   documentAccessModalPanelClassName,
-} from "../config/documentAccessConfig";
+} from "../config/documentAccessModalConfig";
 import { useAddDocumentAccess } from "../hooks/useAddDocumentAccess";
 import { useDocumentAccessManagement } from "../hooks/useDocumentAccessManagement";
 import { useTransferOwnershipForm } from "../hooks/useTransferOwnershipForm";
