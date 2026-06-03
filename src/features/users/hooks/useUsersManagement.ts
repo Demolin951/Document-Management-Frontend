@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { useAuthStore } from "../../../app/store/useAuthStore";
+import { useSelectedUserStore } from "../../../app/store/useSelectedUserStore";
+import { getUsers } from "../../../shared/api/usersApi";
 import { getReadableErrorMessage } from "../../../shared/utils/errorUtils";
 import {
   createManagedUser,
   deleteManagedUser,
 } from "../api/usersManagementApi";
-import { getUsers } from "../../../shared/api/usersApi";
 import type {
   ManagedUser,
   UseUsersManagementResult,
@@ -15,7 +15,7 @@ import type {
 export function useUsersManagement(
   currentUsername: string | undefined,
 ): UseUsersManagementResult {
-  const reloadAuthUsers = useAuthStore((state) => state.loadUsers);
+  const reloadSelectedUsers = useSelectedUserStore((state) => state.loadUsers);
 
   const [users, setUsers] = useState<ManagedUser[]>([]);
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
@@ -94,7 +94,7 @@ export function useUsersManagement(
     try {
       await createManagedUser(trimmedUsername, currentUsername);
       await loadManagedUsers();
-      await reloadAuthUsers();
+      await reloadSelectedUsers();
 
       setIsAddUserModalOpen(false);
       setNewUsername("");
@@ -143,7 +143,7 @@ export function useUsersManagement(
     try {
       await deleteManagedUser(selectedUserForDelete.id, currentUsername);
       await loadManagedUsers();
-      await reloadAuthUsers();
+      await reloadSelectedUsers();
 
       setSelectedUserForDelete(null);
     } catch (error) {
