@@ -1,4 +1,5 @@
 import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
+import type { DocumentRole } from "../../../shared/types/documentTypes";
 
 import {
   documentAccessApiRoleByRole,
@@ -10,8 +11,7 @@ import type {
   AddDocumentAccessRole,
   DocumentAccessApiResponse,
   DocumentAccessApiRole,
-} from "../types/documentAccessTypes";
-import type { DocumentRole } from "../../../shared/types/documentTypes";
+} from "../types/documentAccessApiTypes";
 
 function normalizeDocumentRole(
   role: DocumentAccessApiRole | DocumentRole | undefined,
