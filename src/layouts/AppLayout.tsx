@@ -1,7 +1,9 @@
+import { useEffect } from "react";
+
+import { useAuthStore } from "../app/store/useAuthStore";
 import Sidebar from "../components/layout/Sidebar";
 import Topbar from "../components/layout/Topbar";
-import { useEffect } from "react";
-import { useAuthStore } from "../app/store/useAuthStore";
+import UploadDocumentAction from "../features/documents/wrappers/UploadDocumentAction";
 import type { AppLayoutProps } from "./types/appLayoutTypes";
 
 function AppLayout({ children }: AppLayoutProps) {
@@ -17,7 +19,7 @@ function AppLayout({ children }: AppLayoutProps) {
 
       <main className="ml-64 min-h-screen px-6 py-6 lg:px-8 lg:py-8">
         <div className="w-full max-w-none">
-          <Topbar />
+          <Topbar actions={<UploadDocumentAction />} />
           <div className="mt-5">{children}</div>
         </div>
       </main>
