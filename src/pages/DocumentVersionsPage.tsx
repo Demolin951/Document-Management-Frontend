@@ -1,12 +1,12 @@
+import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
 import SectionCard from "../components/ui/SectionCard";
-import { useAuthStore } from "../app/store/useAuthStore";
-import { useDocuments } from "../shared/hooks/useDocuments";
 import AvailableDocumentsVersionTable from "../features/versions/components/AvailableDocumentsVersionTable";
 import VersionHistoryModal from "../features/versions/components/VersionHistoryModal";
 import { useDocumentVersions } from "../features/versions/hooks/useDocumentVersions";
+import { useDocuments } from "../shared/hooks/useDocuments";
 
 function DocumentVersionsPage() {
-  const selectedUser = useAuthStore((state) => state.selectedUser);
+  const selectedUser = useSelectedUserStore((state) => state.selectedUser);
 
   const { documents, isLoadingDocuments, documentsErrorMessage } = useDocuments(
     selectedUser?.name,
