@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Bell } from "lucide-react";
 import { useLocation } from "react-router";
 
-import { useAuthStore } from "../../app/store/useAuthStore";
+import { useSelectedUserStore } from "../../app/store/useSelectedUserStore";
 
 import { getTopbarTitle } from "./utils/getTopbarTitle";
 
@@ -11,7 +11,7 @@ type TopbarProps = {
 };
 
 function Topbar({ actions }: TopbarProps) {
-  const selectedUser = useAuthStore((state) => state.selectedUser);
+  const selectedUser = useSelectedUserStore((state) => state.selectedUser);
   const location = useLocation();
 
   const topbarTitle = getTopbarTitle(location.pathname);
