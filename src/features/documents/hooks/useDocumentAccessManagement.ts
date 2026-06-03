@@ -1,18 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 
+import { getDocumentAccessList } from "../../../shared/api/documentAccessApi";
+import type { AccessUser } from "../../../shared/types/documentAccessTypes";
 import type { DocumentListItem } from "../../../shared/types/documentTypes";
 
 import {
   changeDocumentAccessRole,
-  getDocumentAccessList,
   removeDocumentAccess,
   transferDocumentOwnership,
 } from "../api/documentAccessApi";
 import { documentAccessConfig } from "../config/documentAccessModalConfig";
-import type {
-  AccessUser,
-  AddDocumentAccessRole,
-} from "../types/documentAccessApiTypes";
+import type { AddDocumentAccessRole } from "../types/documentAccessTypes";
 import type { UseDocumentAccessManagementResult } from "../types/documentAccessHookTypes";
 
 export function useDocumentAccessManagement(
