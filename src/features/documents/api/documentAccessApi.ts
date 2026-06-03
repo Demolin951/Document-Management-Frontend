@@ -1,46 +1,18 @@
 import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
+import { getDocumentAccessList } from "../../../shared/api/documentAccessApi";
+import { normalizeDocumentAccessResponse } from "../../../shared/normalizers/documentAccessNormalizers";
+import type { AccessUser, DocumentAccessApiResponse } from "../../../shared/types/documentAccessTypes";
 
 import { documentAccessApiRoleByRole } from "../config/documentAccessRoleConfig";
-import { normalizeDocumentAccessResponse } from "../normalizers/documentAccessNormalizers";
-import type {
-  AccessUser,
-  AddDocumentAccessPayload,
-  AddDocumentAccessRole,
-  DocumentAccessApiResponse,
-} from "../types/documentAccessApiTypes";
+import type { AddDocumentAccessPayload } from "../types/documentAccessApiTypes";
+import type { AddDocumentAccessRole } from "../types/documentAccessTypes";
 
-export async function getDocumentAccessList(
-  documentId: number,
-  username: string,
-): Promise<AccessUser[]> {
-  const response = await fetch(
-    `/api/document/${documentId}/access?username=${encodeURIComponent(
-      username,
-    )}`,
-  );
+export { getDocumentAccessList };
 
-  if (!response.ok) {
-    const errorMessage = await getApiErrorMessage(
-      response,
-      "Access list could not be loaded.",
-    );
-
-    throw new Error(errorMessage);
-  }
-
-  const data = (await response.json()) as DocumentAccessApiResponse[];
-
-  return data.map(normalizeDocumentAccessResponse);
-}
-
-export async function addDocumentAccess(
-  payload: AddDocumentAccessPayload,
-): Promise<AccessUser> {
+export async function addDocumentAccess(payload: AddDocumentAccessPayload): Promise<AccessUser> {
   const response = await fetch(`/api/document/${payload.documentId}/access`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       UserName: payload.ownerUsername,
       TargetUserName: payload.targetUserName,
@@ -49,17 +21,10 @@ export async function addDocumentAccess(
   });
 
   if (!response.ok) {
-    const errorMessage = await getApiErrorMessage(
-      response,
-      "Access could not be added.",
-    );
-
-    throw new Error(errorMessage);
+    throw new Error(await getApiErrorMessage(response, "Access could not be added."));
   }
 
-  const data = (await response.json()) as DocumentAccessApiResponse;
-
-  return normalizeDocumentAccessResponse(data);
+  return normalizeDocumentAccessResponse((await response.json()) as DocumentAccessApiResponse);
 }
 
 export async function changeDocumentAccessRole(
@@ -70,9 +35,7 @@ export async function changeDocumentAccessRole(
 ): Promise<AccessUser> {
   const response = await fetch(`/api/document/${documentId}/access`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       UserName: ownerUsername,
       TargetUserName: targetUserName,
@@ -81,17 +44,10 @@ export async function changeDocumentAccessRole(
   });
 
   if (!response.ok) {
-    const errorMessage = await getApiErrorMessage(
-      response,
-      "Access role could not be changed.",
-    );
-
-    throw new Error(errorMessage);
+    throw new Error(await getApiErrorMessage(response, "Access role could not be changed."));
   }
 
-  const data = (await response.json()) as DocumentAccessApiResponse;
-
-  return normalizeDocumentAccessResponse(data);
+  return normalizeDocumentAccessResponse((await response.json()) as DocumentAccessApiResponse);
 }
 
 export async function removeDocumentAccess(
@@ -100,21 +56,12 @@ export async function removeDocumentAccess(
   targetUserName: string,
 ): Promise<void> {
   const response = await fetch(
-    `/api/document/${documentId}/access?username=${encodeURIComponent(
-      ownerUsername,
-    )}&targetUserName=${encodeURIComponent(targetUserName)}`,
-    {
-      method: "DELETE",
-    },
+    `/api/document/${documentId}/access?username=${encodeURIComponent(ownerUsername)}&targetUserName=${encodeURIComponent(targetUserName)}`,
+    { method: "DELETE" },
   );
 
   if (!response.ok) {
-    const errorMessage = await getApiErrorMessage(
-      response,
-      "Access could not be removed.",
-    );
-
-    throw new Error(errorMessage);
+    throw new Error(await getApiErrorMessage(response, "Access could not be removed."));
   }
 }
 
@@ -125,9 +72,7 @@ export async function transferDocumentOwnership(
 ): Promise<void> {
   const response = await fetch(`/api/document/${documentId}/owner`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       CurrentOwnerUserName: currentOwnerUsername,
       NewOwnerUserName: newOwnerUsername,
@@ -135,11 +80,6 @@ export async function transferDocumentOwnership(
   });
 
   if (!response.ok) {
-    const errorMessage = await getApiErrorMessage(
-      response,
-      "Ownership could not be transferred.",
-    );
-
-    throw new Error(errorMessage);
+    throw new Error(await getApiErrorMessage(response, "Ownership could not be transferred."));
   }
 }
