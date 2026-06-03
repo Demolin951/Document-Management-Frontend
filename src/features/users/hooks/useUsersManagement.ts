@@ -166,26 +166,20 @@ export function useUsersManagement(
       try {
         const loadedUsers = await fetchManagedUsers();
 
-        if (!isMounted) {
-          return;
+        if (isMounted) {
+          setUsers(loadedUsers);
+          setUsersErrorMessage(null);
         }
-
-        setUsers(loadedUsers);
-        setUsersErrorMessage(null);
       } catch (error) {
-        if (!isMounted) {
-          return;
+        if (isMounted) {
+          setUsersErrorMessage(
+            getReadableErrorMessage(error, "Users could not be loaded."),
+          );
         }
-
-        setUsersErrorMessage(
-          getReadableErrorMessage(error, "Users could not be loaded."),
-        );
       } finally {
-        if (!isMounted) {
-          return;
+        if (isMounted) {
+          setIsLoadingUsers(false);
         }
-
-        setIsLoadingUsers(false);
       }
     }
 
