@@ -1,54 +1,13 @@
 import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
-import type { DocumentRole } from "../../../shared/types/documentTypes";
 
-import {
-  documentAccessApiRoleByRole,
-  documentAccessRoleByApiRole,
-} from "../config/documentAccessRoleConfig";
+import { documentAccessApiRoleByRole } from "../config/documentAccessRoleConfig";
+import { normalizeDocumentAccessResponse } from "../normalizers/documentAccessNormalizers";
 import type {
   AccessUser,
   AddDocumentAccessPayload,
   AddDocumentAccessRole,
   DocumentAccessApiResponse,
-  DocumentAccessApiRole,
 } from "../types/documentAccessApiTypes";
-
-function normalizeDocumentRole(
-  role: DocumentAccessApiRole | DocumentRole | undefined,
-): DocumentRole {
-  if (role === undefined) {
-    throw new Error("Document access role is missing.");
-  }
-
-  if (typeof role === "number") {
-    return documentAccessRoleByApiRole[role];
-  }
-
-  return role;
-}
-
-function normalizeDocumentAccessResponse(
-  response: DocumentAccessApiResponse,
-): AccessUser {
-  const userId = response.userId ?? response.UserId;
-  const userName = response.userName ?? response.UserName;
-  const role = response.role ?? response.Role;
-
-  if (typeof userId !== "number") {
-    throw new Error("Document access user id is missing.");
-  }
-
-  if (!userName) {
-    throw new Error("Document access username is missing.");
-  }
-
-  return {
-    id: userId,
-    name: userName,
-    username: userName,
-    role: normalizeDocumentRole(role),
-  };
-}
 
 export async function getDocumentAccessList(
   documentId: number,
