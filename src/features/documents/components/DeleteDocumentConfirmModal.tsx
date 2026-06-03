@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Modal from "../../../components/ui/Modal";
 import { deleteDocument } from "../api/documentDeleteApi";
-import type { DocumentListItem } from "../types/documentTypes";
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
 
 type DeleteDocumentConfirmModalProps = {
   isOpen: boolean;

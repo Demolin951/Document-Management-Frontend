@@ -2,9 +2,9 @@ import { useState } from "react";
  
 import { addDocumentAccess } from "../api/documentAccessApi";
 import { documentAccessConfig } from "../config/documentAccessConfig";
-import type { AddDocumentAccessRole } from "../types/documentAccessTypes";
-import type { DocumentListItem } from "../types/documentTypes";
-import type { UseAddDocumentAccessResult } from "../types/documentAccessTypes";
+import type { AddDocumentAccessRole } from "../types/documentAccessApiTypes";
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
+import type { UseAddDocumentAccessResult } from "../types/documentAccessHookTypes";
  
 export function useAddDocumentAccess(): UseAddDocumentAccessResult {
   const [targetUserName, setTargetUserName] = useState("");

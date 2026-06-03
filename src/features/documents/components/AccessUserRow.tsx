@@ -4,10 +4,8 @@ import {
   changeAccessConfig,
   documentAccessRoleOptions,
 } from "../config/documentAccessConfig";
-import type {
-  AccessUserRowProps,
-  AddDocumentAccessRole,
-} from "../types/documentAccessTypes";
+import type { AddDocumentAccessRole } from "../types/documentAccessApiTypes";
+import type { AccessUserRowProps} from "../types/documentAccessComponentTypes";
 
 function AccessUserRow({
   accessUser,

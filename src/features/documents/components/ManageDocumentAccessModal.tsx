@@ -1,7 +1,5 @@
 import { useState } from "react";
-
 import Modal from "../../../components/ui/Modal";
-
 import {
   documentAccessConfig,
   documentAccessModalPanelClassName,
@@ -10,15 +8,16 @@ import { useAddDocumentAccess } from "../hooks/useAddDocumentAccess";
 import { useDocumentAccessManagement } from "../hooks/useDocumentAccessManagement";
 import { useTransferOwnershipForm } from "../hooks/useTransferOwnershipForm";
 import type {
-  AccessUser,
   AddDocumentAccessFormSubmitEvent,
   AddDocumentAccessInputChangeEvent,
-  AddDocumentAccessRole,
   AddDocumentAccessRoleChangeEvent,
-  ManageDocumentAccessModalProps,
   TransferOwnershipInputChangeEvent,
-} from "../types/documentAccessTypes";
-
+} from "../types/documentAccessEventTypes";
+import type {
+  AccessUser,
+  AddDocumentAccessRole,
+} from "../types/documentAccessApiTypes";
+import type { ManageDocumentAccessModalProps } from "../types/documentAccessComponentTypes";
 import AddUserAccessCard from "./AddUserAccessCard";
 import ChangeAccessCard from "./ChangeAccessCard";
 import RemoveAccessConfirmModal from "./RemoveAccessConfirmModal";

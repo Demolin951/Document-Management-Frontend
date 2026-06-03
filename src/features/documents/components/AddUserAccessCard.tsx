@@ -5,7 +5,7 @@ import {
   documentAccessConfig,
   documentAccessRoleOptions,
 } from "../config/documentAccessConfig";
-import type { AddUserAccessCardProps } from "../types/documentAccessTypes";
+import type { AddUserAccessCardProps } from "../types/documentAccessComponentTypes";
 
 function AddUserAccessCard({
   targetUserName,

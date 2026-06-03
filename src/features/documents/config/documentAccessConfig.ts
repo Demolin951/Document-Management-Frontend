@@ -1,9 +1,9 @@
-import type {
-  AddDocumentAccessRole,
-  DocumentAccessApiRole,
-  DocumentAccessConfig,
-  DocumentAccessRoleOption,
-} from "../types/documentAccessTypes";
+import type { AddDocumentAccessRole, 
+  DocumentAccessApiRole, 
+  DocumentAccessRoleOption,} from "../types/documentAccessApiTypes";
+
+import type { DocumentAccessConfig } from "../types/documentAccessComponentTypes";  
+
 import type { DocumentRole } from "../../../shared/types/documentTypes";
   
 export const documentAccessRoleOptions: DocumentAccessRoleOption[] = [

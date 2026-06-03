@@ -7,12 +7,11 @@ import {
   transferDocumentOwnership,
 } from "../api/documentAccessApi";
 import { documentAccessConfig } from "../config/documentAccessConfig";
-import type {
-  AccessUser,
-  AddDocumentAccessRole,
-  UseDocumentAccessManagementResult,
-} from "../types/documentAccessTypes";
-import type { DocumentListItem } from "../types/documentTypes";
+
+import type { AccessUser, AddDocumentAccessRole, } from "../types/documentAccessApiTypes";
+import type { UseDocumentAccessManagementResult } from "../types/documentAccessHookTypes";
+
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
   
 export function useDocumentAccessManagement(
   document: DocumentListItem | null,
