@@ -1,4 +1,4 @@
-import type { DocumentListItem } from "./documentTypes";
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
  
 export type UseDocumentsResult = {
   documents: DocumentListItem[];
