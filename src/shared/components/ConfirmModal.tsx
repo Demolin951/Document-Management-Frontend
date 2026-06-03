@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import Button from "../../components/ui/Button";
 import Modal from "../../components/ui/Modal";
 
@@ -5,7 +7,7 @@ export type ConfirmModalProps = {
   isOpen: boolean;
   title: string;
   questionText: string;
-  targetText?: string | null;
+  targetText?: ReactNode;
   warningText?: string;
   cancelButtonText?: string;
   confirmButtonText: string;

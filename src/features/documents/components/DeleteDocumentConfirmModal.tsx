@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-import Modal from "../../../components/ui/Modal";
-import { deleteDocument } from "../api/documentDeleteApi";
+import ConfirmModal from "../../../shared/components/ConfirmModal";
 import type { DocumentListItem } from "../../../shared/types/documentTypes";
+
+import { deleteDocument } from "../api/documentDeleteApi";
 
 type DeleteDocumentConfirmModalProps = {
   isOpen: boolean;
@@ -55,53 +56,20 @@ function DeleteDocumentConfirmModal({
   }
 
   return (
-    <Modal isOpen={isOpen} title="Delete document" onClose={handleClose}>
-      <div className="space-y-5">
-        {deleteErrorMessage && (
-          <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
-            {deleteErrorMessage}
-          </div>
-        )}
-
-        <div className="space-y-3">
-          <p className="text-sm font-semibold text-slate-900">
-            Are you sure you want to delete this document?
-          </p>
-
-          {document && (
-            <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-              <p className="truncate text-sm font-bold text-slate-900">
-                {document.fileName}
-              </p>
-            </div>
-          )}
-
-          <p className="text-sm font-medium text-slate-500">
-            This action cannot be undone.
-          </p>
-        </div>
-
-        <div className="flex items-center justify-end gap-3 border-t border-slate-200 pt-5">
-          <button
-            type="button"
-            onClick={handleClose}
-            disabled={isDeleting}
-            className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            Cancel
-          </button>
-
-          <button
-            type="button"
-            onClick={handleDeleteClick}
-            disabled={isDeleting || !document || !username}
-            className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {isDeleting ? "Deleting..." : "Delete document"}
-          </button>
-        </div>
-      </div>
-    </Modal>
+    <ConfirmModal
+      isOpen={isOpen}
+      title="Delete document"
+      questionText="Are you sure you want to delete this document?"
+      targetText={document?.fileName}
+      warningText="This action cannot be undone."
+      confirmButtonText="Delete document"
+      loadingConfirmButtonText="Deleting..."
+      isLoading={isDeleting}
+      isConfirmDisabled={!document || !username}
+      errorMessage={deleteErrorMessage}
+      onClose={handleClose}
+      onConfirm={handleDeleteClick}
+    />
   );
 }
 
