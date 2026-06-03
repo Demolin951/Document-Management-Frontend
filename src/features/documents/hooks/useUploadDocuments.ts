@@ -5,7 +5,7 @@ import { useDocumentRefreshStore } from "../../../shared/store/useDocumentRefres
 import { uploadDocument } from "../api/documentUploadApi";
 import { documentUploadConfig } from "../config/documentUploadConfig";
 import type { UseUploadDocumentResult } from "../types/documentUploadTypes";
-import { validateUploadFile } from "../utils/documentUploadUtils";
+import { validateUploadFile } from "../validators/documentUploadValidators";
 
 export function useUploadDocument(): UseUploadDocumentResult {
   const requestDocumentsRefresh = useDocumentRefreshStore(
