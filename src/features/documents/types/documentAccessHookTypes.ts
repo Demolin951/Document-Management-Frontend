@@ -1,6 +1,6 @@
+import type { AccessUser } from "../../../shared/types/documentAccessTypes";
 import type { DocumentListItem } from "../../../shared/types/documentTypes";
-
-import type { AccessUser, AddDocumentAccessRole } from "./documentAccessApiTypes";
+import type { AddDocumentAccessRole } from "./documentAccessTypes";
 
 export type UseAddDocumentAccessResult = {
   targetUserName: string;
@@ -29,10 +29,7 @@ export type UseDocumentAccessManagementResult = {
   isAccessActionLoading: boolean;
   accessManagementErrorMessage: string | null;
   reloadAccessUsers: () => Promise<void>;
-  changeAccessRole: (
-    accessUser: AccessUser,
-    newRole: AddDocumentAccessRole,
-  ) => Promise<void>;
+  changeAccessRole: (accessUser: AccessUser, newRole: AddDocumentAccessRole) => Promise<void>;
   removeAccess: (accessUser: AccessUser) => Promise<boolean>;
   transferOwnership: (newOwnerUsername: string) => Promise<boolean>;
 };
