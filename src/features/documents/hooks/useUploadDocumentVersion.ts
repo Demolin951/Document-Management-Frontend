@@ -4,7 +4,7 @@ import type { DocumentListItem } from "../../../shared/types/documentTypes";
 
 import { uploadDocumentVersion } from "../api/documentVersionUploadApi";
 import { documentUploadConfig } from "../config/documentUploadConfig";
-import { validateUploadFile } from "../utils/documentUploadUtils";
+import { validateUploadFile } from "../validators/documentUploadValidators";
 
 type UseUploadDocumentVersionResult = {
   selectedFile: File | null;
