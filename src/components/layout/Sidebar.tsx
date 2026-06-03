@@ -1,12 +1,13 @@
+import { useSelectedUserStore } from "../../app/store/useSelectedUserStore";
 import SidebarNavItem from "../ui/SidebarNavItem";
+
 import sidebarItems from "./configs/sidebarConfig";
-import { useAuthStore } from "../../app/store/useAuthStore";
 
 function Sidebar() {
-  const users = useAuthStore((state) => state.users);
-  const selectedUser = useAuthStore((state) => state.selectedUser);
-  const isLoadingUsers = useAuthStore((state) => state.isLoadingUsers);
-  const selectUser = useAuthStore((state) => state.selectUser);
+  const users = useSelectedUserStore((state) => state.users);
+  const selectedUser = useSelectedUserStore((state) => state.selectedUser);
+  const isLoadingUsers = useSelectedUserStore((state) => state.isLoadingUsers);
+  const selectUser = useSelectedUserStore((state) => state.selectUser);
   const userInitial = selectedUser?.name.charAt(0).toUpperCase() ?? "?";
 
   const isAdmin = selectedUser?.name.toLowerCase() === "admin";
