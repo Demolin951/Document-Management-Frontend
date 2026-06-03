@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { useAuthStore } from "../../../app/store/useAuthStore";
+import { useSelectedUserStore } from "../../../app/store/useSelectedUserStore";
 import Button from "../../../components/ui/Button";
 
 import UploadDocumentModal from "../components/UploadDocumentModal";
 
 function UploadDocumentAction() {
-  const selectedUser = useAuthStore((state) => state.selectedUser);
+  const selectedUser = useSelectedUserStore((state) => state.selectedUser);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   function openUploadModal() {
