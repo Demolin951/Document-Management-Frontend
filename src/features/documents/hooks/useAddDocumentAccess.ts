@@ -4,7 +4,7 @@ import type { DocumentListItem } from "../../../shared/types/documentTypes";
 
 import { addDocumentAccess } from "../api/documentAccessApi";
 import { documentAccessConfig } from "../config/documentAccessModalConfig";
-import type { AddDocumentAccessRole } from "../types/documentAccessApiTypes";
+import type { AddDocumentAccessRole } from "../types/documentAccessTypes";
 import type { UseAddDocumentAccessResult } from "../types/documentAccessHookTypes";
 
 export function useAddDocumentAccess(): UseAddDocumentAccessResult {
