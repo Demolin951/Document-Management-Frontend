@@ -12,13 +12,17 @@ import type {
   UseUsersManagementResult,
 } from "../types/userManagementTypes";
 
+async function fetchManagedUsers(): Promise<ManagedUser[]> {
+  return getUsers();
+}
+
 export function useUsersManagement(
   currentUsername: string | undefined,
 ): UseUsersManagementResult {
   const reloadSelectedUsers = useSelectedUserStore((state) => state.loadUsers);
 
   const [users, setUsers] = useState<ManagedUser[]>([]);
-  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+  const [isLoadingUsers, setIsLoadingUsers] = useState(true);
   const [usersErrorMessage, setUsersErrorMessage] = useState<string | null>(
     null,
   );
@@ -42,7 +46,7 @@ export function useUsersManagement(
     setUsersErrorMessage(null);
 
     try {
-      const loadedUsers = await getUsers();
+      const loadedUsers = await fetchManagedUsers();
 
       setUsers(loadedUsers);
     } catch (error) {
@@ -156,7 +160,40 @@ export function useUsersManagement(
   }
 
   useEffect(() => {
-    void loadManagedUsers();
+    let isMounted = true;
+
+    async function loadInitialManagedUsers() {
+      try {
+        const loadedUsers = await fetchManagedUsers();
+
+        if (!isMounted) {
+          return;
+        }
+
+        setUsers(loadedUsers);
+        setUsersErrorMessage(null);
+      } catch (error) {
+        if (!isMounted) {
+          return;
+        }
+
+        setUsersErrorMessage(
+          getReadableErrorMessage(error, "Users could not be loaded."),
+        );
+      } finally {
+        if (!isMounted) {
+          return;
+        }
+
+        setIsLoadingUsers(false);
+      }
+    }
+
+    void loadInitialManagedUsers();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return {
