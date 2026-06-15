@@ -2,11 +2,9 @@ import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
 import { getFileNameFromContentDisposition } from "../../../shared/utils/fileDownloadUtils";
 
 import { normalizeDocumentVersion } from "../normalizers/documentVersionNormalizers";
+import type { DocumentVersionApiResponse } from "../types/documentVersionApiTypes";
 import type { VersionDownloadResult } from "../types/documentVersionDownloadTypes";
-import type {
-  DocumentVersionApiResponse,
-  DocumentVersionListItem,
-} from "../types/documentVersionTypes";
+import type { DocumentVersionListItem } from "../types/documentVersionTypes";
 
 export async function getDocumentVersions(
   documentId: number,
