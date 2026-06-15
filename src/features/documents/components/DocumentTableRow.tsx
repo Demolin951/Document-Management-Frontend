@@ -1,6 +1,6 @@
 import { FileText } from "lucide-react";
 
-import DataTableRow from "../../../components/ui/DataTableRow";
+import DataTableRow from "../../../shared/components/ui/DataTableRow";
 import { formatDateTime } from "../../../shared/utils/formatDateTime";
 
 import { documentRoleConfig } from "../config/documentRoleConfig";
