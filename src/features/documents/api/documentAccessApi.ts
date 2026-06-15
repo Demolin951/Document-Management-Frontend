@@ -1,13 +1,10 @@
 import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
-import { getDocumentAccessList } from "../../../shared/api/documentAccessApi";
 import { normalizeDocumentAccessResponse } from "../../../shared/normalizers/documentAccessNormalizers";
 import type { AccessUser, DocumentAccessApiResponse } from "../../../shared/types/documentAccessTypes";
 
 import { documentAccessApiRoleByRole } from "../config/documentAccessRoleConfig";
 import type { AddDocumentAccessPayload } from "../types/documentAccessApiTypes";
 import type { AddDocumentAccessRole } from "../types/documentAccessTypes";
-
-export { getDocumentAccessList };
 
 export async function addDocumentAccess(payload: AddDocumentAccessPayload): Promise<AccessUser> {
   const response = await fetch(`/api/document/${payload.documentId}/access`, {
