@@ -1,8 +1,8 @@
 import { Download, FileText, Layers } from "lucide-react";
 
-import DataTableRow from "../../../components/ui/DataTableRow";
+import DataTableRow from "../../../shared/components/ui/DataTableRow";
 import { availableDocumentsVersionTableColumns } from "../config/documentVersionsConfig";
-import type { VersionDocumentRowProps } from "../types/documentVersionTypes";
+import type { VersionDocumentRowProps } from "../types/documentVersionComponentTypes";
 
 function VersionDocumentRow({
   document,
