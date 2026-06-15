@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
-import Button from "../../components/ui/Button";
-import Modal from "../../components/ui/Modal";
+import Button from "./ui/Button";
+import Modal from "./ui/Modal";
 
 export type ConfirmModalProps = {
   isOpen: boolean;
