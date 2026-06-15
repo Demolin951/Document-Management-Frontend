@@ -3,7 +3,7 @@ import { FileText } from "lucide-react";
 import DataTable from "../../../shared/components/ui/DataTable";
 import EmptyDataTableState from "../../../shared/components/ui/DataTableEmptyState";
 import { availableDocumentsVersionTableColumns } from "../config/documentVersionsConfig";
-import type { AvailableDocumentsVersionTableProps } from "../types/documentVersionTypes";
+import type { AvailableDocumentsVersionTableProps } from "../types/documentVersionComponentTypes";
 import VersionDocumentRow from "./VersionDocumentRow";
 
 function AvailableDocumentsVersionTable({ documents, onDownloadLatest, onOpenVersionHistory }: AvailableDocumentsVersionTableProps) {
