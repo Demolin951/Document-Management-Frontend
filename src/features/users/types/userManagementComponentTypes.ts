@@ -1,4 +1,4 @@
-import type { ManagedUser } from "./usersTypes";
+import type { ManagedUser } from "./userManagementTypes";
 
 export type UsersTableProps = {
   users: ManagedUser[];
