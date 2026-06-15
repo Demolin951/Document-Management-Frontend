@@ -1,7 +1,5 @@
-import type {
-  DocumentVersionApiResponse,
-  DocumentVersionListItem,
-} from "../types/documentVersionTypes";
+import type { DocumentVersionApiResponse } from "../types/documentVersionApiTypes";
+import type { DocumentVersionListItem } from "../types/documentVersionTypes";
 
 export function normalizeDocumentVersion(
   response: DocumentVersionApiResponse,
