@@ -1,5 +1,5 @@
 import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
-import SectionCard from "../components/ui/SectionCard";
+import Panel from "../shared/components/ui/Panel";
 import AvailableDocumentsVersionTable from "../features/versions/components/AvailableDocumentsVersionTable";
 import VersionHistoryModal from "../features/versions/components/VersionHistoryModal";
 import { useDocumentVersions } from "../features/versions/hooks/useDocumentVersions";
@@ -25,48 +25,48 @@ function DocumentVersionsPage() {
 
   if (!selectedUser) {
     return (
-      <SectionCard>
+      <Panel>
         <div className="px-6 py-10 text-center">
           <p className="text-sm font-semibold text-slate-500">
             Select a user in the sidebar to load documents.
           </p>
         </div>
-      </SectionCard>
+      </Panel>
     );
   }
 
   if (isLoadingDocuments) {
     return (
-      <SectionCard>
+      <Panel>
         <div className="px-6 py-10 text-center">
           <p className="text-sm font-semibold text-slate-500">
             Loading documents...
           </p>
         </div>
-      </SectionCard>
+      </Panel>
     );
   }
 
   if (documentsErrorMessage) {
     return (
-      <SectionCard>
+      <Panel>
         <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
           {documentsErrorMessage}
         </div>
-      </SectionCard>
+      </Panel>
     );
   }
 
   return (
     <>
       <div className="space-y-6">
-        <SectionCard>
+        <Panel>
           <AvailableDocumentsVersionTable
             documents={documents}
             onDownloadLatest={downloadLatestVersion}
             onOpenVersionHistory={openVersionHistory}
           />
-        </SectionCard>
+        </Panel>
       </div>
 
       <VersionHistoryModal
