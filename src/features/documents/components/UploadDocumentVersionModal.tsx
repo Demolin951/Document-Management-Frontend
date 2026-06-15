@@ -1,5 +1,5 @@
-import Button from "../../../components/ui/Button";
-import Modal from "../../../components/ui/Modal";
+import Button from "../../../shared/components/ui/Button";
+import Modal from "../../../shared/components/ui/Modal";
 import type { DocumentListItem } from "../../../shared/types/documentTypes";
 
 import { useUploadDocumentVersion } from "../hooks/useUploadDocumentVersion";
