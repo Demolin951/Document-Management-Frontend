@@ -1,5 +1,5 @@
 import ConfirmModal from "../../../shared/components/ConfirmModal";
-import type { DeleteUserConfirmModalProps } from "../types/userManagementTypes";
+import type { DeleteUserConfirmModalProps } from "../types/userManagementComponentTypes";
 
 function DeleteUserConfirmModal({
   isOpen,
