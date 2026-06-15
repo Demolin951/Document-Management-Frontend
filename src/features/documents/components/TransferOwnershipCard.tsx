@@ -1,6 +1,6 @@
 import { ArrowRightLeft } from "lucide-react";
 
-import Button from "../../../components/ui/Button";
+import Button from "../../../shared/components/ui/Button";
 import { transferOwnershipConfig } from "../config/transferOwnershipConfig";
 import type { TransferOwnershipCardProps } from "../types/documentAccessComponentTypes";
 
