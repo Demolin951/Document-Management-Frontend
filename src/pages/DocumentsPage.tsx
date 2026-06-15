@@ -1,15 +1,16 @@
 import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
-import SectionCard from "../components/ui/SectionCard";
+import Panel from "../shared/components/ui/Panel";
 import DocumentsTable from "../features/documents/components/DocumentTable";
 
 function DocumentsPage() {
   const selectedUser = useSelectedUserStore((state) => state.selectedUser);
+  const username = selectedUser?.name;
 
   return (
     <div className="space-y-6">
-      <SectionCard>
-        <DocumentsTable username={selectedUser?.name} />
-      </SectionCard>
+      <Panel>
+        <DocumentsTable username={username} />
+      </Panel>
     </div>
   );
 }
