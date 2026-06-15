@@ -1,5 +1,3 @@
-import type { DocumentListItem } from "../../../shared/types/documentTypes";
-
 export async function downloadLatestDocumentVersion(
   documentId: number,
   username: string,
@@ -18,5 +16,3 @@ export async function downloadLatestDocumentVersion(
 
   return response.blob();
 }
-
-export type DownloadDocumentTarget = DocumentListItem;
