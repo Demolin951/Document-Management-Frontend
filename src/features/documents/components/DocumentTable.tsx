@@ -1,7 +1,7 @@
 import { FileText } from "lucide-react";
 
-import DataTable from "../../../components/ui/DataTable";
-import EmptyDataTableState from "../../../components/ui/EmptyDataTableState";
+import DataTable from "../../../shared/components/ui/DataTable";
+import EmptyDataTableState from "../../../shared/components/ui/DataTableEmptyState";
 import { useDocuments } from "../../../shared/hooks/useDocuments";
 
 import { documentTableColumns } from "../config/documentTableColumns";
