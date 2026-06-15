@@ -1,6 +1,6 @@
 import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
 import type { AppUser } from "../../../shared/types/userTypes";
-import type { CreateUserRequest } from "../types/userManagementTypes";
+import type { CreateUserRequest } from "../types/userManagementApiTypes";
 
 export async function createManagedUser(
   username: string,
