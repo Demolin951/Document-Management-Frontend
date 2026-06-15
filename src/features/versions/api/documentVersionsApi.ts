@@ -2,9 +2,9 @@ import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
 import { getFileNameFromContentDisposition } from "../../../shared/utils/fileDownloadUtils";
 
 import { normalizeDocumentVersion } from "../normalizers/documentVersionNormalizers";
+import type { VersionDownloadResult } from "../types/documentVersionDownloadTypes";
 import type {
   DocumentVersionApiResponse,
-  DocumentVersionDownloadResult,
   DocumentVersionListItem,
 } from "../types/documentVersionTypes";
 
@@ -38,7 +38,7 @@ export async function downloadLatestDocumentVersion(
   documentId: number,
   username: string,
   fallbackFileName: string,
-): Promise<DocumentVersionDownloadResult> {
+): Promise<VersionDownloadResult> {
   const query = new URLSearchParams({
     username,
   });
@@ -70,7 +70,7 @@ export async function downloadDocumentVersion(
   versionNumber: number,
   username: string,
   fallbackFileName: string,
-): Promise<DocumentVersionDownloadResult> {
+): Promise<VersionDownloadResult> {
   const query = new URLSearchParams({
     username,
   });
