@@ -8,7 +8,7 @@ import {
   deleteManagedUser,
 } from "../api/usersManagementApi";
 import type { UseUsersManagementResult } from "../types/userManagementHookTypes";
-import type { ManagedUser } from "../types/usersTypes";
+import type { ManagedUser } from "../types/userManagementTypes";
 
 async function fetchManagedUsers(): Promise<ManagedUser[]> {
   return getUsers();
