@@ -1,16 +1,11 @@
-import { SELECTED_USER_STORAGE_KEYS } from "../config/selectedUserStorageConfig";
+const SELECTED_USER_ID_STORAGE_KEY = "document-management-selected-user-id";
 
 export function saveSelectedUserId(userId: number) {
-  localStorage.setItem(
-    SELECTED_USER_STORAGE_KEYS.selectedUserId,
-    String(userId),
-  );
+  localStorage.setItem(SELECTED_USER_ID_STORAGE_KEY, String(userId));
 }
 
 export function getSavedSelectedUserId(): number | null {
-  const savedUserId = localStorage.getItem(
-    SELECTED_USER_STORAGE_KEYS.selectedUserId,
-  );
+  const savedUserId = localStorage.getItem(SELECTED_USER_ID_STORAGE_KEY);
 
   if (!savedUserId) {
     return null;
@@ -26,5 +21,5 @@ export function getSavedSelectedUserId(): number | null {
 }
 
 export function clearSavedSelectedUserId() {
-  localStorage.removeItem(SELECTED_USER_STORAGE_KEYS.selectedUserId);
+  localStorage.removeItem(SELECTED_USER_ID_STORAGE_KEY);
 }
