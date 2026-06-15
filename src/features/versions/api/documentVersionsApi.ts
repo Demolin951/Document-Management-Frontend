@@ -1,9 +1,10 @@
 import { getApiErrorMessage } from "../../../shared/api/apiErrorUtils";
-import { downloadResponseAsFile } from "../../../shared/utils/fileDownloadUtils";
+import { getFileNameFromContentDisposition } from "../../../shared/utils/fileDownloadUtils";
 
 import { normalizeDocumentVersion } from "../normalizers/documentVersionNormalizers";
 import type {
   DocumentVersionApiResponse,
+  DocumentVersionDownloadResult,
   DocumentVersionListItem,
 } from "../types/documentVersionTypes";
 
@@ -37,7 +38,7 @@ export async function downloadLatestDocumentVersion(
   documentId: number,
   username: string,
   fallbackFileName: string,
-): Promise<void> {
+): Promise<DocumentVersionDownloadResult> {
   const query = new URLSearchParams({
     username,
   });
@@ -55,7 +56,13 @@ export async function downloadLatestDocumentVersion(
     throw new Error(errorMessage);
   }
 
-  await downloadResponseAsFile(response, fallbackFileName);
+  return {
+    blob: await response.blob(),
+    fileName:
+      getFileNameFromContentDisposition(
+        response.headers.get("content-disposition"),
+      ) ?? fallbackFileName,
+  };
 }
 
 export async function downloadDocumentVersion(
@@ -63,7 +70,7 @@ export async function downloadDocumentVersion(
   versionNumber: number,
   username: string,
   fallbackFileName: string,
-): Promise<void> {
+): Promise<DocumentVersionDownloadResult> {
   const query = new URLSearchParams({
     username,
   });
@@ -81,5 +88,11 @@ export async function downloadDocumentVersion(
     throw new Error(errorMessage);
   }
 
-  await downloadResponseAsFile(response, fallbackFileName);
+  return {
+    blob: await response.blob(),
+    fileName:
+      getFileNameFromContentDisposition(
+        response.headers.get("content-disposition"),
+      ) ?? fallbackFileName,
+  };
 }
