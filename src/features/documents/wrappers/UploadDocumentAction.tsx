@@ -1,12 +1,14 @@
 import { useState } from "react";
 
-import { useSelectedUserStore } from "../../../app/store/useSelectedUserStore";
-import Button from "../../../components/ui/Button";
+import Button from "../../../shared/components/ui/Button";
 
 import UploadDocumentModal from "../components/UploadDocumentModal";
 
-function UploadDocumentAction() {
-  const selectedUser = useSelectedUserStore((state) => state.selectedUser);
+type UploadDocumentActionProps = {
+  selectedUsername?: string;
+};
+
+function UploadDocumentAction({ selectedUsername }: UploadDocumentActionProps) {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   function openUploadModal() {
@@ -23,7 +25,7 @@ function UploadDocumentAction() {
 
       <UploadDocumentModal
         isOpen={isUploadModalOpen}
-        selectedUsername={selectedUser?.name}
+        selectedUsername={selectedUsername}
         onClose={closeUploadModal}
       />
     </>
