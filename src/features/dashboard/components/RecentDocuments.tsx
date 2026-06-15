@@ -1,7 +1,7 @@
 import { FileText, MoveRight } from "lucide-react";
 import { Link } from "react-router";
 
-import VersionBadge from "../../../components/ui/VersionBadge";
+import VersionLabel from "../../../shared/components/ui/VersionLabel";
 import type { DocumentListItem } from "../../../shared/types/documentTypes";
 import { formatDateTime } from "../../../shared/utils/formatDateTime";
 import DashboardListItem from "./DashboardListItem";
@@ -35,7 +35,7 @@ function RecentDocuments({ documents }: RecentDocumentsProps) {
               subtitle={formatDateTime(document.createdAtUtc)}
               iconBgClass="bg-red-50"
               iconTextClass="text-red-600"
-              rightContent={<VersionBadge version={document.role} />}
+              rightContent={<VersionLabel version={document.role} />}
             />
           ))}
         </div>
