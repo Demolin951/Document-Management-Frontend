@@ -7,11 +7,9 @@ import {
   downloadLatestDocumentVersion,
   getDocumentVersions,
 } from "../api/documentVersionsApi";
-import type {
-  DocumentVersionListItem,
-  UseDocumentVersionsResult,
-  VersionDocumentRow,
-} from "../types/documentVersionTypes";
+import type { VersionDocumentRow } from "../types/documentVersionComponentTypes";
+import type { UseDocumentVersionsResult } from "../types/documentVersionHookTypes";
+import type { DocumentVersionListItem } from "../types/documentVersionTypes";
 
 function getReadableErrorMessage(error: unknown, fallbackMessage: string) {
   if (error instanceof Error && error.message) {
