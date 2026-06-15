@@ -1,8 +1,8 @@
-import Modal from "../../../shared/components/ui/Modal";
+import Modal from "../../../../shared/components/ui/Modal";
 
-import { documentAccessModalPanelClassName } from "../config/documentAccessModalConfig";
-import { useManageDocumentAccessModal } from "../hooks/useManageDocumentAccessModal";
-import type { ManageDocumentAccessModalProps } from "../types/documentAccessComponentTypes";
+import { documentAccessModalPanelClassName } from "../../config/documentAccessModalConfig";
+import { useManageDocumentAccessModal } from "../../hooks/useManageDocumentAccessModal";
+import type { ManageDocumentAccessModalProps } from "../../types/documentAccessComponentTypes";
 
 import AddUserAccessCard from "./AddUserAccessCard";
 import ChangeAccessCard from "./ChangeAccessCard";

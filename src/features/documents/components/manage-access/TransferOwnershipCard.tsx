@@ -1,8 +1,8 @@
 import { ArrowRightLeft } from "lucide-react";
 
-import Button from "../../../shared/components/ui/Button";
-import { transferOwnershipConfig } from "../config/transferOwnershipConfig";
-import type { TransferOwnershipCardProps } from "../types/documentAccessComponentTypes";
+import Button from "../../../../shared/components/ui/Button";
+import { transferOwnershipConfig } from "../../config/transferOwnershipConfig";
+import type { TransferOwnershipCardProps } from "../../types/documentAccessComponentTypes";
 
 function TransferOwnershipCard({
   accessUsers,

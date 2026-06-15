@@ -1,10 +1,10 @@
 import { Download } from "lucide-react";
 
-import DataTableRow from "../../../shared/components/ui/DataTableRow";
-import { formatDateTime } from "../../../shared/utils/formatDateTime";
+import DataTableRow from "../../../../shared/components/ui/DataTableRow";
+import { formatDateTime } from "../../../../shared/utils/formatDateTime";
 
-import { versionHistoryTableColumns } from "../config/documentVersionsConfig";
-import type { VersionHistoryRowProps } from "../types/documentVersionComponentTypes";
+import { versionHistoryTableColumns } from "../../config/documentVersionsConfig";
+import type { VersionHistoryRowProps } from "../../types/documentVersionComponentTypes";
 
 function VersionHistoryRow({
   version,

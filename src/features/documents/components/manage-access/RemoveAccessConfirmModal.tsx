@@ -1,5 +1,5 @@
-import ConfirmModal from "../../../shared/components/ConfirmModal";
-import type { RemoveAccessConfirmModalProps } from "../types/documentAccessComponentTypes";
+import ConfirmModal from "../../../../shared/components/ConfirmModal";
+import type { RemoveAccessConfirmModalProps } from "../../types/documentAccessComponentTypes";
 
 function RemoveAccessConfirmModal({
   isOpen,

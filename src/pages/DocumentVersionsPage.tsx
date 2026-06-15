@@ -1,7 +1,7 @@
 import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
 import Panel from "../shared/components/ui/Panel";
-import AvailableDocumentsVersionTable from "../features/versions/components/AvailableDocumentsVersionTable";
-import VersionHistoryModal from "../features/versions/components/VersionHistoryModal";
+import AvailableDocumentsVersionTable from "../features/versions/components/available-documents/AvailableDocumentsVersionTable";
+import VersionHistoryModal from "../features/versions/components/version-history/VersionHistoryModal";
 import { useDocumentVersions } from "../features/versions/hooks/useDocumentVersions";
 import { useDocuments } from "../shared/hooks/useDocuments";
 

@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import type { DocumentsTableFooterProps } from "../types/documentTableTypes";
+import type { DocumentsTableFooterProps } from "../../types/documentTableTypes";
 
 function DocumentsTableFooter({ totalCount }: DocumentsTableFooterProps) {
   const firstVisibleDocumentNumber = totalCount === 0 ? 0 : 1;

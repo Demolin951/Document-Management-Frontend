@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Button from "../../../shared/components/ui/Button";
 
-import UploadDocumentModal from "../components/UploadDocumentModal";
+import UploadDocumentModal from "../components/upload/UploadDocumentModal";
 
 type UploadDocumentActionProps = {
   selectedUsername?: string;

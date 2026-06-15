@@ -1,9 +1,9 @@
-import Button from "../../../shared/components/ui/Button";
-import Modal from "../../../shared/components/ui/Modal";
+import Button from "../../../../shared/components/ui/Button";
+import Modal from "../../../../shared/components/ui/Modal";
 
-import { documentUploadConfig } from "../config/documentUploadConfig";
-import { useUploadDocument } from "../hooks/useUploadDocuments";
-import type { UploadDocumentModalProps } from "../types/documentUploadTypes";
+import { documentUploadConfig } from "../../config/documentUploadConfig";
+import { useUploadDocument } from "../../hooks/useUploadDocuments";
+import type { UploadDocumentModalProps } from "../../types/documentUploadTypes";
 
 import UploadDocumentDropzone from "./UploadDocumentDropzone";
 

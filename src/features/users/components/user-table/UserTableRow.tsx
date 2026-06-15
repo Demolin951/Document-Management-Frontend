@@ -1,8 +1,8 @@
 import { Lock, Trash2, User } from "lucide-react";
 
-import DataTableRow from "../../../shared/components/ui/DataTableRow";
-import { usersTableColumns } from "../config/usersTableConfig";
-import type { UserTableRowProps } from "../types/userManagementComponentTypes";
+import DataTableRow from "../../../../shared/components/ui/DataTableRow";
+import { usersTableColumns } from "../../config/usersTableConfig";
+import type { UserTableRowProps } from "../../types/userManagementComponentTypes";
 
 function UserTableRow({ user, onOpenDeleteUserModal }: UserTableRowProps) {
   const isAdmin = user.name.toLowerCase() === "admin";

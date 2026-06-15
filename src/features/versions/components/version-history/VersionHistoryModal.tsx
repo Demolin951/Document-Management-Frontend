@@ -1,10 +1,10 @@
 import { FileText } from "lucide-react";
 
-import DataTable from "../../../shared/components/ui/DataTable";
-import EmptyDataTableState from "../../../shared/components/ui/DataTableEmptyState";
-import Modal from "../../../shared/components/ui/Modal";
-import { versionHistoryTableColumns } from "../config/documentVersionsConfig";
-import type { VersionHistoryModalProps } from "../types/documentVersionComponentTypes";
+import DataTable from "../../../../shared/components/ui/DataTable";
+import EmptyDataTableState from "../../../../shared/components/ui/DataTableEmptyState";
+import Modal from "../../../../shared/components/ui/Modal";
+import { versionHistoryTableColumns } from "../../config/documentVersionsConfig";
+import type { VersionHistoryModalProps } from "../../types/documentVersionComponentTypes";
 
 import VersionHistoryRow from "./VersionHistoryRow";
 

@@ -2,7 +2,7 @@ import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
 import SectionCard from "../shared/components/ui/Panel";
 import AddUserModal from "../features/users/components/AddUserModal";
 import DeleteUserConfirmModal from "../features/users/components/DeleteUserConfirmModal";
-import UsersTable from "../features/users/components/UsersTable";
+import UsersTable from "../features/users/components/user-table/UsersTable";
 import { useUsersManagement } from "../features/users/hooks/useUsersManagement";
 
 function UsersPage() {

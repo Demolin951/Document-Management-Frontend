@@ -1,9 +1,9 @@
 import { UserPlus } from "lucide-react";
 
-import Button from "../../../shared/components/ui/Button";
-import { documentAccessConfig } from "../config/documentAccessModalConfig";
-import { documentAccessRoleOptions } from "../config/documentAccessRoleConfig";
-import type { AddUserAccessCardProps } from "../types/documentAccessComponentTypes";
+import Button from "../../../../shared/components/ui/Button";
+import { documentAccessConfig } from "../../config/documentAccessModalConfig";
+import { documentAccessRoleOptions } from "../../config/documentAccessRoleConfig";
+import type { AddUserAccessCardProps } from "../../types/documentAccessComponentTypes";
 
 function AddUserAccessCard({
   targetUserName,

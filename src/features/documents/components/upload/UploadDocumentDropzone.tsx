@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 import { CloudUpload } from "lucide-react";
 
-import { documentUploadConfig } from "../config/documentUploadConfig";
+import { documentUploadConfig } from "../../config/documentUploadConfig";
 import type {
   UploadDocumentDropzoneDragEvent,
   UploadDocumentDropzoneInputChangeEvent,
   UploadDocumentDropzoneProps,
-} from "../types/documentUploadTypes";
+} from "../../types/documentUploadTypes";
 
 function UploadDocumentDropzone({
   selectedFile,

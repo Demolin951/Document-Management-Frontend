@@ -1,6 +1,6 @@
-import ConfirmModal from "../../../shared/components/ConfirmModal";
-import { transferOwnershipConfirmConfig } from "../config/transferOwnershipConfig";
-import type { TransferOwnershipConfirmModalProps } from "../types/documentAccessComponentTypes";
+import ConfirmModal from "../../../../shared/components/ConfirmModal";
+import { transferOwnershipConfirmConfig } from "../../config/transferOwnershipConfig";
+import type { TransferOwnershipConfirmModalProps } from "../../types/documentAccessComponentTypes";
 
 function TransferOwnershipConfirmModal({
   isOpen,

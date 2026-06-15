@@ -1,6 +1,6 @@
 import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
 import Panel from "../shared/components/ui/Panel";
-import DocumentsTable from "../features/documents/components/DocumentTable";
+import DocumentsTable from "../features/documents/components/document-table/DocumentTable";
 
 function DocumentsPage() {
   const selectedUser = useSelectedUserStore((state) => state.selectedUser);

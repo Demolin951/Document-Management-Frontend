@@ -1,18 +1,18 @@
 import { FileText } from "lucide-react";
 
-import DataTable from "../../../shared/components/ui/DataTable";
-import EmptyDataTableState from "../../../shared/components/ui/DataTableEmptyState";
-import { useDocuments } from "../../../shared/hooks/useDocuments";
+import DataTable from "../../../../shared/components/ui/DataTable";
+import EmptyDataTableState from "../../../../shared/components/ui/DataTableEmptyState";
+import { useDocuments } from "../../../../shared/hooks/useDocuments";
 
-import { documentTableColumns } from "../config/documentTableColumns";
-import { useDocumentActions } from "../hooks/useDocumentActions";
-import type { DocumentsTableProps } from "../types/documentTableTypes";
+import { documentTableColumns } from "../../config/documentTableColumns";
+import { useDocumentActions } from "../../hooks/useDocumentActions";
+import type { DocumentsTableProps } from "../../types/documentTableTypes";
 
-import DeleteDocumentConfirmModal from "./DeleteDocumentConfirmModal";
+import DeleteDocumentConfirmModal from "../DeleteDocumentConfirmModal";
+import ManageDocumentAccessModal from "../manage-access/ManageDocumentAccessModal";
+import UploadDocumentVersionModal from "../upload/UploadDocumentVersionModal";
 import DocumentTableRow from "./DocumentTableRow";
 import DocumentsTableFooter from "./DocumentsTableFooter";
-import ManageDocumentAccessModal from "./ManageDocumentAccessModal";
-import UploadDocumentVersionModal from "./UploadDocumentVersionModal";
 
 function DocumentTable({ username }: DocumentsTableProps) {
   const {

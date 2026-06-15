@@ -1,12 +1,12 @@
 import { FileText } from "lucide-react";
 
-import DataTableRow from "../../../shared/components/ui/DataTableRow";
-import { formatDateTime } from "../../../shared/utils/formatDateTime";
+import DataTableRow from "../../../../shared/components/ui/DataTableRow";
+import { formatDateTime } from "../../../../shared/utils/formatDateTime";
 
-import { documentRoleConfig } from "../config/documentRoleConfig";
-import { documentTableColumns } from "../config/documentTableColumns";
-import type { DocumentTableRowProps } from "../types/documentTableTypes";
-import { getAvailableDocumentActions } from "../utils/documentPermissions";
+import { documentRoleConfig } from "../../config/documentRoleConfig";
+import { documentTableColumns } from "../../config/documentTableColumns";
+import type { DocumentTableRowProps } from "../../types/documentTableTypes";
+import { getAvailableDocumentActions } from "../../utils/documentPermissions";
 
 function DocumentTableRow({
   document,
