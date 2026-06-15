@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { saveBlobAsFile } from "../../../shared/utils/fileDownloadUtils";
+
 import {
   downloadDocumentVersion,
   downloadLatestDocumentVersion,
@@ -75,11 +77,13 @@ export function useDocumentVersions(
     setVersionsErrorMessage(null);
 
     try {
-      await downloadLatestDocumentVersion(
+      const downloadResult = await downloadLatestDocumentVersion(
         document.id,
         username,
         document.fileName,
       );
+
+      saveBlobAsFile(downloadResult.blob, downloadResult.fileName);
     } catch (error) {
       setVersionsErrorMessage(
         getReadableErrorMessage(
@@ -102,12 +106,14 @@ export function useDocumentVersions(
     setVersionsErrorMessage(null);
 
     try {
-      await downloadDocumentVersion(
+      const downloadResult = await downloadDocumentVersion(
         version.documentId,
         version.versionNumber,
         username,
         selectedDocumentForVersions.fileName,
       );
+
+      saveBlobAsFile(downloadResult.blob, downloadResult.fileName);
     } catch (error) {
       setVersionsErrorMessage(
         getReadableErrorMessage(error, "Version could not be downloaded."),
