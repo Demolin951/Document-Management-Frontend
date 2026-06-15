@@ -1,5 +1,5 @@
 import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
-import SectionCard from "../components/ui/SectionCard";
+import SectionCard from "../shared/components/ui/Panel";
 import AddUserModal from "../features/users/components/AddUserModal";
 import DeleteUserConfirmModal from "../features/users/components/DeleteUserConfirmModal";
 import UsersTable from "../features/users/components/UsersTable";
