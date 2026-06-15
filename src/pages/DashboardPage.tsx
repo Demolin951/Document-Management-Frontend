@@ -1,4 +1,4 @@
-import SectionCard from "../components/ui/SectionCard";
+import SectionCard from "../shared/components/ui/Panel";
 import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
 import AccessSummary from "../features/dashboard/components/AccessSummary";
 import DashboardStats from "../features/dashboard/components/DashboardStats";
