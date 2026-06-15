@@ -1,10 +1,10 @@
 import { UserPlus, Users } from "lucide-react";
 
-import Button from "../../../components/ui/Button";
-import DataTable from "../../../components/ui/DataTable";
-import EmptyDataTableState from "../../../components/ui/EmptyDataTableState";
+import Button from "../../../shared/components/ui/Button";
+import DataTable from "../../../shared/components/ui/DataTable";
+import EmptyDataTableState from "../../../shared/components/ui/DataTableEmptyState";
 import { usersTableColumns } from "../config/usersTableConfig";
-import type { UsersTableProps } from "../types/userManagementTypes";
+import type { UsersTableProps } from "../types/userManagementComponentTypes";
 
 import UserTableRow from "./UserTableRow";
 
