@@ -79,7 +79,7 @@ function DocumentTable({ username }: DocumentsTableProps) {
             <EmptyDataTableState
               icon={FileText}
               title="No documents yet"
-              description="This user does not have access to any documents yet."
+              description="You do not have access to any documents yet."
             />
           }
           footer={<DocumentsTableFooter totalCount={documents.length} />}
