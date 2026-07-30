@@ -1,4 +1,4 @@
-import type { DataTableColumn } from "../../../components/ui/types/dataTableTypes";
+import type { DataTableColumn } from "../../../shared/components/ui/types/dataTableTypes";
 
 export const documentTableColumns: DataTableColumn[] = [
     {

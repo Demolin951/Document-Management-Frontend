@@ -1,7 +1,7 @@
 import { FileText, Share2, Spline, Users } from "lucide-react";
 
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
 import type { DashboardStat } from "../types/dashboardTypes";
-import type { DocumentListItem } from "../../documents/types/documentTypes";
 
 export function buildDashboardStats(
   documents: DocumentListItem[],

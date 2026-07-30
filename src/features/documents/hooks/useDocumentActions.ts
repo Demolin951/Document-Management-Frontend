@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { downloadLatestDocumentVersion } from "../api/documentDownloadApi";
 import type { DocumentActionKey } from "../types/documentActionTypes";
-import type { DocumentListItem } from "../types/documentTypes";
 import type { UseDocumentActionsResult } from "../types/useDocumentActionTypes";
-import { saveBlobAsFile } from "../utils/documentDownloadUtils";
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
+import { saveBlobAsFile } from "../../../shared/utils/fileDownloadUtils";
 
 export function useDocumentActions(
   username: string | undefined,

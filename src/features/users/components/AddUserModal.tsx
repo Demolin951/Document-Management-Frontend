@@ -1,6 +1,6 @@
-import Button from "../../../components/ui/Button";
-import Modal from "../../../components/ui/Modal";
-import type { AddUserModalProps } from "../types/userManagementTypes";
+import Button from "../../../shared/components/ui/Button";
+import Modal from "../../../shared/components/ui/Modal";
+import type { AddUserModalProps } from "../types/userManagementComponentTypes";
 
 function AddUserModal({
   isOpen,

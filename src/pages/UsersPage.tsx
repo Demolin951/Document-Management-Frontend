@@ -1,12 +1,12 @@
-import SectionCard from "../components/ui/SectionCard";
-import { useAuthStore } from "../features/auth/store/useAuthStore";
+import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
+import SectionCard from "../shared/components/ui/Panel";
 import AddUserModal from "../features/users/components/AddUserModal";
 import DeleteUserConfirmModal from "../features/users/components/DeleteUserConfirmModal";
-import UsersTable from "../features/users/components/UsersTable";
+import UsersTable from "../features/users/components/user-table/UsersTable";
 import { useUsersManagement } from "../features/users/hooks/useUsersManagement";
 
 function UsersPage() {
-  const selectedUser = useAuthStore((state) => state.selectedUser);
+  const selectedUser = useSelectedUserStore((state) => state.selectedUser);
   const isAdmin = selectedUser?.name.toLowerCase() === "admin";
 
   const {

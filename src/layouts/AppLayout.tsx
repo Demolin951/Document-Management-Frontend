@@ -1,11 +1,12 @@
-import Sidebar from "../components/layout/Sidebar";
-import Topbar from "../components/layout/Topbar";
 import { useEffect } from "react";
-import { useAuthStore } from "../features/auth/store/useAuthStore";
+
+import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
+import AppSidebar from "./components/AppSidebar";
+import Topbar from "./components/Topbar";
 import type { AppLayoutProps } from "./types/appLayoutTypes";
 
-function AppLayout({ children }: AppLayoutProps) {
-  const loadUsers = useAuthStore((state) => state.loadUsers);
+function AppLayout({ children, topbarActions }: AppLayoutProps) {
+  const loadUsers = useSelectedUserStore((state) => state.loadUsers);
 
   useEffect(() => {
     loadUsers();
@@ -13,11 +14,11 @@ function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <div className="min-h-screen bg-slate-100">
-      <Sidebar />
+      <AppSidebar />
 
       <main className="ml-64 min-h-screen px-6 py-6 lg:px-8 lg:py-8">
         <div className="w-full max-w-none">
-          <Topbar />
+          <Topbar actions={topbarActions} />
           <div className="mt-5">{children}</div>
         </div>
       </main>

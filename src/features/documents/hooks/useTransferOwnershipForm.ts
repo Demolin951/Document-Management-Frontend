@@ -1,6 +1,6 @@
 import { useState } from "react";
  
-import type { UseTransferOwnershipFormResult } from "../types/documentAccessTypes";
+import type { UseTransferOwnershipFormResult } from "../types/documentAccessHookTypes";
  
 export function useTransferOwnershipForm(): UseTransferOwnershipFormResult {
   const [newOwnerUsername, setNewOwnerUsername] = useState("");

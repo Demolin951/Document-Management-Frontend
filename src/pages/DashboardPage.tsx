@@ -1,5 +1,5 @@
-import SectionCard from "../components/ui/SectionCard";
-import { useAuthStore } from "../features/auth/store/useAuthStore";
+import SectionCard from "../shared/components/ui/Panel";
+import { useSelectedUserStore } from "../app/store/useSelectedUserStore";
 import AccessSummary from "../features/dashboard/components/AccessSummary";
 import DashboardStats from "../features/dashboard/components/DashboardStats";
 import RecentDocuments from "../features/dashboard/components/RecentDocuments";
@@ -10,7 +10,7 @@ import {
 } from "../features/dashboard/utils/dashboardMappers";
 
 function DashboardPage() {
-  const selectedUser = useAuthStore((state) => state.selectedUser);
+  const selectedUser = useSelectedUserStore((state) => state.selectedUser);
 
   const {
     documents,

@@ -1,7 +1,7 @@
 import { Edit3, Eye, Crown, MoveRight } from "lucide-react";
 import { Link } from "react-router";
 
-import type { DocumentListItem } from "../../documents/types/documentTypes";
+import type { DocumentListItem } from "../../../shared/types/documentTypes";
 import { getRoleCount } from "../utils/dashboardMappers";
 
 export type AccessSummaryProps = {

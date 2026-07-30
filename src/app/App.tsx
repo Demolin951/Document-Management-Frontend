@@ -1,14 +1,16 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import UsersPage from "../pages/UsersPage";
+
 import AppLayout from "../layouts/AppLayout";
+import UploadDocumentTopbarAction from "./wrappers/UploadDocumentTopbarAction";
 import DashboardPage from "../pages/DashboardPage";
-import DocumentsPage from "../pages/DocumentsPage";
 import DocumentVersionsPage from "../pages/DocumentVersionsPage";
+import DocumentsPage from "../pages/DocumentsPage";
+import UsersPage from "../pages/UsersPage";
 
 function App() {
   return (
     <BrowserRouter>
-      <AppLayout>
+      <AppLayout topbarActions={<UploadDocumentTopbarAction />}>
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<DashboardPage />} />

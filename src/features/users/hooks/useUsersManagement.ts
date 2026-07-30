@@ -1,31 +1,26 @@
 import { useEffect, useState } from "react";
 
-import { useAuthStore } from "../../auth/store/useAuthStore";
+import { useSelectedUserStore } from "../../../app/store/useSelectedUserStore";
+import { getUsers } from "../../../shared/api/usersApi";
+import { getReadableErrorMessage } from "../../../shared/utils/errorUtils";
 import {
   createManagedUser,
   deleteManagedUser,
-  getManagedUsers,
 } from "../api/usersManagementApi";
-import type {
-  ManagedUser,
-  UseUsersManagementResult,
-} from "../types/userManagementTypes";
+import type { UseUsersManagementResult } from "../types/userManagementHookTypes";
+import type { ManagedUser } from "../types/userManagementTypes";
 
-function getReadableErrorMessage(error: unknown, fallbackMessage: string) {
-  if (error instanceof Error && error.message) {
-    return error.message;
-  }
-
-  return fallbackMessage;
+async function fetchManagedUsers(): Promise<ManagedUser[]> {
+  return getUsers();
 }
 
 export function useUsersManagement(
   currentUsername: string | undefined,
 ): UseUsersManagementResult {
-  const reloadAuthUsers = useAuthStore((state) => state.loadUsers);
+  const reloadSelectedUsers = useSelectedUserStore((state) => state.loadUsers);
 
   const [users, setUsers] = useState<ManagedUser[]>([]);
-  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+  const [isLoadingUsers, setIsLoadingUsers] = useState(true);
   const [usersErrorMessage, setUsersErrorMessage] = useState<string | null>(
     null,
   );
@@ -49,7 +44,7 @@ export function useUsersManagement(
     setUsersErrorMessage(null);
 
     try {
-      const loadedUsers = await getManagedUsers();
+      const loadedUsers = await fetchManagedUsers();
 
       setUsers(loadedUsers);
     } catch (error) {
@@ -101,7 +96,7 @@ export function useUsersManagement(
     try {
       await createManagedUser(trimmedUsername, currentUsername);
       await loadManagedUsers();
-      await reloadAuthUsers();
+      await reloadSelectedUsers();
 
       setIsAddUserModalOpen(false);
       setNewUsername("");
@@ -150,7 +145,7 @@ export function useUsersManagement(
     try {
       await deleteManagedUser(selectedUserForDelete.id, currentUsername);
       await loadManagedUsers();
-      await reloadAuthUsers();
+      await reloadSelectedUsers();
 
       setSelectedUserForDelete(null);
     } catch (error) {
@@ -163,7 +158,34 @@ export function useUsersManagement(
   }
 
   useEffect(() => {
-    void loadManagedUsers();
+    let isMounted = true;
+
+    async function loadInitialManagedUsers() {
+      try {
+        const loadedUsers = await fetchManagedUsers();
+
+        if (isMounted) {
+          setUsers(loadedUsers);
+          setUsersErrorMessage(null);
+        }
+      } catch (error) {
+        if (isMounted) {
+          setUsersErrorMessage(
+            getReadableErrorMessage(error, "Users could not be loaded."),
+          );
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoadingUsers(false);
+        }
+      }
+    }
+
+    void loadInitialManagedUsers();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return {
